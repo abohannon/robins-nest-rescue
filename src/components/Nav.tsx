@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import logoSrc from '../assets/rnr-logo.png';
 
 interface NavProps {
   currentPath?: string;
@@ -15,8 +16,8 @@ export function Nav({ currentPath = '/' }: NavProps) {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-white">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-        <a href="/" className="font-heading text-xl font-bold text-primary no-underline">
-          Robin's Nest Rescue
+        <a href="/" className="no-underline" aria-label="Robin's Nest Rescue — Home">
+          <img src={logoSrc.src} alt="Robin's Nest Rescue" width={100} className="h-auto" />
         </a>
         <button
           aria-label="Toggle menu"

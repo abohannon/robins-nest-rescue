@@ -1,4 +1,6 @@
 ---
+import Logo from './Logo.astro';
+
 const year = new Date().getFullYear();
 
 const links = [
@@ -10,7 +12,7 @@ const links = [
 <footer class="bg-primary-dark px-6 py-12 text-white">
   <div class="mx-auto flex max-w-5xl flex-col gap-8 md:flex-row md:items-start md:justify-between">
     <div>
-      <p class="mb-2 font-heading text-xl font-bold">Robin's Nest Rescue</p>
+      <Logo width={120} class="mb-2" />
       <p class="font-body text-sm opacity-70">
         &copy; {year} Robin's Nest Rescue. All rights reserved.
       </p>

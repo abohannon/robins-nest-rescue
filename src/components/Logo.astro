@@ -1,0 +1,23 @@
+---
+import { Image } from 'astro:assets';
+import logoSrc from '../assets/rnr-logo.png';
+
+interface Props {
+  class?: string;
+  width?: number;
+  height?: number;
+}
+
+const { class: className, width = 150, height, ...rest } = Astro.props;
+---
+
+<a href="/" aria-label="Robin's Nest Rescue — Home">
+  <Image
+    src={logoSrc}
+    alt="Robin's Nest Rescue"
+    width={width}
+    height={height}
+    class={className}
+    {...rest}
+  />
+</a>

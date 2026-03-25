@@ -53,4 +53,5 @@ All public env vars use the `PUBLIC_` prefix per Astro convention.
 - Use Astro's built-in `<Image>` component for optimized images from local sources; use `@sanity/image-url` for Sanity-hosted images
 - All UI must be responsive and mobile-friendly — use Tailwind's responsive prefixes (`sm:`, `md:`, `lg:`, etc.) and test layouts at mobile widths
 - Keep Sanity queries co-located with the pages/components that use them
+- Follow WCAG 2.1 accessibility guidelines — use semantic HTML elements, provide alt text for all images, ensure sufficient color contrast, support keyboard navigation, and use ARIA attributes only when semantic HTML is insufficient
 - Node >= 22.12.0 required

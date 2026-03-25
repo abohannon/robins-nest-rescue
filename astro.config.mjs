@@ -3,7 +3,7 @@ import { defineConfig, envField } from 'astro/config';
 import { loadEnv } from 'vite';
 import sanity from '@sanity/astro';
 import react from '@astrojs/react';
-import node from '@astrojs/node';
+import cloudflare from '@astrojs/cloudflare';
 import tailwindcss from '@tailwindcss/vite';
 
 const env = loadEnv(process.env.NODE_ENV || '', process.cwd(), 'PUBLIC_');
@@ -11,7 +11,7 @@ const env = loadEnv(process.env.NODE_ENV || '', process.cwd(), 'PUBLIC_');
 // https://astro.build/config
 export default defineConfig({
   output: 'static',
-  adapter: node({ mode: 'standalone' }),
+  adapter: cloudflare({ imageService: 'compile' }),
   integrations: [
     sanity({
       projectId: env.PUBLIC_SANITY_PROJECT_ID,

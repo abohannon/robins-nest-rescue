@@ -1,0 +1,46 @@
+---
+import Layout from '../components/Layout.astro';
+import MissionBanner from '../components/MissionBanner.astro';
+import ActionCardGrid from '../components/ActionCardGrid.astro';
+
+const values = [
+  {
+    icon: '❤️',
+    title: 'Compassion',
+    description: 'Every animal in our care is treated with kindness, patience, and love.',
+    linkHref: '/adopt',
+    linkLabel: 'Meet Our Animals',
+  },
+  {
+    icon: '🤝',
+    title: 'Community',
+    description: 'We partner with local shelters, vets, and volunteers to maximize our impact.',
+    linkHref: '/volunteer',
+    linkLabel: 'Get Involved',
+  },
+  {
+    icon: '🌱',
+    title: 'Second Chances',
+    description: 'We believe no animal is beyond help. Every rescue is a new beginning.',
+    linkHref: '/donate',
+    linkLabel: 'Support Our Work',
+  },
+];
+---
+
+<Layout title="About" currentPath="/about">
+  <MissionBanner
+    heading="About Robin's Nest Rescue"
+    body="Robin's Nest Rescue was founded with a simple belief: every animal deserves a safe, loving home. What started as a small foster network has grown into a dedicated rescue organization serving our local community. We rescue animals from shelters, abandonment, and neglect — giving them the medical care, rehabilitation, and love they need to thrive."
+  />
+  <ActionCardGrid
+    heading="Our Values"
+    subheading="These principles guide everything we do."
+    cards={values}
+  />
+  <MissionBanner
+    heading="Join Our Mission"
+    body="Whether you adopt, foster, volunteer, or donate — you're making a direct impact on the lives of animals in need. Every bit of support helps us continue our work."
+    cta={{ label: 'See How to Help', href: '/' }}
+  />
+</Layout>

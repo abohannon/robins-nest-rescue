@@ -4,12 +4,19 @@ interface Props {
   subtext: string;
   primaryCta: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
+  size?: 'default' | 'tall' | 'full';
 }
 
-const { headline, subtext, primaryCta, secondaryCta } = Astro.props;
+const { headline, subtext, primaryCta, secondaryCta, size = 'default' } = Astro.props;
+
+const sizeClasses: Record<'default' | 'tall' | 'full', string> = {
+  default: 'px-6 py-16 md:py-24',
+  tall: 'flex min-h-[70vh] items-center px-6',
+  full: 'flex min-h-screen items-center px-6',
+};
 ---
 
-<section class="bg-primary px-6 py-16 text-white md:py-24">
+<section class:list={['bg-primary text-white', sizeClasses[size]]}>
   <div class="mx-auto max-w-5xl text-center">
     <h1 class="mb-4 font-heading text-3xl leading-tight md:text-5xl">
       {headline}

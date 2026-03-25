@@ -4,6 +4,7 @@ import { loadEnv } from 'vite';
 import sanity from '@sanity/astro';
 import react from '@astrojs/react';
 import node from '@astrojs/node';
+import tailwindcss from '@tailwindcss/vite';
 
 const env = loadEnv(process.env.NODE_ENV || '', process.cwd(), 'PUBLIC_');
 
@@ -20,4 +21,7 @@ export default defineConfig({
     }),
     react(),
   ],
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });

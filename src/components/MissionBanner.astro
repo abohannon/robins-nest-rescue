@@ -1,0 +1,26 @@
+---
+interface Props {
+  heading: string;
+  body: string;
+  cta?: { label: string; href: string };
+}
+
+const { heading, body, cta } = Astro.props;
+---
+
+<section class="bg-white px-6 py-16">
+  <div class="mx-auto max-w-3xl text-center">
+    <h2 class="mb-4 font-heading text-3xl text-primary">{heading}</h2>
+    <p class="mb-8 font-body text-lg leading-relaxed text-text">
+      {body}
+    </p>
+    {cta && (
+      <a
+        href={cta.href}
+        class="inline-block rounded-md bg-primary px-8 py-3 font-body font-semibold text-white no-underline hover:bg-primary-dark"
+      >
+        {cta.label}
+      </a>
+    )}
+  </div>
+</section>

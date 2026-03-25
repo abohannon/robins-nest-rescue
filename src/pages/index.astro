@@ -1,17 +1,49 @@
 ---
+import Layout from '../components/Layout.astro';
+import Hero from '../components/Hero.astro';
+import ActionCardGrid from '../components/ActionCardGrid.astro';
+import MissionBanner from '../components/MissionBanner.astro';
 
+const actionCards = [
+  {
+    icon: '🐾',
+    title: 'Adopt a Pet',
+    description: 'Browse our animals looking for forever homes. Every adoption saves a life.',
+    linkHref: '/adopt',
+    linkLabel: 'View Animals',
+  },
+  {
+    icon: '🏠',
+    title: 'Foster',
+    description: 'Provide temporary shelter and love while we find them a permanent home.',
+    linkHref: '/foster',
+    linkLabel: 'Become a Foster',
+  },
+  {
+    icon: '💛',
+    title: 'Donate',
+    description: 'Your generosity helps us provide food, shelter, and medical care.',
+    linkHref: '/donate',
+    linkLabel: 'Make a Gift',
+  },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Home" currentPath="/">
+  <Hero
+    headline="Every Animal Deserves a Loving Home"
+    subtext="Robin's Nest Rescue is dedicated to rescuing, rehabilitating, and rehoming animals in need. Together, we can make a difference."
+    primaryCta={{ label: 'Adopt Now', href: '/adopt' }}
+    secondaryCta={{ label: 'Learn More', href: '/about' }}
+  />
+  <ActionCardGrid
+    heading="How You Can Help"
+    subheading="There are many ways to support our mission and the animals in our care."
+    cards={actionCards}
+  />
+  <MissionBanner
+    heading="Our Mission"
+    body="At Robin's Nest Rescue, we believe every animal deserves compassion, safety, and a second chance. We work tirelessly to rescue animals from neglect and abandonment, provide them with veterinary care and rehabilitation, and find them loving forever homes."
+    cta={{ label: 'Read Our Story', href: '/about' }}
+  />
+</Layout>

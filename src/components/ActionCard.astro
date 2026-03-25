@@ -1,0 +1,25 @@
+---
+interface Props {
+  icon: string;
+  title: string;
+  description: string;
+  linkHref: string;
+  linkLabel: string;
+}
+
+const { icon, title, description, linkHref, linkLabel } = Astro.props;
+---
+
+<article class="rounded-lg border border-border bg-white p-8 text-center transition-shadow hover:shadow-md">
+  <span class="mb-4 block text-4xl">{icon}</span>
+  <h3 class="mb-2 font-heading text-xl text-text">{title}</h3>
+  <p class="mb-4 font-body text-sm leading-relaxed text-text-light">
+    {description}
+  </p>
+  <a
+    href={linkHref}
+    class="font-body text-sm font-semibold text-primary no-underline hover:text-primary-dark hover:underline"
+  >
+    {linkLabel}
+  </a>
+</article>

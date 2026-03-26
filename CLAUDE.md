@@ -49,7 +49,7 @@ All public env vars use the `PUBLIC_` prefix per Astro convention.
 
 ## Conventions
 
-- Prefer Astro components (`.astro`) for static/server-rendered content; use React only for interactive client-side features
+- Prefer Astro components (`.astro`) for static/server-rendered content; use Astro components with inline `<script>` tags for simple client-side interactions (toggles, accordions, etc.); reserve React for complex stateful UI that benefits from component-level reactivity (forms with validation, dynamic lists, real-time updates)
 - Use Astro's built-in `<Image>` component for optimized images from local sources; use `@sanity/image-url` for Sanity-hosted images
 - All UI must be responsive and mobile-friendly — use Tailwind's responsive prefixes (`sm:`, `md:`, `lg:`, etc.) and test layouts at mobile widths
 - Keep Sanity queries co-located with the pages/components that use them

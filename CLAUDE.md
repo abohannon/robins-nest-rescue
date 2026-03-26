@@ -58,6 +58,8 @@ All public env vars use the `PUBLIC_` prefix per Astro convention.
 
 ## Conventions
 
+- **Reuse over reinvention** — always check for existing components before creating new ones. Extract shared UI into reusable components in `src/components/`. Do not duplicate markup, styles, or logic across files. One-off solutions should only be created when reuse is genuinely not feasible.
+- **Good software engineering practices** — write clean, maintainable, and well-structured code. Keep components focused and single-responsibility. Use meaningful names. Avoid dead code, magic values, and copy-paste duplication. Refactor when patterns emerge.
 - Prefer Astro components (`.astro`) for static/server-rendered content; use Astro components with inline `<script>` tags for simple client-side interactions (toggles, accordions, etc.); reserve React for complex stateful UI that benefits from component-level reactivity (forms with validation, dynamic lists, real-time updates)
 - Use Astro's built-in `<Image>` component for optimized images from local sources; use `@sanity/image-url` for Sanity-hosted images
 - All UI must be responsive and mobile-friendly — use Tailwind's responsive prefixes (`sm:`, `md:`, `lg:`, etc.) and test layouts at mobile widths

@@ -1,5 +1,5 @@
 ---
-import logoSrc from '../assets/rnr-logo.png';
+import Logo from './Logo.astro';
 
 interface Props {
   currentPath?: string;
@@ -15,9 +15,7 @@ const links = [
 
 <header class="sticky top-0 z-50 border-b border-border bg-white">
   <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-    <a href="/" class="no-underline" aria-label="Robin's Nest Rescue — Home">
-      <img src={logoSrc.src} alt="Robin's Nest Rescue" width={100} class="h-auto" />
-    </a>
+    <Logo width={100} class="h-auto" />
     <button
       id="nav-toggle"
       aria-label="Toggle menu"

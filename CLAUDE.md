@@ -8,7 +8,7 @@ Website for Robin's Nest Rescue, a 501(c)(3) animal sanctuary providing educatio
 
 ## Tech Stack
 
-- **Astro 6** — static output mode with Node adapter (`@astrojs/node` standalone)
+- **Astro 6** — static output mode with Cloudflare adapter (`@astrojs/cloudflare`)
 - **Sanity CMS v5** — headless CMS with embedded studio at `/admin`
 - **React 19** — interactive components via `@astrojs/react`
 - **Tailwind CSS v4** — utility-first styling
@@ -46,6 +46,15 @@ All public env vars use the `PUBLIC_` prefix per Astro convention.
 - Use `@sanity/image-url` for image URL building from Sanity assets
 - Schema types are defined in `sanity.config.ts` — add new content types there
 - Use `astro-portabletext` components for rendering rich text from Sanity
+
+## Deployment
+
+- **Cloudflare Workers** via `wrangler` (dev dependency)
+- Worker name: `robins-nest-rescue-demo`
+- Deployed URL: `https://robins-nest-rescue-demo.abohannon.workers.dev`
+- Deployment is triggered automatically on git push via Cloudflare's CI/CD (build command: `npm run build`, deploy command: `npx wrangler deploy`)
+- Use `npx wrangler deployments list --name robins-nest-rescue-demo` to check deployment status
+- Environment variables (e.g., Sanity credentials) must be set in Cloudflare Workers settings
 
 ## Conventions
 

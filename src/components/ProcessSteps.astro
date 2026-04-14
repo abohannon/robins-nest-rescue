@@ -1,0 +1,35 @@
+---
+interface Step {
+  title: string;
+  description: string;
+}
+
+interface Props {
+  heading: string;
+  steps: Step[];
+}
+
+const { heading, steps } = Astro.props;
+---
+
+<section class="bg-off-white px-6 py-16">
+  <div class="mx-auto max-w-5xl">
+    <h2 class="mb-12 text-center font-heading text-3xl text-text">{heading}</h2>
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+      {steps.map((step, index) => (
+        <div class="relative flex flex-col items-center text-center">
+          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-lg font-semibold text-white">
+            {index + 1}
+          </div>
+          {index < steps.length - 1 && (
+            <div class="absolute left-1/2 top-6 hidden h-px w-full -translate-y-1/2 translate-x-1/2 bg-border md:block" />
+          )}
+          <h3 class="mb-2 font-heading text-xl text-text">{step.title}</h3>
+          <p class="font-body text-sm leading-relaxed text-text-light">
+            {step.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

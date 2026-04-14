@@ -1,32 +1,32 @@
 ---
-import Layout from '../components/Layout.astro';
-import MissionBanner from '../components/MissionBanner.astro';
-import ActionCardGrid from '../components/ActionCardGrid.astro';
+import Layout from "../components/Layout.astro";
+import MissionBanner from "../components/MissionBanner.astro";
+import ActionCardGrid from "../components/ActionCardGrid.astro";
 
 const values = [
   {
-    icon: '❤️',
-    title: 'Compassion',
+    icon: "❤️",
+    title: "Compassion",
     description:
-      'Every animal in our care is treated with kindness, patience, and love.',
-    linkHref: '/animals',
-    linkLabel: 'Meet the Animals',
+      "Every animal in our care is treated with kindness, patience, and love.",
+    linkHref: "/animals",
+    linkLabel: "Meet the Animals",
   },
   {
-    icon: '🤝',
-    title: 'Community',
+    icon: "🤝",
+    title: "Community",
     description:
-      'We partner with local organizations and volunteers to expand our impact and reach.',
-    linkHref: '/events',
-    linkLabel: 'See Our Events',
+      "We partner with local organizations and volunteers to expand our impact and reach.",
+    linkHref: "/events",
+    linkLabel: "See Our Events",
   },
   {
-    icon: '🌱',
-    title: 'Healing',
+    icon: "🌱",
+    title: "Healing",
     description:
-      'We believe in the extraordinary bond between animals and people — and the healing it creates.',
-    linkHref: '/sanctuary',
-    linkLabel: 'Visit the Sanctuary',
+      "We believe in the extraordinary bond between animals and people — and the healing it creates.",
+    linkHref: "/sanctuary",
+    linkLabel: "Visit the Sanctuary",
   },
 ];
 ---
@@ -44,6 +44,6 @@ const values = [
   <MissionBanner
     heading="Join Our Mission"
     body="Whether you visit the sanctuary, attend an event, volunteer, or donate — you're making a direct impact on the lives of animals and people alike."
-    cta={{ label: 'Book a Farm Tour', href: '/tours' }}
+    cta={{ label: "Book a Farm Tour", href: "/tours" }}
   />
 </Layout>

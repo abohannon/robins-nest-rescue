@@ -1,44 +1,48 @@
 ---
-import Logo from './Logo.astro';
-import Button from './Button.astro';
-import { navLinks, navActions } from '../config/navigation';
+import Logo from "./Logo.astro";
+import Button from "./Button.astro";
+import { navLinks, navActions } from "../config/navigation";
 
 interface Props {
   currentPath?: string;
 }
 
-const { currentPath = '/' } = Astro.props;
+const { currentPath = "/" } = Astro.props;
 ---
 
-<header class="sticky top-0 z-50 border-b border-border bg-white">
+<header class="border-border sticky top-0 z-50 border-b bg-white">
   <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
     <Logo width={100} class="h-auto" />
     <button
       id="nav-toggle"
       aria-label="Toggle menu"
       aria-expanded="false"
-      class="block cursor-pointer border-none bg-transparent p-1 text-2xl text-text md:hidden"
+      class="text-text block cursor-pointer border-none bg-transparent p-1 text-2xl md:hidden"
     >
       ☰
     </button>
     <div class="hidden items-center gap-6 md:flex">
-      {navLinks.map(({ label, href }) => (
-        <a
-          href={href}
-          aria-current={currentPath === href ? 'page' : undefined}
-          class:list={[
-            'font-body text-sm no-underline hover:text-primary',
-            currentPath === href ? 'font-semibold text-primary' : 'text-text',
-          ]}
-        >
-          {label}
-        </a>
-      ))}
-      {navActions.map(({ label, href, style }) => (
-        <Button href={href} variant={style} size="sm">
-          {label}
-        </Button>
-      ))}
+      {
+        navLinks.map(({ label, href }) => (
+          <a
+            href={href}
+            aria-current={currentPath === href ? "page" : undefined}
+            class:list={[
+              "font-body hover:text-primary text-sm no-underline",
+              currentPath === href ? "text-primary font-semibold" : "text-text",
+            ]}
+          >
+            {label}
+          </a>
+        ))
+      }
+      {
+        navActions.map(({ label, href, style }) => (
+          <Button href={href} variant={style} size="sm">
+            {label}
+          </Button>
+        ))
+      }
     </div>
   </div>
   <nav
@@ -47,39 +51,47 @@ const { currentPath = '/' } = Astro.props;
     class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out data-[open=true]:grid-rows-[1fr] md:hidden"
   >
     <div class="overflow-hidden">
-      <div class="flex flex-col items-center gap-6 border-b border-border bg-white p-6">
-        {navLinks.map(({ label, href }) => (
-          <a
-            href={href}
-            aria-current={currentPath === href ? 'page' : undefined}
-            class:list={[
-              'font-body text-sm no-underline hover:text-primary',
-              currentPath === href ? 'font-semibold text-primary' : 'text-text',
-            ]}
-          >
-            {label}
-          </a>
-        ))}
-        {navActions.map(({ label, href, style }) => (
-          <Button href={href} variant={style} size="sm">
-            {label}
-          </Button>
-        ))}
+      <div
+        class="border-border flex flex-col items-center gap-6 border-b bg-white p-6"
+      >
+        {
+          navLinks.map(({ label, href }) => (
+            <a
+              href={href}
+              aria-current={currentPath === href ? "page" : undefined}
+              class:list={[
+                "font-body hover:text-primary text-sm no-underline",
+                currentPath === href
+                  ? "text-primary font-semibold"
+                  : "text-text",
+              ]}
+            >
+              {label}
+            </a>
+          ))
+        }
+        {
+          navActions.map(({ label, href, style }) => (
+            <Button href={href} variant={style} size="sm">
+              {label}
+            </Button>
+          ))
+        }
       </div>
     </div>
   </nav>
 </header>
 
 <script>
-  const toggle = document.getElementById('nav-toggle');
-  const menu = document.getElementById('nav-menu');
+  const toggle = document.getElementById("nav-toggle");
+  const menu = document.getElementById("nav-menu");
 
-  toggle?.addEventListener('click', () => {
-    const isOpen = menu?.getAttribute('data-open') === 'true';
-    menu?.setAttribute('data-open', String(!isOpen));
+  toggle?.addEventListener("click", () => {
+    const isOpen = menu?.getAttribute("data-open") === "true";
+    menu?.setAttribute("data-open", String(!isOpen));
     if (toggle) {
-      toggle.textContent = isOpen ? '☰' : '✕';
-      toggle.setAttribute('aria-expanded', String(!isOpen));
+      toggle.textContent = isOpen ? "☰" : "✕";
+      toggle.setAttribute("aria-expanded", String(!isOpen));
     }
   });
 </script>

@@ -34,6 +34,7 @@ npm run preview    # Preview production build locally
 ## Environment Variables
 
 Required env vars (see `.env.example`):
+
 - `PUBLIC_SANITY_PROJECT_ID` — Sanity project ID
 - `PUBLIC_SANITY_DATASET` — Sanity dataset name (defaults to `production`)
 

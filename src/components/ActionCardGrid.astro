@@ -1,5 +1,5 @@
 ---
-import ActionCard from './ActionCard.astro';
+import ActionCard from "./ActionCard.astro";
 
 interface CardData {
   icon: string;
@@ -20,14 +20,14 @@ const { heading, subheading, cards } = Astro.props;
 
 <section class="bg-off-white px-6 py-16">
   <div class="mx-auto max-w-5xl text-center">
-    <h2 class="mb-2 font-heading text-3xl text-text">{heading}</h2>
-    {subheading && (
-      <p class="mb-8 font-body text-base text-text-light">{subheading}</p>
-    )}
+    <h2 class="font-heading text-text mb-2 text-3xl">{heading}</h2>
+    {
+      subheading && (
+        <p class="font-body text-text-light mb-8 text-base">{subheading}</p>
+      )
+    }
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {cards.map((card) => (
-        <ActionCard {...card} />
-      ))}
+      {cards.map((card) => <ActionCard {...card} />)}
     </div>
   </div>
 </section>

@@ -1,14 +1,14 @@
 ---
-import Nav from './Nav.astro';
-import Footer from './Footer.astro';
-import '../styles/global.css';
+import Nav from "./Nav.astro";
+import Footer from "./Footer.astro";
+import "../styles/global.css";
 
 interface Props {
   title: string;
   currentPath?: string;
 }
 
-const { title, currentPath = '/' } = Astro.props;
+const { title, currentPath = "/" } = Astro.props;
 ---
 
 <!doctype html>

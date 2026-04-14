@@ -1,6 +1,6 @@
 ---
-import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 
 interface Props {
   title: string;
@@ -10,29 +10,42 @@ interface Props {
   placeholderColor?: string;
 }
 
-const { title, description, href, image, placeholderColor = 'bg-primary' } = Astro.props;
+const {
+  title,
+  description,
+  href,
+  image,
+  placeholderColor = "bg-primary",
+} = Astro.props;
 ---
 
 <a
   href={href}
-  class="group block overflow-hidden rounded-lg border border-border bg-white no-underline transition-shadow hover:shadow-lg"
+  class="group border-border block overflow-hidden rounded-lg border bg-white no-underline transition-shadow hover:shadow-lg"
 >
-  <div class:list={['relative h-48 w-full overflow-hidden', !image && placeholderColor]}>
-    {image && (
-      <Image
-        src={image}
-        alt=""
-        class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-        widths={[400, 600]}
-        sizes="(max-width: 640px) 100vw, 33vw"
-      />
-    )}
+  <div
+    class:list={[
+      "relative h-48 w-full overflow-hidden",
+      !image && placeholderColor,
+    ]}
+  >
+    {
+      image && (
+        <Image
+          src={image}
+          alt=""
+          class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          widths={[400, 600]}
+          sizes="(max-width: 640px) 100vw, 33vw"
+        />
+      )
+    }
   </div>
   <div class="p-6">
-    <h3 class="mb-2 font-heading text-xl text-text group-hover:text-primary">
+    <h3 class="font-heading text-text group-hover:text-primary mb-2 text-xl">
       {title}
     </h3>
-    <p class="font-body text-sm leading-relaxed text-text-light">
+    <p class="font-body text-text-light text-sm leading-relaxed">
       {description}
     </p>
   </div>

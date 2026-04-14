@@ -1,18 +1,30 @@
 ---
-import { Image } from 'astro:assets';
-import logoSrc from '../assets/rnr-logo.png';
+import { Image } from "astro:assets";
+import logoSrc from "../assets/rnr-logo.png";
 
 interface Props {
   class?: string;
   width?: number;
   height?: number;
-  variant?: 'default' | 'on-dark';
+  variant?: "default" | "on-dark";
 }
 
-const { class: className, width = 150, height, variant = 'default', ...rest } = Astro.props;
+const {
+  class: className,
+  width = 150,
+  height,
+  variant = "default",
+  ...rest
+} = Astro.props;
 ---
 
-<a href="/" aria-label="Robin's Nest Rescue — Home" class:list={[variant === 'on-dark' && 'inline-block rounded-lg bg-white/90 p-2']}>
+<a
+  href="/"
+  aria-label="Robin's Nest Rescue — Home"
+  class:list={[
+    variant === "on-dark" && "inline-block rounded-lg bg-white/90 p-2",
+  ]}
+>
   <Image
     src={logoSrc}
     alt="Robin's Nest Rescue"

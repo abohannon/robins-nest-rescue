@@ -1,24 +1,35 @@
 ---
-import Button from './Button.astro';
+import Button from "./Button.astro";
 
 interface Props {
   headline: string;
   subtext: string;
   primaryCta: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
-  size?: 'default' | 'tall' | 'full';
+  size?: "default" | "tall" | "full";
 }
 
-const { headline, subtext, primaryCta, secondaryCta, size = 'tall' } = Astro.props;
+const {
+  headline,
+  subtext,
+  primaryCta,
+  secondaryCta,
+  size = "tall",
+} = Astro.props;
 
-const sizeClasses: Record<'default' | 'tall' | 'full', string> = {
-  default: 'py-16 md:py-24',
-  tall: 'min-h-[70vh]',
-  full: 'min-h-screen',
+const sizeClasses: Record<"default" | "tall" | "full", string> = {
+  default: "py-16 md:py-24",
+  tall: "min-h-[70vh]",
+  full: "min-h-screen",
 };
 ---
 
-<section class:list={['relative flex items-center justify-center overflow-hidden', sizeClasses[size]]}>
+<section
+  class:list={[
+    "relative flex items-center justify-center overflow-hidden",
+    sizeClasses[size],
+  ]}
+>
   <video
     autoplay
     muted
@@ -35,7 +46,7 @@ const sizeClasses: Record<'default' | 'tall' | 'full', string> = {
   <div class="absolute inset-0 bg-black/50"></div>
 
   <div class="relative z-10 mx-auto max-w-5xl px-6 text-center text-white">
-    <h1 class="mb-4 font-heading text-3xl leading-tight md:text-5xl">
+    <h1 class="font-heading mb-4 text-3xl leading-tight md:text-5xl">
       {headline}
     </h1>
     <p class="mx-auto mb-8 max-w-xl text-lg leading-relaxed opacity-90">
@@ -45,11 +56,13 @@ const sizeClasses: Record<'default' | 'tall' | 'full', string> = {
       <Button href={primaryCta.href} variant="ghost">
         {primaryCta.label}
       </Button>
-      {secondaryCta && (
-        <Button href={secondaryCta.href} variant="secondary">
-          {secondaryCta.label}
-        </Button>
-      )}
+      {
+        secondaryCta && (
+          <Button href={secondaryCta.href} variant="secondary">
+            {secondaryCta.label}
+          </Button>
+        )
+      }
     </div>
   </div>
 </section>

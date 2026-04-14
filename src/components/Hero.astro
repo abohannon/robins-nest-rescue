@@ -1,26 +1,32 @@
 ---
-import Button from './Button.astro';
+import Button from "./Button.astro";
 
 interface Props {
   headline: string;
   subtext: string;
   primaryCta: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
-  size?: 'default' | 'tall' | 'full';
+  size?: "default" | "tall" | "full";
 }
 
-const { headline, subtext, primaryCta, secondaryCta, size = 'default' } = Astro.props;
+const {
+  headline,
+  subtext,
+  primaryCta,
+  secondaryCta,
+  size = "default",
+} = Astro.props;
 
-const sizeClasses: Record<'default' | 'tall' | 'full', string> = {
-  default: 'px-6 py-16 md:py-24',
-  tall: 'flex min-h-[70vh] items-center px-6',
-  full: 'flex min-h-screen items-center px-6',
+const sizeClasses: Record<"default" | "tall" | "full", string> = {
+  default: "px-6 py-16 md:py-24",
+  tall: "flex min-h-[70vh] items-center px-6",
+  full: "flex min-h-screen items-center px-6",
 };
 ---
 
-<section class:list={['bg-primary text-white', sizeClasses[size]]}>
+<section class:list={["bg-primary text-white", sizeClasses[size]]}>
   <div class="mx-auto max-w-5xl text-center">
-    <h1 class="mb-4 font-heading text-3xl leading-tight md:text-5xl">
+    <h1 class="font-heading mb-4 text-3xl leading-tight md:text-5xl">
       {headline}
     </h1>
     <p class="mx-auto mb-8 max-w-xl text-lg leading-relaxed opacity-90">
@@ -30,11 +36,13 @@ const sizeClasses: Record<'default' | 'tall' | 'full', string> = {
       <Button href={primaryCta.href} variant="ghost">
         {primaryCta.label}
       </Button>
-      {secondaryCta && (
-        <Button href={secondaryCta.href} variant="secondary">
-          {secondaryCta.label}
-        </Button>
-      )}
+      {
+        secondaryCta && (
+          <Button href={secondaryCta.href} variant="secondary">
+            {secondaryCta.label}
+          </Button>
+        )
+      }
     </div>
   </div>
 </section>

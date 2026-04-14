@@ -1,49 +1,71 @@
 ---
 import Layout from '../components/Layout.astro';
 import VideoHero from '../components/VideoHero.astro';
-import ActionCardGrid from '../components/ActionCardGrid.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
 import MissionBanner from '../components/MissionBanner.astro';
+import FeatureCardGrid from '../components/FeatureCardGrid.astro';
 
-const actionCards = [
+const processSteps = [
   {
-    icon: '🐾',
-    title: 'Adopt a Pet',
-    description: 'Browse our animals looking for forever homes. Every adoption saves a life.',
-    linkHref: '/adopt',
-    linkLabel: 'View Animals',
+    title: 'Rescue',
+    description:
+      'Animals rescued from neglect, abuse, or abandonment receive care and safety.',
   },
   {
-    icon: '🏠',
-    title: 'Foster',
-    description: 'Provide temporary shelter and love while we find them a permanent home.',
-    linkHref: '/foster',
-    linkLabel: 'Become a Foster',
+    title: 'Nurture',
+    description:
+      'Participants connect with rescued animals through guided, hands-on experiences.',
   },
   {
-    icon: '💛',
-    title: 'Donate',
-    description: 'Your generosity helps us provide food, shelter, and medical care.',
-    linkHref: '/donate',
-    linkLabel: 'Make a Gift',
+    title: 'Rebuild',
+    description:
+      "Through patience, empathy, and connection, both animals and people rediscover trust and confidence. It's the science behind the extraordinary animal-human bond.",
+  },
+];
+
+const exploreCards = [
+  {
+    title: 'Meet the Animals',
+    description:
+      'Our therapists eat hay! The therapeutic, calming nature of our animal-assisted activities represents a shift from traditional counseling to nature-based healing.',
+    href: '/animals',
+    placeholderColor: 'bg-primary',
+  },
+  {
+    title: 'The Sanctuary',
+    description:
+      'Set among open skies and quiet paths, the sanctuary offers something many have forgotten — space is to simply be.',
+    href: '/sanctuary',
+    placeholderColor: 'bg-accent',
+  },
+  {
+    title: 'Events',
+    description:
+      "From quiet visits to joyful celebrations — including our annual Rockin' Robin Music Fest — our events invite you to experience Robin's Nest firsthand.",
+    href: '/events',
+    placeholderColor: 'bg-coral-500',
   },
 ];
 ---
 
 <Layout title="Home" currentPath="/">
   <VideoHero
-    headline="Every Animal Deserves a Loving Home"
-    subtext="Robin's Nest Rescue is dedicated to rescuing, rehabilitating, and rehoming animals in need. Together, we can make a difference."
-    primaryCta={{ label: 'Adopt Now', href: '/adopt' }}
-    secondaryCta={{ label: 'Learn More', href: '/about' }}
+    headline="A Place Where Animals and People Heal Together"
+    subtext="Robin's Nest Rescue is a sanctuary where rescued animals and people rediscover trust, connection, and healing — side by side."
+    primaryCta={{ label: 'Visit the Sanctuary', href: '/sanctuary' }}
+    secondaryCta={{ label: 'Book a Tour', href: '/tours' }}
   />
-  <ActionCardGrid
-    heading="How You Can Help"
-    subheading="There are many ways to support our mission and the animals in our care."
-    cards={actionCards}
-  />
+  <ProcessSteps heading="How It Works" steps={processSteps} />
   <MissionBanner
-    heading="Our Mission"
-    body="At Robin's Nest Rescue, we believe every animal deserves compassion, safety, and a second chance. We work tirelessly to rescue animals from neglect and abandonment, provide them with veterinary care and rehabilitation, and find them loving forever homes."
-    cta={{ label: 'Read Our Story', href: '/about' }}
+    heading="Robin's Nest isn't just an animal rescue. It's really a place where broken trust is repaired."
+    body="That's why the animals matter. That's why the people matter. That's why the work matters."
+    variant="highlight"
+  />
+  <FeatureCardGrid cards={exploreCards} />
+  <MissionBanner
+    heading="Whether you come to connect, to learn, or simply to spend time among the animals"
+    body="Each visit offers a chance to slow down, engage, and be part of something meaningful — where healing happens naturally, side by side."
+    cta={{ label: 'Book a Farm Tour', href: '/tours' }}
+    variant="subtle"
   />
 </Layout>

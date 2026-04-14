@@ -1,26 +1,50 @@
 ---
+import Button from './Button.astro';
+
 interface Props {
   heading: string;
   body: string;
   cta?: { label: string; href: string };
+  variant?: 'default' | 'highlight' | 'subtle';
 }
 
-const { heading, body, cta } = Astro.props;
+const { heading, body, cta, variant = 'default' } = Astro.props;
+
+const sectionStyles: Record<string, string> = {
+  default: 'bg-white',
+  highlight: 'bg-primary-dark text-white',
+  subtle: 'bg-off-white',
+};
+
+const headingStyles: Record<string, string> = {
+  default: 'text-primary',
+  highlight: 'text-white',
+  subtle: 'text-primary',
+};
+
+const bodyStyles: Record<string, string> = {
+  default: 'text-text',
+  highlight: 'text-white/90',
+  subtle: 'text-text',
+};
+
+const ctaVariants: Record<string, 'primary' | 'ghost'> = {
+  default: 'primary',
+  highlight: 'ghost',
+  subtle: 'primary',
+};
 ---
 
-<section class="bg-white px-6 py-16">
+<section class:list={['px-6 py-16', sectionStyles[variant]]}>
   <div class="mx-auto max-w-3xl text-center">
-    <h2 class="mb-4 font-heading text-3xl text-primary">{heading}</h2>
-    <p class="mb-8 font-body text-lg leading-relaxed text-text">
+    <h2 class:list={['mb-4 font-heading text-3xl', headingStyles[variant]]}>{heading}</h2>
+    <p class:list={['mb-8 font-body text-lg leading-relaxed', bodyStyles[variant]]}>
       {body}
     </p>
     {cta && (
-      <a
-        href={cta.href}
-        class="inline-block rounded-md bg-primary px-8 py-3 font-body font-semibold text-white no-underline hover:bg-primary-dark"
-      >
+      <Button href={cta.href} variant={ctaVariants[variant]}>
         {cta.label}
-      </a>
+      </Button>
     )}
   </div>
 </section>

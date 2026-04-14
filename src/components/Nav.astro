@@ -1,16 +1,13 @@
 ---
 import Logo from './Logo.astro';
+import Button from './Button.astro';
+import { navLinks, navActions } from '../config/navigation';
 
 interface Props {
   currentPath?: string;
 }
 
 const { currentPath = '/' } = Astro.props;
-
-const links = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-];
 ---
 
 <header class="sticky top-0 z-50 border-b border-border bg-white">
@@ -25,7 +22,7 @@ const links = [
       ☰
     </button>
     <div class="hidden items-center gap-6 md:flex">
-      {links.map(({ label, href }) => (
+      {navLinks.map(({ label, href }) => (
         <a
           href={href}
           aria-current={currentPath === href ? 'page' : undefined}
@@ -37,12 +34,11 @@ const links = [
           {label}
         </a>
       ))}
-      <a
-        href="/donate"
-        class="rounded-md bg-accent px-4 py-2 font-body text-sm font-semibold text-white no-underline hover:bg-accent-dark"
-      >
-        Donate
-      </a>
+      {navActions.map(({ label, href, style }) => (
+        <Button href={href} variant={style} size="sm">
+          {label}
+        </Button>
+      ))}
     </div>
   </div>
   <nav
@@ -52,7 +48,7 @@ const links = [
   >
     <div class="overflow-hidden">
       <div class="flex flex-col items-center gap-6 border-b border-border bg-white p-6">
-        {links.map(({ label, href }) => (
+        {navLinks.map(({ label, href }) => (
           <a
             href={href}
             aria-current={currentPath === href ? 'page' : undefined}
@@ -64,12 +60,11 @@ const links = [
             {label}
           </a>
         ))}
-        <a
-          href="/donate"
-          class="rounded-md bg-accent px-4 py-2 font-body text-sm font-semibold text-white no-underline hover:bg-accent-dark"
-        >
-          Donate
-        </a>
+        {navActions.map(({ label, href, style }) => (
+          <Button href={href} variant={style} size="sm">
+            {label}
+          </Button>
+        ))}
       </div>
     </div>
   </nav>

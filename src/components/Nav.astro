@@ -61,9 +61,9 @@ const { currentPath = '/' } = Astro.props;
           </a>
         ))}
         {navActions.map(({ label, href, style }) => (
-          <a href={href} class={actionStyles[style]}>
+          <Button href={href} variant={style} size="sm">
             {label}
-          </a>
+          </Button>
         ))}
       </div>
     </div>

@@ -47,6 +47,12 @@ All public env vars use the `PUBLIC_` prefix per Astro convention.
 - Schema types are defined in `sanity.config.ts` — add new content types there
 - Use `astro-portabletext` components for rendering rich text from Sanity
 
+## Donations & Transactions
+
+- **Givebutter** — current donation/transaction POS platform ([dashboard](https://dashboard.givebutter.com/accounts/131875/home))
+- All donation flows and payment processing go through Givebutter for now
+- A more robust transaction service may replace Givebutter in the future, but all current solutions must use Givebutter
+
 ## Deployment
 
 - **Cloudflare Workers** via `wrangler` (dev dependency)

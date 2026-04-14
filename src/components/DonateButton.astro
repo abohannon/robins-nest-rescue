@@ -1,0 +1,38 @@
+---
+interface Props {
+  variant?: "accent" | "ghost";
+  size?: "sm" | "default";
+  class?: string;
+}
+
+const { variant = "accent", size = "default", class: className } = Astro.props;
+
+const base =
+  "inline-block rounded-md font-body font-semibold transition-colors cursor-pointer border-none";
+
+const sizeStyles: Record<string, string> = {
+  sm: "px-4 py-2 text-sm",
+  default: "px-8 py-3",
+};
+
+const variantStyles: Record<string, string> = {
+  accent: "bg-accent text-white hover:bg-accent-dark",
+  ghost: "bg-white text-primary hover:bg-off-white",
+};
+---
+
+<button
+  type="button"
+  class:list={[base, sizeStyles[size], variantStyles[variant], className]}
+  data-donate-button
+>
+  Donate
+</button>
+
+<script>
+  document.querySelectorAll("[data-donate-button]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.dispatchEvent(new CustomEvent("donate:open"));
+    });
+  });
+</script>

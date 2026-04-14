@@ -26,9 +26,13 @@ describe("navigation config", () => {
     expect(homeLink).toBeUndefined();
   });
 
-  it("navActions includes Book a Tour and Donate", () => {
+  it("navActions includes Book a Tour", () => {
     const labels = navActions.map((a) => a.label);
     expect(labels).toContain("Book a Tour");
-    expect(labels).toContain("Donate");
+  });
+
+  it("navActions does not include Donate (handled by DonateButton component)", () => {
+    const labels = navActions.map((a) => a.label);
+    expect(labels).not.toContain("Donate");
   });
 });

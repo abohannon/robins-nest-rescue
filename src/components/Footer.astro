@@ -1,12 +1,8 @@
 ---
 import Logo from './Logo.astro';
+import { navLinks } from '../config/navigation';
 
 const year = new Date().getFullYear();
-
-const links = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-];
 ---
 
 <footer class="bg-primary-dark px-6 py-12 text-white">
@@ -17,8 +13,8 @@ const links = [
         &copy; {year} Robin's Nest Rescue. All rights reserved.
       </p>
     </div>
-    <nav class="flex gap-6">
-      {links.map(({ label, href }) => (
+    <nav class="flex flex-wrap gap-6">
+      {navLinks.map(({ label, href }) => (
         <a
           href={href}
           class="font-body text-sm text-white no-underline opacity-80 hover:opacity-100"

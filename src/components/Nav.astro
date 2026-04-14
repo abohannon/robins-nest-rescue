@@ -1,5 +1,6 @@
 ---
 import Logo from './Logo.astro';
+import Button from './Button.astro';
 import { navLinks, navActions } from '../config/navigation';
 
 interface Props {
@@ -7,13 +8,6 @@ interface Props {
 }
 
 const { currentPath = '/' } = Astro.props;
-
-const actionStyles: Record<string, string> = {
-  primary:
-    'rounded-md bg-primary px-4 py-2 font-body text-sm font-semibold text-white no-underline hover:bg-primary-dark',
-  accent:
-    'rounded-md bg-accent px-4 py-2 font-body text-sm font-semibold text-white no-underline hover:bg-accent-dark',
-};
 ---
 
 <header class="sticky top-0 z-50 border-b border-border bg-white">
@@ -41,9 +35,9 @@ const actionStyles: Record<string, string> = {
         </a>
       ))}
       {navActions.map(({ label, href, style }) => (
-        <a href={href} class={actionStyles[style]}>
+        <Button href={href} variant={style} size="sm">
           {label}
-        </a>
+        </Button>
       ))}
     </div>
   </div>

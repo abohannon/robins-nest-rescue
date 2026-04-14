@@ -1,50 +1,59 @@
 ---
-import Button from './Button.astro';
+import Button from "./Button.astro";
 
 interface Props {
   heading: string;
   body: string;
   cta?: { label: string; href: string };
-  variant?: 'default' | 'highlight' | 'subtle';
+  variant?: "default" | "highlight" | "subtle";
 }
 
-const { heading, body, cta, variant = 'default' } = Astro.props;
+const { heading, body, cta, variant = "default" } = Astro.props;
 
 const sectionStyles: Record<string, string> = {
-  default: 'bg-white',
-  highlight: 'bg-primary-dark text-white',
-  subtle: 'bg-off-white',
+  default: "bg-white",
+  highlight: "bg-primary-dark text-white",
+  subtle: "bg-off-white",
 };
 
 const headingStyles: Record<string, string> = {
-  default: 'text-primary',
-  highlight: 'text-white',
-  subtle: 'text-primary',
+  default: "text-primary",
+  highlight: "text-white",
+  subtle: "text-primary",
 };
 
 const bodyStyles: Record<string, string> = {
-  default: 'text-text',
-  highlight: 'text-white/90',
-  subtle: 'text-text',
+  default: "text-text",
+  highlight: "text-white/90",
+  subtle: "text-text",
 };
 
-const ctaVariants: Record<string, 'primary' | 'ghost'> = {
-  default: 'primary',
-  highlight: 'ghost',
-  subtle: 'primary',
+const ctaVariants: Record<string, "primary" | "ghost"> = {
+  default: "primary",
+  highlight: "ghost",
+  subtle: "primary",
 };
 ---
 
-<section class:list={['px-6 py-16', sectionStyles[variant]]}>
+<section class:list={["px-6 py-16", sectionStyles[variant]]}>
   <div class="mx-auto max-w-3xl text-center">
-    <h2 class:list={['mb-4 font-heading text-3xl', headingStyles[variant]]}>{heading}</h2>
-    <p class:list={['mb-8 font-body text-lg leading-relaxed', bodyStyles[variant]]}>
+    <h2 class:list={["font-heading mb-4 text-3xl", headingStyles[variant]]}>
+      {heading}
+    </h2>
+    <p
+      class:list={[
+        "font-body mb-8 text-lg leading-relaxed",
+        bodyStyles[variant],
+      ]}
+    >
       {body}
     </p>
-    {cta && (
-      <Button href={cta.href} variant={ctaVariants[variant]}>
-        {cta.label}
-      </Button>
-    )}
+    {
+      cta && (
+        <Button href={cta.href} variant={ctaVariants[variant]}>
+          {cta.label}
+        </Button>
+      )
+    }
   </div>
 </section>

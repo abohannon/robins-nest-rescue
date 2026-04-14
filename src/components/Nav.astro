@@ -1,5 +1,6 @@
 ---
 import Logo from './Logo.astro';
+import { navLinks, navActions } from '../config/navigation';
 
 interface Props {
   currentPath?: string;
@@ -7,10 +8,12 @@ interface Props {
 
 const { currentPath = '/' } = Astro.props;
 
-const links = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-];
+const actionStyles: Record<string, string> = {
+  primary:
+    'rounded-md bg-primary px-4 py-2 font-body text-sm font-semibold text-white no-underline hover:bg-primary-dark',
+  accent:
+    'rounded-md bg-accent px-4 py-2 font-body text-sm font-semibold text-white no-underline hover:bg-accent-dark',
+};
 ---
 
 <header class="sticky top-0 z-50 border-b border-border bg-white">
@@ -25,7 +28,7 @@ const links = [
       ☰
     </button>
     <div class="hidden items-center gap-6 md:flex">
-      {links.map(({ label, href }) => (
+      {navLinks.map(({ label, href }) => (
         <a
           href={href}
           aria-current={currentPath === href ? 'page' : undefined}
@@ -37,12 +40,11 @@ const links = [
           {label}
         </a>
       ))}
-      <a
-        href="/donate"
-        class="rounded-md bg-accent px-4 py-2 font-body text-sm font-semibold text-white no-underline hover:bg-accent-dark"
-      >
-        Donate
-      </a>
+      {navActions.map(({ label, href, style }) => (
+        <a href={href} class={actionStyles[style]}>
+          {label}
+        </a>
+      ))}
     </div>
   </div>
   <nav
@@ -52,7 +54,7 @@ const links = [
   >
     <div class="overflow-hidden">
       <div class="flex flex-col items-center gap-6 border-b border-border bg-white p-6">
-        {links.map(({ label, href }) => (
+        {navLinks.map(({ label, href }) => (
           <a
             href={href}
             aria-current={currentPath === href ? 'page' : undefined}
@@ -64,12 +66,11 @@ const links = [
             {label}
           </a>
         ))}
-        <a
-          href="/donate"
-          class="rounded-md bg-accent px-4 py-2 font-body text-sm font-semibold text-white no-underline hover:bg-accent-dark"
-        >
-          Donate
-        </a>
+        {navActions.map(({ label, href, style }) => (
+          <a href={href} class={actionStyles[style]}>
+            {label}
+          </a>
+        ))}
       </div>
     </div>
   </nav>

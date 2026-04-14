@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  image?: ImageMetadata;
+  placeholderColor?: string;
+}
+
+const { title, description, href, image, placeholderColor = 'bg-primary' } = Astro.props;
+---
+
+<a
+  href={href}
+  class="group block overflow-hidden rounded-lg border border-border bg-white no-underline transition-shadow hover:shadow-lg"
+>
+  <div class:list={['relative h-48 w-full overflow-hidden', !image && placeholderColor]}>
+    {image && (
+      <Image
+        src={image}
+        alt=""
+        class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+        widths={[400, 600]}
+        sizes="(max-width: 640px) 100vw, 33vw"
+      />
+    )}
+  </div>
+  <div class="p-6">
+    <h3 class="mb-2 font-heading text-xl text-text group-hover:text-primary">
+      {title}
+    </h3>
+    <p class="font-body text-sm leading-relaxed text-text-light">
+      {description}
+    </p>
+  </div>
+</a>

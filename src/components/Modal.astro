@@ -1,0 +1,77 @@
+---
+interface Props {
+  id: string;
+  label: string;
+  class?: string;
+}
+
+const { id, label, class: className } = Astro.props;
+const titleId = `${id}-title`;
+const closeId = `${id}-close`;
+---
+
+<dialog
+  id={id}
+  aria-labelledby={titleId}
+  class:list={[
+    "m-0 h-full w-full bg-white p-0 shadow-xl backdrop:bg-black/50 open:flex open:flex-col md:m-auto md:h-auto md:max-w-[500px] md:rounded-lg",
+    className,
+  ]}
+>
+  <div class="flex items-center justify-end p-4 pb-0">
+    <h2 id={titleId} class="sr-only">{label}</h2>
+    <button
+      type="button"
+      id={closeId}
+      aria-label={`Close ${label.toLowerCase()} form`}
+      class="cursor-pointer border-none bg-transparent p-1 text-2xl leading-none text-neutral-500 hover:text-neutral-800"
+      data-modal-close
+    >
+      ✕
+    </button>
+  </div>
+  <div class="px-6 pb-6">
+    <slot />
+  </div>
+</dialog>
+
+<script>
+  // Wire up all [data-modal-target] buttons to their corresponding dialogs
+  document
+    .querySelectorAll<HTMLElement>("[data-modal-target]")
+    .forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const targetId = btn.dataset.modalTarget;
+        if (!targetId) return;
+        const dialog = document.getElementById(
+          targetId,
+        ) as HTMLDialogElement | null;
+        if (dialog && !dialog.open) {
+          dialog.showModal();
+          document.body.style.overflow = "hidden";
+        }
+      });
+    });
+
+  // Wire up all close buttons and backdrop clicks for every dialog with [data-modal-close]
+  document
+    .querySelectorAll<HTMLElement>("[data-modal-close]")
+    .forEach((btn) => {
+      const dialog = btn.closest("dialog") as HTMLDialogElement | null;
+      if (!dialog) return;
+
+      btn.addEventListener("click", () => {
+        dialog.close();
+      });
+
+      dialog.addEventListener("click", (e) => {
+        if (e.target === dialog) {
+          dialog.close();
+        }
+      });
+
+      dialog.addEventListener("close", () => {
+        document.body.style.overflow = "";
+      });
+    });
+</script>

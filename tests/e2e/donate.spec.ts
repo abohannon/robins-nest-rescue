@@ -45,7 +45,13 @@ test.describe("Donate Button & Modal", () => {
     await expect(modal).not.toBeVisible();
   });
 
-  test("modal closes on backdrop click", async ({ page, isMobile }) => {
+  test("modal closes on backdrop click (desktop only)", async ({
+    page,
+    isMobile,
+  }) => {
+    // Skip on mobile — full-screen modal has no visible backdrop to click
+    test.skip(!!isMobile, "No backdrop on mobile full-screen modal");
+
     await openDonateModal(page, !!isMobile);
 
     const modal = page.locator("#donate-modal");
@@ -75,7 +81,7 @@ test.describe("Donate Button & Modal", () => {
     await openDonateModal(page, !!isMobile);
 
     const closeBtn = page.locator("#donate-modal-close");
-    await expect(closeBtn).toHaveAttribute("aria-label", "Close donation form");
+    await expect(closeBtn).toHaveAttribute("aria-label", "Close donate form");
   });
 });
 

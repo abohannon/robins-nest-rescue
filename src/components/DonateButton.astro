@@ -25,14 +25,7 @@ const variantStyles: Record<string, string> = {
   type="button"
   class:list={[base, sizeStyles[size], variantStyles[variant], className]}
   data-donate-button
+  data-modal-target="donate-modal"
 >
   Donate
 </button>
-
-<script>
-  document.querySelectorAll("[data-donate-button]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      document.dispatchEvent(new CustomEvent("donate:open"));
-    });
-  });
-</script>

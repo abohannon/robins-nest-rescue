@@ -20,32 +20,34 @@ if (exclude) {
 const displayAnimals = filtered.slice(0, limit);
 ---
 
-{displayAnimals.length > 0 && (
-  <section class="py-16">
-    <h2 class="font-heading text-text mb-8 text-2xl md:text-3xl">
-      Meet More Animals
-    </h2>
-    <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
-      {displayAnimals.map((animal) => (
-        <a
-          href={`/animals/${animal.family}/${animal.slug}`}
-          class="group relative block aspect-square overflow-hidden rounded-lg"
-        >
-          <Image
-            src={animal.photo}
-            alt=""
-            class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-            widths={[300, 500]}
-            sizes="(max-width: 768px) 50vw, 25vw"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-          <div class="absolute bottom-0 left-0 p-3">
-            <span class="font-heading text-lg font-bold text-white">
-              {animal.name}
-            </span>
-          </div>
-        </a>
-      ))}
-    </div>
-  </section>
-)}
+{
+  displayAnimals.length > 0 && (
+    <section class="py-16">
+      <h2 class="font-heading text-text mb-8 text-2xl md:text-3xl">
+        Meet More Animals
+      </h2>
+      <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+        {displayAnimals.map((animal) => (
+          <a
+            href={`/animals/${animal.family}/${animal.slug}`}
+            class="group relative block aspect-square overflow-hidden rounded-lg"
+          >
+            <Image
+              src={animal.photo}
+              alt=""
+              class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              widths={[300, 500]}
+              sizes="(max-width: 768px) 50vw, 25vw"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div class="absolute bottom-0 left-0 p-3">
+              <span class="font-heading text-lg font-bold text-white">
+                {animal.name}
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )
+}

@@ -9,21 +9,19 @@ interface Props {
 const { animalName, suggestedAmount = 25 } = Astro.props;
 ---
 
-<div class="rounded-lg border border-border bg-off-white p-6 text-center">
+<div class="border-border bg-off-white rounded-lg border p-6 text-center">
   <h2 class="font-heading text-text mb-2 text-xl">
     Support {animalName}
   </h2>
   <p class="font-body text-text-light mb-4 text-sm">
     Help cover food, shelter, and medical care
   </p>
-  <p class="font-body text-text-light mb-1 text-xs uppercase tracking-wide">
+  <p class="font-body text-text-light mb-1 text-xs tracking-wide uppercase">
     Suggested donation
   </p>
   <p class="font-heading text-text mb-4 text-3xl font-bold">
     ${suggestedAmount}
   </p>
-  <p class="font-body text-text-light mb-4 text-xs">
-    Take the first step
-  </p>
+  <p class="font-body text-text-light mb-4 text-xs">Take the first step</p>
   <DonateButton variant="accent" />
 </div>

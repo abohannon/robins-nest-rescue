@@ -1,0 +1,21 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  photo: ImageMetadata;
+  name: string;
+}
+
+const { photo, name } = Astro.props;
+---
+
+<div class="h-[400px] w-full overflow-hidden rounded-lg">
+  <Image
+    src={photo}
+    alt={name}
+    class="h-full w-full object-cover"
+    widths={[640, 1024, 1440]}
+    sizes="(max-width: 768px) 100vw, 1024px"
+  />
+</div>

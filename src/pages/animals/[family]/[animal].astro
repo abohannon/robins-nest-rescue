@@ -1,0 +1,68 @@
+---
+import Layout from "../../../components/Layout.astro";
+import AnimalHero from "../../../components/AnimalHero.astro";
+import AnimalSupportCard from "../../../components/AnimalSupportCard.astro";
+import MoreAnimals from "../../../components/MoreAnimals.astro";
+import { animals, getFamily } from "../../../data/animals";
+import { renderMarkdown } from "../../../lib/markdown";
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+
+export const getStaticPaths = (() => {
+  return animals.map((animal) => ({
+    params: { family: animal.family, animal: animal.slug },
+    props: { animal },
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { animal } = Astro.props as Props;
+const family = getFamily(animal.family);
+const storyHtml = renderMarkdown(animal.story);
+---
+
+<Layout
+  title={`${animal.name} | ${family?.name ?? "Animals"}`}
+  currentPath="/animals"
+>
+  <section class="px-6 py-16">
+    <div class="mx-auto max-w-5xl">
+      <!-- Hero -->
+      <div class="mb-10">
+        <AnimalHero photo={animal.photo} name={animal.name} />
+      </div>
+
+      <!-- Two-column content grid -->
+      <!--
+        Mobile order (single column): name/desc (1) → support card (2) → story (3)
+        Desktop order (3-col grid): name/desc + story span col 1-2, support card in col 3
+      -->
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <div class="order-1 md:col-span-2">
+          <h1 class="font-heading text-text mb-2 text-3xl md:text-4xl">
+            {animal.name}
+          </h1>
+          <p class="font-body text-text-light text-lg leading-relaxed">
+            {animal.description}
+          </p>
+        </div>
+
+        <div class="order-2 md:row-span-2">
+          <div class="md:sticky md:top-36">
+            <AnimalSupportCard animalName={animal.name} />
+          </div>
+        </div>
+
+        <div class="order-3 md:col-span-2">
+          <div
+            class="font-body text-text prose prose-lg max-w-none"
+            set:html={storyHtml}
+          />
+        </div>
+      </div>
+
+      <!-- More Animals -->
+      <MoreAnimals exclude={animal.slug} limit={4} />
+    </div>
+  </section>
+</Layout>

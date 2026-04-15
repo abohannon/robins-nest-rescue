@@ -105,6 +105,7 @@ Follow [Conventional Commits](https://www.conventionalcommits.org/) strictly.
 - Mark breaking changes with `BREAKING CHANGE:` in the footer or `!` after the type: `feat(api)!: change response format`
 
 **Good:**
+
 ```
 feat(donate): add suggested donation label with $25 default
 
@@ -114,6 +115,7 @@ reasonable default.
 ```
 
 **Bad:**
+
 ```
 updated stuff
 fixed things and also reformatted some files

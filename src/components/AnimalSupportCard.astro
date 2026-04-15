@@ -6,7 +6,7 @@ interface Props {
   suggestedAmount?: number;
 }
 
-const { animalName, suggestedAmount = 20 } = Astro.props;
+const { animalName, suggestedAmount = 25 } = Astro.props;
 ---
 
 <div class="rounded-lg border border-border bg-off-white p-6 text-center">
@@ -15,6 +15,9 @@ const { animalName, suggestedAmount = 20 } = Astro.props;
   </h2>
   <p class="font-body text-text-light mb-4 text-sm">
     Help cover food, shelter, and medical care
+  </p>
+  <p class="font-body text-text-light mb-1 text-xs uppercase tracking-wide">
+    Suggested donation
   </p>
   <p class="font-heading text-text mb-4 text-3xl font-bold">
     ${suggestedAmount}

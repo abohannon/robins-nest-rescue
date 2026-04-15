@@ -25,3 +25,7 @@ docs/
 
 # jetbrains setting folder
 .idea/
+
+# Playwright
+tests/e2e/test-results/
+tests/e2e/screenshots/

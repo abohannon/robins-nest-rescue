@@ -1,0 +1,75 @@
+---
+interface Props {
+  id: string;
+  label: string;
+  class?: string;
+}
+
+const { id, label, class: className } = Astro.props;
+const titleId = `${id}-title`;
+const closeId = `${id}-close`;
+---
+
+<dialog
+  id={id}
+  aria-labelledby={titleId}
+  class:list={[
+    "relative bg-white p-0 shadow-xl backdrop:bg-black/50 max-md:m-0 max-md:h-full max-md:max-h-full max-md:w-full max-md:max-w-full md:m-auto md:w-[480px] md:max-w-[calc(100vw-4rem)] md:min-w-[320px] md:rounded-lg",
+    className,
+  ]}
+>
+  <h2 id={titleId} class="sr-only">{label}</h2>
+  <button
+    type="button"
+    id={closeId}
+    aria-label={`Close ${label.toLowerCase()} form`}
+    class="absolute top-4 right-4 z-10 cursor-pointer border-none bg-transparent p-1 text-2xl leading-none text-neutral-500 hover:text-neutral-800"
+    data-modal-close
+  >
+    ✕
+  </button>
+  <div class="flex h-full items-center justify-center p-6 pt-12">
+    <slot />
+  </div>
+</dialog>
+
+<script>
+  // Wire up all [data-modal-target] buttons to their corresponding dialogs
+  document
+    .querySelectorAll<HTMLElement>("[data-modal-target]")
+    .forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const targetId = btn.dataset.modalTarget;
+        if (!targetId) return;
+        const dialog = document.getElementById(
+          targetId,
+        ) as HTMLDialogElement | null;
+        if (dialog && !dialog.open) {
+          dialog.showModal();
+          document.body.style.overflow = "hidden";
+        }
+      });
+    });
+
+  // Wire up all close buttons and backdrop clicks for every dialog with [data-modal-close]
+  document
+    .querySelectorAll<HTMLElement>("[data-modal-close]")
+    .forEach((btn) => {
+      const dialog = btn.closest("dialog") as HTMLDialogElement | null;
+      if (!dialog) return;
+
+      btn.addEventListener("click", () => {
+        dialog.close();
+      });
+
+      dialog.addEventListener("click", (e) => {
+        if (e.target === dialog) {
+          dialog.close();
+        }
+      });
+
+      dialog.addEventListener("close", () => {
+        document.body.style.overflow = "";
+      });
+    });
+</script>

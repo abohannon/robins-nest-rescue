@@ -1,6 +1,7 @@
 ---
 import Nav from "./Nav.astro";
 import Footer from "./Footer.astro";
+import DonateModal from "./DonateModal.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -26,6 +27,11 @@ const { title, currentPath = "/" } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+    <script
+      is:inline
+      async
+      src="https://widgets.givebutter.com/latest.umd.cjs?acct=jJwApa3qcNpMDzrY&p=other"
+    ></script>
   </head>
   <body class="m-0">
     <Nav currentPath={currentPath} />
@@ -33,5 +39,6 @@ const { title, currentPath = "/" } = Astro.props;
       <slot />
     </main>
     <Footer />
+    <DonateModal />
   </body>
 </html>

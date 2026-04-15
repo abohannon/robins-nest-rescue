@@ -1,6 +1,7 @@
 ---
 import Logo from "./Logo.astro";
 import Button from "./Button.astro";
+import DonateButton from "./DonateButton.astro";
 import { navLinks, navActions } from "../config/navigation";
 
 interface Props {
@@ -43,6 +44,7 @@ const { currentPath = "/" } = Astro.props;
           </Button>
         ))
       }
+      <DonateButton size="sm" />
     </div>
   </div>
   <nav
@@ -77,6 +79,7 @@ const { currentPath = "/" } = Astro.props;
             </Button>
           ))
         }
+        <DonateButton size="sm" />
       </div>
     </div>
   </nav>

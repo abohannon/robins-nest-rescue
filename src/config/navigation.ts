@@ -18,5 +18,4 @@ export const navLinks: NavLink[] = [
 
 export const navActions: NavAction[] = [
   { label: "Book a Tour", href: "/tours", style: "primary" },
-  { label: "Donate", href: "/donate", style: "accent" },
 ];

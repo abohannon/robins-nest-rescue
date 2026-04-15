@@ -10,7 +10,7 @@ interface Props {
 const { photo, name } = Astro.props;
 ---
 
-<div class="overflow-hidden rounded-lg max-h-[400px]">
+<div class="h-[400px] w-full overflow-hidden rounded-lg">
   <Image
     src={photo}
     alt={name}

@@ -3,16 +3,18 @@ import Layout from "../../components/Layout.astro";
 import Hero from "../../components/Hero.astro";
 import AnimalCard from "../../components/AnimalCard.astro";
 import { animalFamilies, getAnimalsByFamily } from "../../data/animals";
-import type { GetStaticPaths } from "astro";
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 
-export const getStaticPaths: GetStaticPaths = () => {
+export const getStaticPaths = (() => {
   return animalFamilies.map((family) => ({
     params: { family: family.slug },
     props: { family },
   }));
-};
+}) satisfies GetStaticPaths;
 
-const { family } = Astro.props;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { family } = Astro.props as Props;
 const familyAnimals = getAnimalsByFamily(family.slug);
 ---
 

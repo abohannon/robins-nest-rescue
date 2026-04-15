@@ -2,20 +2,25 @@
 import Layout from "../../../components/Layout.astro";
 import AnimalProfile from "../../../components/AnimalProfile.astro";
 import { animals, getFamily } from "../../../data/animals";
-import type { GetStaticPaths } from "astro";
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 
-export const getStaticPaths: GetStaticPaths = () => {
+export const getStaticPaths = (() => {
   return animals.map((animal) => ({
     params: { family: animal.family, animal: animal.slug },
     props: { animal },
   }));
-};
+}) satisfies GetStaticPaths;
 
-const { animal } = Astro.props;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { animal } = Astro.props as Props;
 const family = getFamily(animal.family);
 ---
 
-<Layout title={`${animal.name} | ${family?.name ?? "Animals"}`} currentPath="/animals">
+<Layout
+  title={`${animal.name} | ${family?.name ?? "Animals"}`}
+  currentPath="/animals"
+>
   <AnimalProfile
     name={animal.name}
     photo={animal.photo}

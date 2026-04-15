@@ -124,8 +124,7 @@ At an estimated 45 years old, Shelly is our oldest resident. She moves at her ow
     slug: "tank",
     family: "tortoises",
     photo: placeholderImage,
-    description:
-      "A determined tortoise who never lets anything slow him down.",
+    description: "A determined tortoise who never lets anything slow him down.",
     story: `Tank earned his name on day one. Rescued from a hoarding situation, he arrived with a chipped shell and a stubborn streak a mile wide.
 
 **Nothing stops Tank.** He's been known to push through obstacles, climb over barriers, and generally go wherever he pleases.

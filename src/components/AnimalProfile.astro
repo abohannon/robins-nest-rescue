@@ -1,0 +1,39 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import DonateButton from "./DonateButton.astro";
+import { renderMarkdown } from "../lib/markdown";
+
+interface Props {
+  name: string;
+  photo: ImageMetadata;
+  description: string;
+  story: string;
+}
+
+const { name, photo, description, story } = Astro.props;
+const storyHtml = renderMarkdown(story);
+---
+
+<section class="px-6 py-16">
+  <div class="mx-auto max-w-3xl">
+    <div class="mb-8 overflow-hidden rounded-lg">
+      <Image
+        src={photo}
+        alt={name}
+        class="h-auto w-full object-cover"
+        widths={[640, 1024]}
+        sizes="(max-width: 768px) 100vw, 768px"
+      />
+    </div>
+    <h1 class="font-heading text-text mb-2 text-3xl md:text-4xl">{name}</h1>
+    <p class="font-body text-text-light mb-8 text-lg leading-relaxed">
+      {description}
+    </p>
+    <div
+      class="font-body text-text prose prose-lg mb-8 max-w-none"
+      set:html={storyHtml}
+    />
+    <DonateButton variant="accent" />
+  </div>
+</section>

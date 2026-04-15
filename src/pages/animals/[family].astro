@@ -1,0 +1,32 @@
+---
+import Layout from "../../components/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import AnimalCard from "../../components/AnimalCard.astro";
+import { animalFamilies, getAnimalsByFamily } from "../../data/animals";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths: GetStaticPaths = () => {
+  return animalFamilies.map((family) => ({
+    params: { family: family.slug },
+    props: { family },
+  }));
+};
+
+const { family } = Astro.props;
+const familyAnimals = getAnimalsByFamily(family.slug);
+---
+
+<Layout title={family.name} currentPath="/animals">
+  <Hero
+    headline={family.name}
+    subtext={family.description}
+    primaryCta={{ label: "Back to All Animals", href: "/animals" }}
+  />
+  <section class="px-6 py-16">
+    <div class="mx-auto max-w-5xl">
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {familyAnimals.map((animal) => <AnimalCard {...animal} />)}
+      </div>
+    </div>
+  </section>
+</Layout>

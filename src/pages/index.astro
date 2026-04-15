@@ -4,6 +4,9 @@ import VideoHero from "../components/VideoHero.astro";
 import ProcessSteps from "../components/ProcessSteps.astro";
 import MissionBanner from "../components/MissionBanner.astro";
 import FeatureCardGrid from "../components/FeatureCardGrid.astro";
+import animalsImage from "../assets/alpaca-smile.jpg";
+import sanctuaryImage from "../assets/ranch-aerial.jpg";
+import eventsImage from "../assets/rockin-robin-2023-music-1800.jpg";
 
 const processSteps = [
   {
@@ -29,21 +32,21 @@ const exploreCards = [
     description:
       "Our therapists eat hay! The therapeutic, calming nature of our animal-assisted activities represents a shift from traditional counseling to nature-based healing.",
     href: "/animals",
-    placeholderColor: "bg-primary",
+    image: animalsImage,
   },
   {
     title: "The Sanctuary",
     description:
       "Set among open skies and quiet paths, the sanctuary offers something many have forgotten — space is to simply be.",
     href: "/sanctuary",
-    placeholderColor: "bg-accent",
+    image: sanctuaryImage,
   },
   {
     title: "Events",
     description:
       "From quiet visits to joyful celebrations — including our annual Rockin' Robin Music Fest — our events invite you to experience Robin's Nest firsthand.",
     href: "/events",
-    placeholderColor: "bg-coral-500",
+    image: eventsImage,
   },
 ];
 ---

@@ -63,6 +63,10 @@ All public env vars use the `PUBLIC_` prefix per Astro convention.
 - Use `npx wrangler deployments list --name robins-nest-rescue-demo` to check deployment status
 - Environment variables (e.g., Sanity credentials) must be set in Cloudflare Workers settings
 
+## MCP Servers
+
+- **astro-docs** — provides `search_astro_docs` tool for querying the official Astro documentation. Use this when writing Astro code to verify APIs, check component usage, confirm configuration options, or look up any Astro-specific patterns. Prefer consulting these docs over relying on training data, since Astro evolves quickly.
+
 ## Conventions
 
 - **Reuse over reinvention** — always check for existing components before creating new ones. Extract shared UI into reusable components in `src/components/`. Do not duplicate markup, styles, or logic across files. One-off solutions should only be created when reuse is genuinely not feasible.

@@ -30,8 +30,10 @@ const closeId = `${id}-close`;
       ✕
     </button>
   </div>
-  <div class="px-6 pb-6">
-    <slot />
+  <div class="flex flex-1 items-center justify-center px-6 pb-6">
+    <div class="w-full">
+      <slot />
+    </div>
   </div>
 </dialog>
 

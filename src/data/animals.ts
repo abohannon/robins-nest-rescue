@@ -17,6 +17,8 @@ import neptunePhoto from "../assets/neptune.jpg";
 import jollaPhoto from "../assets/jolla.jpg";
 import poppyBellePhoto from "../assets/poppy-belle.jpg";
 import hopePhoto from "../assets/hope.jpg";
+import dollyPhoto from "../assets/dolly.jpg";
+import rebaPhoto from "../assets/reba.jpg";
 
 export interface AnimalFamily {
   name: string;
@@ -62,6 +64,13 @@ export const animalFamilies: AnimalFamily[] = [
     description:
       "Big horse, little horse, and a donkey too! The equine family at Robin's Nest includes Tivio, our stunning buckskin Quarter Horse, Phinneas the gorgeous mini horse, and Donkey the lovable mini donkey.",
     photo: tivioPhoto,
+  },
+  {
+    name: "The Little Lambs",
+    slug: "lambs",
+    description:
+      "If Mary truly had a little lamb, it would be very happy here at Robin's Nest! Our twin Dorper Katahdin crossbreed lambs help maintain the ranch grounds and make sure everyone knows when it's time to go outside.",
+    photo: dollyPhoto,
   },
 ];
 
@@ -494,6 +503,42 @@ He was purchased by a local riding program for lessons, but after light work he 
 Robin's Nest received the call, consulted their vet urgently, and stepped in immediately. The euthanasia funds were redirected to support his new beginning.
 
 Today Cowboy is settling in, gentle and affectionate. With joint and gastric support he is expected to remain comfortable. He will play a special role in therapeutic and educational programs — teaching beginners horsemanship, grooming, handling, and the art of connecting with a horse.`,
+  },
+  {
+    name: "Dolly",
+    slug: "dolly",
+    family: "lambs",
+    photo: dollyPhoto,
+    description:
+      "Like her namesake Dolly Parton, Dolly is quite vocal and a real charmer. And she's also known for her hair! She is slightly larger than Reba and definitely the more outgoing of the two.",
+    story: `Just like her namesake, Dolly is quite vocal and a real charmer. And she's also known for her hair!
+
+"The Lambies" came to us from a local farm in Ramona. These twin girls are named after music legends Dolly Parton and Reba McEntire! Dolly is slightly larger than Reba and definitely the more outgoing of the two. They serve as our "lawn mowers," helping to manage some of the overgrowth. While they still need a bit of assistance with that task, they're very eager to start their workday each morning! True to their namesakes, they are quite vocal, with Dolly's voice having a deeper tone than Reba's.
+
+The lambs are a cross between the Dorper and Katahdin breeds, commonly known as "hair sheep." Instead of wool, they produce hair and typically don't require shearing. While their crossbreed is prized for meat, that's not the case for these two! We are committed to farm animal welfare, and they play a crucial role in helping the alpacas manage the vegetation. Like all the residents at Robin's Nest, this is their forever home.
+
+At Robin's Nest, we also value diversity, and their unique mix is fascinating. The Dorper breed, hailing from South Africa, is known for its adaptability, hardiness, reproductive rates, and growth. In fact, Dorper skin is the most sought-after sheepskin in the world. The Katahdin breed was developed in the U.S. from a combination of three "African Hair Sheep" brought to Maine from St. Croix. Our goal here is to educate, promote responsible breeding, reduce livestock raised for slaughter, and strengthen the bond with our animal partners.
+
+**Did you know?** Sheep are very clever. Like dogs, sheep can learn their own name and even do tricks!`,
+  },
+  {
+    name: "Reba",
+    slug: "reba",
+    family: "lambs",
+    photo: rebaPhoto,
+    description:
+      "Reba, just like her namesake Reba McEntire, is always a hard worker and is known for her voice. She is slightly smaller than Dolly and a bit shyer, but a true treasure at RNR!",
+    story: `Reba, just like her namesake, is always a hard worker and is known for her voice. Let's keep Reba going!
+
+Reba is one half of our beloved "Lambies" duo, along with her twin sister Dolly. We're big country music fans, and they're named after music legends Dolly Parton and Reba McEntire! Reba is slightly smaller than Dolly, and her voice isn't as deep. She tends to be shyer, so it takes a bit of time for her to warm up to new friends. Both of them are true treasures at RNR!
+
+The Lambies help us manage some of the overgrowth as our "lawn mowers." While they still need a little assistance with that job, they are always eager to start their workday each morning! True to their namesakes, they are quite vocal and make sure to let us know when it's time to go outside!
+
+These lambs are a cross between the Dorper and Katahdin breeds, often referred to as "hair sheep." Instead of wool, they produce hair and typically don't need shearing. Although this crossbreed is prized for meat, that's not the case for these two! We are committed to farm animal welfare, and they play an essential role in helping the alpacas manage the vegetation. Like all the residents at Robin's Nest, this is their forever home.
+
+At Robin's Nest, we also appreciate diversity, and their unique combination is truly fascinating. The Dorper breed, which comes from South Africa, is known for its adaptability, hardiness, and excellent reproductive rates. In fact, Dorper skin is among the most sought-after sheepskin in the world. The Katahdin breed was developed in the U.S. from a mix of three "African Hair Sheep" brought to Maine from St. Croix. Our mission here is to educate, promote responsible breeding, reduce livestock raised for slaughter, and strengthen the bond with our animal partners.
+
+**Did you know?** Life expectancy is 10-12 years. However, if used for production, they are usually sold or "put down" around 5. :-(`,
   },
 ];
 

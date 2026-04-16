@@ -5,6 +5,10 @@ import michaelPhoto from "../assets/michael.png";
 import megPhoto from "../assets/meg.jpg";
 import bubblesPhoto from "../assets/bubbles.jpg";
 import aylaPhoto from "../assets/ayla.png";
+import tivioPhoto from "../assets/tivio.png";
+import donkeyPhoto from "../assets/donkey.png";
+import phinneasPhoto from "../assets/phinneas.png";
+import cowboyPhoto from "../assets/cowboy.jpg";
 
 export interface AnimalFamily {
   name: string;
@@ -43,6 +47,13 @@ export const animalFamilies: AnimalFamily[] = [
     description:
       "Slow and steady, our rescue tortoises remind us that healing happens at its own pace.",
     photo: placeholderImage,
+  },
+  {
+    name: "The Equines",
+    slug: "equines",
+    description:
+      "Big horse, little horse, and a donkey too! The equine family at Robin's Nest includes Tivio, our stunning buckskin Quarter Horse, Phinneas the gorgeous mini horse, and Donkey the lovable mini donkey.",
+    photo: tivioPhoto,
   },
 ];
 
@@ -271,6 +282,100 @@ At an estimated 45 years old, Shelly is our oldest resident. She moves at her ow
 **Nothing stops Tank.** He's been known to push through obstacles, climb over barriers, and generally go wherever he pleases.
 
 Despite his tough exterior, Tank is surprisingly social. He'll follow familiar staff members around the enclosure and has been known to "sprint" (tortoise sprint) toward his favorite treats.`,
+  },
+  {
+    name: "Tivio",
+    slug: "tivio",
+    family: "equines",
+    photo: tivioPhoto,
+    description:
+      "Like all our animals, Tivio has special gifts and pays them forward. Though an active working Quarter Horse, he knows just when to stand still, how to offer a nudge, and when a soulful gaze may help.",
+    story: `Tivio, our beautiful buckskin Quarter Horse, loves to accompany you on your journey of healing.
+
+Tivio is a registered American Quarter Horse whose full name is Eds Lil Tivio Jess. He was born in 2012 on a ranch in Montana, came to California in 2018, and was loved by the Goodwins (owners of Goodwins Market in Crestline, CA). He worked the ranch, herded and sorted cows, and played with Friesian friends near Reno. Tivio came to Robin's Nest in December 2021 as Kimber's personal horse — he is not a rescue. He and Kimber ride Western, and he works with cowboy/trainer Pete Spates. The property has a solid oak round pen and arena.
+
+Although not officially part of the rescue mission, Tivio contributes valuably to Robin's Nest and became the go-to program animal in the "Side by Side" therapeutic program.
+
+**The American Quarter Horse**
+
+The American Quarter Horse is a breed renowned for its speed, agility, and "cow sense" — an almost instinctive ability to work with cattle. It traces its lineage back to the 1600s, when colonists crossed English Thoroughbreds with native horses of Spanish descent. One famous sire, Pete McCue, is considered the foundation of the modern Quarter Horse.
+
+**Seven Quarter Horse facts you might not know:**
+
+- The breed's earliest origins trace back to the 1600s when English Thoroughbreds were crossed with native horses of Spanish descent
+- They got their name from being the fastest breed over a quarter-mile distance
+- The American Quarter Horse Association (AQHA) has over 2 million registered horses worldwide, with over 420,000 in Texas alone
+- Easy Jet, one of the most famous racing Quarter Horses, won 27 of 38 races and earned over $445,000 in the 1960s
+- Quarter Horses are known for their "cow sense" — an almost instinctive ability to work with cattle
+- They are one of the most versatile breeds, excelling in Western riding, racing, ranch work, and therapeutic programs
+- The breed is known for its calm temperament, making them excellent therapy animals
+
+**The Buckskin**
+
+Buckskin is not a breed but a color pattern — a tan or gold coat with a black mane, tail, and lower legs. This coloring traces back to the Sorraia horse of the Iberian Peninsula and is the result of the creme dilution gene acting on a bay base coat. The gene lightens the body color while leaving the dark points intact, creating the distinctive buckskin look.`,
+  },
+  {
+    name: "Donkey",
+    slug: "donkey",
+    family: "equines",
+    photo: donkeyPhoto,
+    description:
+      "Donkey is proud, and he knows it! Always a cute photo op and everyone's favorite, Donkey has come a long way. He was rescued from a kill pen in Oklahoma, known for its abusive conditions.",
+    story: `Donkey braved his journey from kill pen to service.
+
+Donkey is a charming miniature donkey who joined Robin's Nest in 2021. He was rescued from a "kill pen" in Oklahoma via collaboration with Little Hooves Rescue, another San Diego organization. He was about 2-3 years old at arrival. He loves to frolic in the open area alongside his buddy Phinneas.
+
+Thankfully, we were able to find him at Little Hooves and bring him with Phinneas to Robin's Nest. He's a keeper!
+
+Donkey is strong yet gentle, intelligent yet curious, loving but cautious, and undeniably handsome. He has demonstrated protector skills and dislikes apples and being told what to do.
+
+**The exploitation of miniature farm animals**
+
+The intentional breeding of miniature farm animals has become a troubling trend. Breeders charge $15,000–$20,000 for these animals, often bred for smaller and smaller size at the expense of their health. This leads to serious genetic issues including reduced immunity, congenital abnormalities, and complications with vital organs. Hoarding situations are common, with animals kept in cramped, unsanitary conditions.
+
+**Mini Myths**
+
+- **Carrying capacity:** Mini equines can safely carry only about 20% of their body weight — not 50% as commonly believed. Overloading causes serious spinal and joint damage.
+- **Guardian donkeys:** While donkeys can be protective, the "guardian donkey" myth has led to miniature donkeys being placed in dangerous situations with predators they cannot realistically fend off.`,
+  },
+  {
+    name: "Phinneas",
+    slug: "phinneas",
+    family: "equines",
+    photo: phinneasPhoto,
+    description:
+      "Phinneas always seems to say, 'I'm so pretty,' even when he just rolled in the mud! He's a cutie, a crowd favorite, and gives the best little nose cuddles.",
+    story: `Every day Phinneas grows to overcome his kill pen experience.
+
+Phinneas is a delightful miniature horse who joined Robin's Nest in 2021 as a recently gelded two-year-old. Like Donkey, he was rescued via Little Hooves Rescue from a "kill pen" in Louisiana. He still has a hint of stallion spirit. Phinneas is an adventurous eater, incredibly curious, with the sweetest face and stylish mane. Always a crowd favorite.
+
+Watch your fingers though when giving treats — he's very quick!
+
+Phinneas dislikes baths and going anywhere without Donkey. Kimber adopted both Phinneas and Donkey with the help of friend and supporter Stephanie.
+
+**About Little Hooves Rescue**
+
+Little Hooves Rescue was a San Diego organization that worked to save miniature equines from kill pens — holding facilities where unwanted animals are sold cheaply, often for slaughter. Animals in kill pens endure crowded, stressful, and sometimes abusive conditions. "Bail" payments are made to pull animals from these pens before their fate is sealed. Little Hooves has since disbanded/relocated, but their work helped save both Phinneas and Donkey.
+
+**Mini Myths**
+
+- **Not all small horses are Shetland ponies.** Miniature horses have longer, thinner legs compared to the stocky build of ponies. They are distinct breeds with different characteristics.
+- Miniature horses serve as guide assistants and therapy animals. The LA County Sheriff's Department even uses them in school programs to build trust with children.`,
+  },
+  {
+    name: "Cowboy",
+    slug: "cowboy",
+    family: "equines",
+    photo: cowboyPhoto,
+    description:
+      "Meet Cowboy, a sweet 23-year-old Quarter Horse who came to us in urgent need of a safe place to land. Once facing euthanasia within days, he is now comfortable, cared for, and already charming everyone he meets.",
+    story: `Cowboy is a 23-year-old American Quarter Horse with a gentle spirit.
+
+He was purchased by a local riding program for lessons, but after light work he would limp due to an unrecoverable old injury. The buyer was refunded, but the horse couldn't return to his former home and couldn't work lessons. He was going to be euthanized, with funds already set aside.
+
+Robin's Nest received the call, consulted their vet urgently, and stepped in immediately. The euthanasia funds were redirected to support his new beginning.
+
+Today Cowboy is settling in, gentle and affectionate. With joint and gastric support he is expected to remain comfortable. He will play a special role in therapeutic and educational programs — teaching beginners horsemanship, grooming, handling, and the art of connecting with a horse.`,
   },
 ];
 

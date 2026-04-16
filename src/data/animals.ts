@@ -1,6 +1,7 @@
 import type { ImageMetadata } from "astro";
-import placeholderImage from "../assets/alpaca-smile.jpg";
 import falkorPhoto from "../assets/falkor.png";
+import marcoPhoto from "../assets/marco.jpg";
+import poloPhoto from "../assets/polo.jpg";
 import michaelPhoto from "../assets/michael.png";
 import megPhoto from "../assets/meg.jpg";
 import bubblesPhoto from "../assets/bubbles.jpg";
@@ -50,11 +51,11 @@ export const animalFamilies: AnimalFamily[] = [
     photo: fernPhoto,
   },
   {
-    name: "The Tortoises",
+    name: "The Sulcata Tortoises",
     slug: "tortoises",
     description:
-      "Slow and steady, our rescue tortoises remind us that healing happens at its own pace.",
-    photo: placeholderImage,
+      "AKA African Spurred Tortoises. With an extraordinary lifespan of 80 to 120 years, our two Sulcata brothers Marco and Polo often outlived their caretakers. Thankfully, Robin's Nest is their forever home.",
+    photo: marcoPhoto,
   },
   {
     name: "The Equines",
@@ -377,29 +378,48 @@ All of these characteristics are part of her behavior for alpacas. As with most 
 In total, Hope represents so much of the Robin's Nest mission — hope and home. We are so glad she is here with us for the rest of her life.`,
   },
   {
-    name: "Shelly",
-    slug: "shelly",
+    name: "Marco",
+    slug: "marco",
     family: "tortoises",
-    photo: placeholderImage,
+    photo: marcoPhoto,
     description:
-      "Our oldest resident — Shelly has been teaching patience since before the sanctuary opened.",
-    story: `Shelly was found wandering a neighborhood, likely an abandoned pet who had outgrown her owner's expectations. She was dehydrated and her shell showed signs of improper care.
+      "Marco, the older and larger of the brothers, is the leader and more active of the two. If you're lucky, you may see Marco meandering around his yard — though they can move surprisingly fast!",
+    story: `Marco is the perfect big brother; he comes out first and checks the food!
 
-**After months of rehabilitation, Shelly thrived.** She became the sanctuary's unofficial mascot and a reminder that every animal deserves a second chance.
+Marco and Polo are African Sulcata Tortoises who joined the ranch in 2023. We partnered with a fantastic local rescue, Country Tortoise Rescue and Farm, to provide these two 22-year-old brothers their final home. They had been kept for years as "backyard pets," which is not how their nature is intended. Their previous owner was elderly and had recently passed; the family had no resources to continue their care and surrendered them. Because tortoises are insular by nature, it is highly unusual for them, especially males, to form a family unit.
 
-At an estimated 45 years old, Shelly is our oldest resident. She moves at her own pace — and the farm is better for it.`,
+Marco is the larger of the two, eating the lion's share! You're more likely to see him out meandering through their yard, and he might even come right up to you! They are friendly, but you should also watch out for those jaws!
+
+**The Sulcata**
+
+Unfortunately, the scenario just described happens a lot. Sulcata tortoises can live more than 100 years, so it is common for them to outlive their owners, with no arrangements for their continued care. Further, most people are not prepared for the needs of these large reptiles, including a proper diet and temperature controlled environment. Marco and Polo were significantly malnourished when they came to us and still need special diet and care.
+
+The Sulcata African Spurred Tortoise is an endangered species, typically inhabiting the southern edge of the African Sahara Desert. It is the largest mainland species of tortoise in the world. It is the only living species of its genus, Centrachelys, with the five other species in the family already extinct.
+
+**Did you know?**
+
+- Tortoises have existed for around 220 to 300 million years, making them older than dinosaurs! One theory of survival is the tortoise's ability to hibernate, allowing the tortoise to survive the dark winter after a meteor strike.
+- Charles Darwin and Steve Irwin took care of the same tortoise! Yes! It was Harriet (c. 1830-2006), a Galapagos tortoise who was approximately 175 years at the time of her death in Australia.
+- Tortoises have two skeletons! The exoskeleton is external and supports and protects the body. The endoskeleton, internal, made up of carapace and plastron (bony plates), gives the inside structure and support. A "bridge" fuses the pieces together.
+- Tortoises can feel. Yes! They have nerve endings in their shell so they can feel when touched there. If you touch a tortoise, start slow and always be easy. Never knock or hit its shell.
+- Tortoises can't swim. Unlike aquatic turtles, tortoises adapted to live on land. With short legs and heavy shells, they simply aren't designed to glide through the water.`,
   },
   {
-    name: "Tank",
-    slug: "tank",
+    name: "Polo",
+    slug: "polo",
     family: "tortoises",
-    photo: placeholderImage,
-    description: "A determined tortoise who never lets anything slow him down.",
-    story: `Tank earned his name on day one. Rescued from a hoarding situation, he arrived with a chipped shell and a stubborn streak a mile wide.
+    photo: poloPhoto,
+    description:
+      "Polo, the smaller of the two brothers, has distinctive and permanent signs of mistreatment. He is very slowly improving, as he learns to trust again. A great example of survivorship.",
+    story: `Polo, the little brother, has become a great example of survivorship: Just keep moving!
 
-**Nothing stops Tank.** He's been known to push through obstacles, climb over barriers, and generally go wherever he pleases.
+Marco and Polo are African Sulcata Tortoises who joined the ranch in 2023. We partnered with a fantastic local rescue, Country Tortoise Rescue and Farm, to provide these two 22-year-old brothers their final home. They had been kept for years as "backyard pets," which is not how their nature is intended. Their previous owner was elderly and had recently passed; the family had no resources to continue their care and surrendered them. Because tortoises are insular by nature, it is highly unusual for them, especially males, to form a family unit.
 
-Despite his tough exterior, Tank is surprisingly social. He'll follow familiar staff members around the enclosure and has been known to "sprint" (tortoise sprint) toward his favorite treats.`,
+Polo is a bit more shy and prefers the warmth of the heat lamps in their enclosure. It must be maintained at 80 degrees, so imagine that electric bill! His favorite foods are leafy green lettuces and Hibiscus blooms from Dr. Sue's garden! Their dislikes are cold, cloudy weather and running out of romaine.
+
+You may also notice sharp spikes in Polo's shell. These are obvious marks of severe malnourishment over many years. Unfortunately, this scenario happens a lot. Sulcata tortoises can live more than 100 years, so it is common for them to outlive their owners, with no arrangements for their continued care. Further, most people are not prepared for the needs of these large reptiles, including a proper diet and temperature controlled environment. Marco and Polo were significantly malnourished when they came to us and still need special diet and care.
+
+The Sulcata African Spurred Tortoise is an endangered species, typically inhabiting the southern edge of the African Sahara Desert. It is the largest mainland species of tortoise in the world. It is the only living species of its genus, Centrachelys, with the five other species in the family already extinct.`,
   },
   {
     name: "Tivio",

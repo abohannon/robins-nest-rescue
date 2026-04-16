@@ -5,6 +5,14 @@ import michaelPhoto from "../assets/michael.png";
 import megPhoto from "../assets/meg.jpg";
 import bubblesPhoto from "../assets/bubbles.jpg";
 import aylaPhoto from "../assets/ayla.png";
+import woodrowPhoto from "../assets/woodrow.jpg";
+import fernPhoto from "../assets/fern.jpg";
+import gusPhoto from "../assets/gus.jpg";
+import gandalfPhoto from "../assets/gandalf.jpg";
+import neptunePhoto from "../assets/neptune.jpg";
+import jollaPhoto from "../assets/jolla.jpg";
+import poppyBellePhoto from "../assets/poppy-belle.jpg";
+import hopePhoto from "../assets/hope.jpg";
 
 export interface AnimalFamily {
   name: string;
@@ -31,11 +39,11 @@ export const animalFamilies: AnimalFamily[] = [
     photo: falkorPhoto,
   },
   {
-    name: "The Alpacas",
+    name: "The Grand Huacaya Alpacas",
     slug: "alpacas",
     description:
-      "Gentle and curious, our alpacas bring a calming presence to the sanctuary and love meeting new friends.",
-    photo: placeholderImage,
+      "With their soulful eyes, playful curiosity, and cloud-soft fleece, our eight Huacaya alpacas teach us daily about connection, compassion, and joy. Four joined us in 2022, and four seniors found their forever home in 2025.",
+    photo: fernPhoto,
   },
   {
     name: "The Tortoises",
@@ -222,30 +230,140 @@ Rest easy, sweet girl. You will always be a part of our story.
 *— Dr. Sue Original, April 18, 2025*`,
   },
   {
-    name: "Luna",
-    slug: "luna",
+    name: "Woodrow",
+    slug: "woodrow",
     family: "alpacas",
-    photo: placeholderImage,
+    photo: woodrowPhoto,
     description:
-      "A curious alpaca who loves to investigate anything new on the farm.",
-    story: `Luna was rescued from a fiber farm where conditions had deteriorated. She arrived thin and skittish, flinching at sudden movements.
+      "Typically, Woodrow will be second only to Fern in walking right up to say hi. He is approachable, friendly, and also will offer a kiss if he trusts you.",
+    story: `You will love Woodrow, and he will love you right back!
 
-**Months of patient care transformed Luna.** She's now the most curious alpaca on the farm, always the first to approach something (or someone) new.
+Fern and Woodrow are cousins who joined RNR with Gus and Gandalf in 2022. Being a bit younger and more curious, they arrived at the ranch as two-year-olds. While they often stick together, they're also more adventurous than the older Huacaya alpacas, happily exploring The Acres, their spacious home.
 
-Luna has become a favorite in our animal-assisted therapy sessions. Her gentle curiosity puts even the most anxious visitors at ease.`,
+Woodrow is named after the character from Lonesome Dove, based on a famous rancher and Texas Ranger portrayed by Tommy Lee Jones. He's a close second to Fern in terms of friendliness and is quickly gaining fans with his own version of "kisses." He's quite the handsome fellow, resembling Fern, though their distinct features make it easy for those who know them to tell them apart! Like Fern, Woodrow is curious and enjoys watching people. At night, they make excellent guardians, keeping an eye out for any intruders, such as coyotes. Woodrow's favorite treat is bite-sized carrots, and he'll warm up to you immediately if you have some on hand.
+
+Just a tip: they're not fans of being patted on the head. And don't worry — alpacas can't bite your fingers since they don't have upper teeth! They both adore water and are not fond of late dinners!
+
+**Alpaca Fun Fact:** They have three stomachs, eat grass, and chew cud. They have no upper teeth. Yes, alpacas spit, but usually at other alpacas who might want their food!`,
   },
   {
-    name: "Dusty",
-    slug: "dusty",
+    name: "Fern",
+    slug: "fern",
     family: "alpacas",
-    photo: placeholderImage,
+    photo: fernPhoto,
     description:
-      "The calmest presence on the farm — Dusty brings peace wherever he goes.",
-    story: `Dusty was surrendered by an owner who could no longer afford his care. Unlike many rescues, he arrived in good health — just in need of a home.
+      "Fern is the star of the show, and she knows it! She is always curious and generously gives the best kisses. She is more than a pretty face, though, and has become the perfect emotional support animal at Robin's Nest.",
+    story: `Famous Fern is a doll! She loves to give kisses to kids, and also to kids-at-heart!
 
-**Dusty's calm demeanor makes him a natural healer.** He stands quietly beside visitors during therapy sessions, his steady presence a grounding force.
+Fern and Woodrow are cousins who joined RNR alongside Gus and Gandalf in 2022. Being a bit younger and more curious, they came to the ranch as two-year-olds.
 
-He's especially gentle with children and has an uncanny ability to sense when someone needs a little extra comfort.`,
+Let's focus on Fern — she would definitely want us to! First and foremost, she's stunning, with her soft white fleece and expressive, curious face. Fern knows she's the star of the show. Alpacas have distinct personalities, and Fern's is unmistakable — she's curious, confident, and our #1 ambassador at RNR! When guests arrive, she's always the first to greet them and investigate. During ranch projects, you can count on her to be right there "helping." One of her greatest joys is giving kisses, and we even have a Fern Kissing Booth at some of our events!
+
+Fern is named after the female deer in Bambi, and we've even created a cartoon version of her for RNR. Her favorite treat? Butterscotch horse treats! She also loves water, especially when she gets to enjoy a refreshing spray on hot days. On the flip side, her biggest pet peeve is when dinner is late!
+
+**Alpaca Fun Fact:** Alpacas are generally very clean; all poop in the same spot, known as a communal dung pile. Some have been house trained.`,
+  },
+  {
+    name: "Gus",
+    slug: "gus",
+    family: "alpacas",
+    photo: gusPhoto,
+    description:
+      "You will know Gus right away by his beautiful brown coat. His fleece will make someone a gorgeous sweater! More important, Gus is slowly joining the comfort animal crew.",
+    story: `Gus, always a standout, has beautiful cinnamon color fleece and a heart of gold.
+
+It's hard to mention Gus without also talking about Gandalf. These two have been inseparable best friends for many years, having spent a long time as practice animals at a San Diego vet school. We assisted a neighbor in adopting these two beautiful Huacaya alpacas, and when the neighbor moved and couldn't take them, we knew Robin's Nest would be their perfect sanctuary.
+
+You can't miss Gus with his stunning cinnamon-colored fleece, which makes him stand out among the three white alpacas. He's named after Augustus, the main character from Lonesome Dove, a role famously portrayed by Robert Duvall.
+
+Gus and Gandalf stick together closely, enjoying their Orchard hay and sharing loving gazes. When Gus had a sore eye that required medical attention, Gandalf let out a soulful cry, clearly showing his love and concern for his friend. Though they prefer to keep a little distance from their human family, they do enjoy snacking from a handheld treat bowl! Gus is a bit more adventurous than Gandalf and is gradually becoming more comfortable with their human companions. Regardless, they always look out for each other and have quickly settled into their new retirement home!
+
+**Alpaca Fun Fact:** Alpacas are much smaller than their llama cousins, weighing between 120-200 pounds. Life expectancy is 15-20 years.`,
+  },
+  {
+    name: "Gandalf",
+    slug: "gandalf",
+    family: "alpacas",
+    photo: gandalfPhoto,
+    description:
+      "Gandalf, despite his trials as a vet school practice animal for eight years, maintains a beautiful pose, even at a distance. Our alpacas bring perfect serenity to our healing environment.",
+    story: `Gandalf, always regal, is a great place to start with a RNR comfort animal!
+
+Gandalf, along with his buddy Gus, joined Robin's Nest in July 2022 and has finally found his forever home! RNR helped a neighbor adopt these charming Huacaya alpacas after their retirement from a vet tech school in San Diego, where they spent many years as practice animals. When their neighbor moved and couldn't take them along, we knew RNR would be their final sanctuary.
+
+Gandalf is named after the wizard from The Lord of the Rings, and the name suits him perfectly. If you catch a glimpse of Gandalf, you'll notice his distinctive head tilt, giving him a regal and knowing appearance, even from afar.
+
+Gandalf tends to stick close to Gus — unless Gus gets too adventurous, that is. While he usually prefers to keep a safe distance from humans, he's gradually becoming more comfortable joining in on the action. It's clear that both Gandalf and Gus are thriving in their spacious, forever home — free from any more practice procedures!
+
+Newsflash! Gandalf's current favorite activity is hanging out with Tivio, the Quarter Horse! According to Gandalf, they are besties now!!
+
+**Alpaca Fun Fact:** Alpacas have been in the U.S. only since 1984. They are one of six animals that are part of the camel family known as Camelidae. Their ancestors evolved in North America nine to eleven million years ago, although distant relatives go back as far back as 35 million years. Peru accounts for the world's largest alpaca population, with about 3.8 million. The U.S. has about 192,000.`,
+  },
+  {
+    name: "Neptune",
+    slug: "neptune",
+    family: "alpacas",
+    photo: neptunePhoto,
+    description:
+      "Neptune is a Huacaya alpaca of true black coloring, the purest black fleece imaginable. He has a great spirit and needs lots of love and care after his tragic experience.",
+    story: `Neptune epitomizes resilience and the Robin's Nest philosophy of second chances. He is one of our Quiddish Mission alpacas.
+
+In a moment, Neptune was caught without the protection of his herd and became the victim of a vicious attack by a mountain lion. The smallest of the herd, being on the edge — both socially and physically — sometimes happens. Somehow, Neptune survived the attack, but remains scarred and traumatized.
+
+When Kimber and Thelma began coordinating the re-homing of her 22 beloved alpacas, Thelma said, there are two I don't expect you to take. One (Ziggy) is in critical condition medically and cannot survive such a trip. And Neptune, unfortunately, is too difficult for me to ask you to take him. He is aggressive, is the target of other males in the herd, and has to be isolated.
+
+Less than 24 hours later, Kimber voiced her decision, which was based on Robin's Nest philosophy of second chances. She came in and announced, Neptune will find his final home here at Robin's Nest.
+
+Today, Neptune is thriving. He's healthy, eating well, and is easy to manage by his handlers. He has been gelded, which means he has the opportunity at least to join the herd in the future. In the meantime, he is in a spacious pen where he can interact with other alpacas through the open fencing and is showing great promise of advancing socially. Inclusion is a beautiful thing.`,
+  },
+  {
+    name: "Jolla",
+    slug: "jolla",
+    family: "alpacas",
+    photo: jollaPhoto,
+    description:
+      "Jolla is recognizable by her silver gray coat and her small, almost dainty features. At 23, she is the oldest of the herd and deserves lots of love and attention.",
+    story: `Jolla, like all our senior alpacas, is enjoying her golden years here at Robin's Nest! She is one of our Quiddish Mission alpacas.
+
+Jolla, Jolla, Jolla. She is so pretty you can't say her name just once! At 23, Jolla is the oldest in the pack but you'd never know it by looks. She is stunning... we call her our "regal rose" because she has "that" look, plus her official color is rose gray; her fleece has variations of light, medium, and dark rose gray.
+
+Jolla's face, head, and body seems more slim than our original herd, and also as compared to her own pack, though that may be a product of her last shearing. Regardless, she does earn the "regal" reference and will doubtless be the subject of many photography pursuits. True to the stereotype of royalty (and she IS a purebred registered alpaca!) she also seems a bit more "standoffish" or aloof than others. We LOVE the diversity she adds to our group!`,
+  },
+  {
+    name: "Poppy Belle",
+    slug: "poppy-belle",
+    family: "alpacas",
+    photo: poppyBellePhoto,
+    description:
+      "Poppy Belle is the most outgoing of the senior alpacas. She is a beautiful medium brown, sometimes referred to as chestnut. We can't wait for you to see her charming, inviting smile!",
+    story: `Poppy Belle would LOVE to give you a big "toothy" smile. She gives more than she gets, every time! She is one of our Quiddish Mission alpacas.
+
+Here at Robin's Nest, we proudly stand by our philosophy of inclusion, acceptance, and appreciation for our unique contributions to the world. Poppy Belle envelops each of those enduring traits: She is a proud purebred registered alpaca yet does not have the conventional perfect teeth and "smile" that others may display. But she has plenty of personality, pep, and positivity!
+
+We knew immediately that Poppy would be different and charming all at once. Though she had not been handled a lot as a so-called "pet," she fit right in to the RNR family at once, coming right in for a treat or a friendly hello.
+
+As ever, Poppy Belle and all of our Robin's Nest ambassadors have love and lessons to offer, if only we are willing to listen, learn, and love unconditionally. They do.`,
+  },
+  {
+    name: "Hope",
+    slug: "hope",
+    family: "alpacas",
+    photo: hopePhoto,
+    description:
+      "Hope is white, which accounts for 25% of alpacas. She seems like a born leader too, often bossing the others around. Her name alone is reason enough to love her!",
+    story: `We HOPE you'll find it in your heart to support our HOPE here at Robin's Nest! She is one of our Quiddish Mission alpacas.
+
+Hope, one of our Quiddish Queens, is pure white and pure of heart. But that doesn't keep her from her "boss" duties, which usually means being the first to get the first meal dish down, being the first in line to get out, or just generally asserting her alpha character.
+
+All of these characteristics are part of her behavior for alpacas. As with most herd animals, they need the companionship of other alpacas to survive. For alpacas, they rely not only on the physical safety of numbers but also the assurance of social connection. Three basic needs of the alpaca include:
+
+- **Social Structure**, which includes a command hierarchy. Hope seems to embrace this role. However, she is not yet fully integrated into our existing herd, so time will tell how that designation endures!
+
+- **Communication**, which provides necessary messages to one another, as well as others. Alpacas communicate through body posture, tail and ear movements, and a variety of sounds, including humming, clucking, and alarm calls. Generally, alpacas make a humming noise.
+
+- **Alarm Calls:** Alpacas are herd-loyal to the core and will warn of impending danger. Recently, Hope (and others) sounded an immediate and loud series of "squeaks" (sounds like a dog's squeaky toy!) when our "lambies" were allowed to pass by the Quiddish alpaca pens. We had never heard that before. And more interesting, when Tivio the big Quarter Horse was allowed the same pass-by, the alpacas were quiet and seemed unaffected! But then, of course, Tivio is a pretty calm, cool dude!
+
+In total, Hope represents so much of the Robin's Nest mission — hope and home. We are so glad she is here with us for the rest of her life.`,
   },
   {
     name: "Shelly",

@@ -1,0 +1,84 @@
+---
+export const prerender = false;
+
+import Layout from "../../components/Layout.astro";
+import GoogleMapEmbed from "../../components/GoogleMapEmbed.astro";
+import GiveButterWidget from "../../components/GiveButterWidget.astro";
+import VisitorGuidelines from "../../components/VisitorGuidelines.astro";
+import { SANCTUARY_ADDRESS, sanitizeName } from "../../lib/tours";
+
+const address = SANCTUARY_ADDRESS;
+
+const rawFirstName = Astro.url.searchParams.get("invitee_first_name");
+const rawFullName = Astro.url.searchParams.get("invitee_full_name");
+const rawName = rawFirstName || rawFullName?.split(" ")[0] || null;
+const name = rawName ? sanitizeName(rawName) || null : null;
+const eventTime = Astro.url.searchParams.get("event_start_time");
+
+const heading = name ? `Almost There, ${name}!` : "Almost There!";
+
+let subtext = "We'll see you soon at the sanctuary.";
+if (eventTime) {
+  const date = new Date(eventTime);
+  if (!isNaN(date.getTime())) {
+    const timeZone = "America/Los_Angeles";
+    const formattedDate = new Intl.DateTimeFormat("en-US", {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+      timeZone,
+    }).format(date);
+    const formattedTime = new Intl.DateTimeFormat("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      timeZone,
+    }).format(date);
+    subtext = `We'll see you on ${formattedDate} at ${formattedTime}.`;
+  }
+}
+---
+
+<Layout title="Complete Your Booking" currentPath="/tours">
+  <section class="px-6 py-16 md:py-24">
+    <div class="mx-auto max-w-3xl text-center">
+      <h1
+        class="font-heading text-primary mb-4 text-3xl leading-tight md:text-5xl"
+      >
+        {heading}
+      </h1>
+      <p class="text-text-light text-lg leading-relaxed">
+        {subtext}
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-off-white px-6 py-16 md:py-24">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="font-heading text-primary mb-4 text-3xl">
+        Complete Your Booking
+      </h2>
+      <p class="text-text-light mb-8 text-lg leading-relaxed">
+        A minimum donation of $60 is required to confirm your farm tour. As a
+        501(c)(3) nonprofit, your donation is tax-deductible and goes directly
+        to the care of our rescue animals.
+      </p>
+      <div class="mx-auto max-w-md">
+        <GiveButterWidget id="gKZZE3" />
+      </div>
+    </div>
+  </section>
+
+  <VisitorGuidelines />
+
+  <section class="px-6 py-16 md:py-24">
+    <div class="mx-auto max-w-5xl">
+      <h2 class="font-heading text-primary mb-4 text-center text-3xl">
+        Getting Here
+      </h2>
+      <p class="text-text-light mb-8 text-center text-lg">
+        {address}
+      </p>
+      <GoogleMapEmbed query={address} />
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,56 @@
+---
+import Layout from "../../components/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import CalendlyEmbed from "../../components/CalendlyEmbed.astro";
+import GoogleMapEmbed from "../../components/GoogleMapEmbed.astro";
+import MissionBanner from "../../components/MissionBanner.astro";
+import VisitorGuidelines from "../../components/VisitorGuidelines.astro";
+import { SANCTUARY_ADDRESS, CALENDLY_URL } from "../../lib/tours";
+
+const address = SANCTUARY_ADDRESS;
+---
+
+<Layout title="Book a Farm Tour" currentPath="/tours">
+  <Hero
+    headline="Book a Farm Tour"
+    subtext="Come visit the sanctuary, meet the animals, and experience the healing power of Robin's Nest in person."
+    primaryCta={{ label: "Book Now", href: "#book" }}
+  />
+
+  <section id="book" class="px-6 py-16 md:py-24">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="font-heading text-primary mb-4 text-3xl">
+        Schedule Your Visit
+      </h2>
+      <p class="text-text-light mb-8 text-lg leading-relaxed">
+        Farm tours are donation-based, last about an hour, and take place during
+        our regular feeding times. Pick a time that works for you and come
+        experience life at the sanctuary.
+      </p>
+    </div>
+    <div class="mx-auto max-w-3xl">
+      <CalendlyEmbed url={CALENDLY_URL} />
+    </div>
+  </section>
+
+  <VisitorGuidelines variant="off-white" />
+
+  <section class="px-6 py-16 md:py-24">
+    <div class="mx-auto max-w-5xl">
+      <h2 class="font-heading text-primary mb-4 text-center text-3xl">
+        Find Us
+      </h2>
+      <p class="text-text-light mb-8 text-center text-lg">
+        {address}
+      </p>
+      <GoogleMapEmbed query={address} />
+    </div>
+  </section>
+
+  <MissionBanner
+    heading="Support the Sanctuary"
+    body="100% of donations go directly to the care and feeding of our rescue animals. Every visit and every dollar makes a difference."
+    cta={{ label: "Donate Now", href: "/donate" }}
+    variant="highlight"
+  />
+</Layout>

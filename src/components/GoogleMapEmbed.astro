@@ -1,0 +1,21 @@
+---
+interface Props {
+  query: string;
+  height?: string;
+}
+
+const { query, height = "450px" } = Astro.props;
+
+const encodedQuery = encodeURIComponent(query);
+const src = `https://www.google.com/maps?q=${encodedQuery}&output=embed`;
+---
+
+<iframe
+  src={src}
+  height={height}
+  style="border: 0;"
+  loading="lazy"
+  referrerpolicy="no-referrer-when-downgrade"
+  title={`Map showing ${query}`}
+  class="w-full rounded-lg"
+  allowfullscreen></iframe>

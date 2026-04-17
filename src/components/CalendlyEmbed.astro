@@ -8,7 +8,15 @@ interface Props {
 const { url, resize = true, id = "calendly-embed" } = Astro.props;
 ---
 
-<div id={id} class="calendly-embed-container" style="min-width: 320px;"></div>
+<div
+  id={id}
+  class="calendly-embed-container"
+  style="min-width: 320px; min-height: 660px;"
+>
+  <p class="text-text-light py-8 text-center text-lg">
+    <a href={url} class="text-primary underline">Schedule a visit on Calendly</a>
+  </p>
+</div>
 
 <script
   is:inline
@@ -16,16 +24,20 @@ const { url, resize = true, id = "calendly-embed" } = Astro.props;
   async></script>
 
 <script is:inline define:vars={{ url, resize, id }}>
-  function initCalendly() {
-    if (window.Calendly) {
-      window.Calendly.initInlineWidget({
-        url: url,
-        parentElement: document.getElementById(id),
-        resize: resize,
-      });
-    } else {
-      setTimeout(initCalendly, 100);
+  (function () {
+    var attempts = 0;
+    function initCalendly() {
+      if (window.Calendly) {
+        window.Calendly.initInlineWidget({
+          url: url,
+          parentElement: document.getElementById(id),
+          resize: resize,
+        });
+      } else if (attempts < 50) {
+        attempts++;
+        setTimeout(initCalendly, 100);
+      }
     }
-  }
-  initCalendly();
+    initCalendly();
+  })();
 </script>

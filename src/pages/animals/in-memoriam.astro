@@ -1,0 +1,23 @@
+---
+import Layout from "../../components/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import AnimalCard from "../../components/AnimalCard.astro";
+import { getMemorialAnimals } from "../../data/animals";
+
+const memorialAnimals = getMemorialAnimals();
+---
+
+<Layout title="In Memoriam" currentPath="/animals">
+  <Hero
+    headline="In Memoriam"
+    subtext="At Robin's Nest Rescue, every animal who finds their way to us becomes part of our family. This page honors those who are no longer with us but whose spirits live on in everything we do."
+    primaryCta={{ label: "Back to All Animals", href: "/animals" }}
+  />
+  <section class="px-6 py-16">
+    <div class="mx-auto max-w-5xl">
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {memorialAnimals.map((animal) => <AnimalCard {...animal} />)}
+      </div>
+    </div>
+  </section>
+</Layout>

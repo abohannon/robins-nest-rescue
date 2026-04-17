@@ -2,7 +2,9 @@
 import Layout from "../../components/Layout.astro";
 import Hero from "../../components/Hero.astro";
 import AnimalFamilyCard from "../../components/AnimalFamilyCard.astro";
-import { animalFamilies } from "../../data/animals";
+import { animalFamilies, getMemorialAnimals } from "../../data/animals";
+
+const memorialAnimals = getMemorialAnimals();
 ---
 
 <Layout title="Meet the Animals" currentPath="/animals">
@@ -15,6 +17,16 @@ import { animalFamilies } from "../../data/animals";
     <div class="mx-auto max-w-5xl">
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {animalFamilies.map((family) => <AnimalFamilyCard {...family} />)}
+        {
+          memorialAnimals.length > 0 && (
+            <AnimalFamilyCard
+              name="In Memoriam"
+              slug="in-memoriam"
+              description="Honoring those who are no longer with us but whose spirits live on in everything we do."
+              photo={memorialAnimals[0].photo}
+            />
+          )
+        }
       </div>
     </div>
   </section>

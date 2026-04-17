@@ -14,11 +14,35 @@ test.describe("/tours/confirmation page", () => {
     await expect(subtext).toBeVisible();
   });
 
-  test("renders with invitee name", async ({ page }) => {
-    await page.goto("/tours/confirmation?invitee_full_name=Jane");
+  test("renders with invitee_full_name", async ({ page }) => {
+    await page.goto("/tours/confirmation?invitee_full_name=Jane+Smith");
 
     const heading = page.getByRole("heading", {
-      name: "You're Booked, Jane!",
+      name: "You're Booked, Jane Smith!",
+      level: 1,
+    });
+    await expect(heading).toBeVisible();
+  });
+
+  test("falls back to first + last name when full_name is empty", async ({
+    page,
+  }) => {
+    await page.goto(
+      "/tours/confirmation?invitee_full_name=&invitee_first_name=Adam&invitee_last_name=Bohannon",
+    );
+
+    const heading = page.getByRole("heading", {
+      name: "You're Booked, Adam Bohannon!",
+      level: 1,
+    });
+    await expect(heading).toBeVisible();
+  });
+
+  test("uses first name only when last name is missing", async ({ page }) => {
+    await page.goto("/tours/confirmation?invitee_first_name=Adam");
+
+    const heading = page.getByRole("heading", {
+      name: "You're Booked, Adam!",
       level: 1,
     });
     await expect(heading).toBeVisible();

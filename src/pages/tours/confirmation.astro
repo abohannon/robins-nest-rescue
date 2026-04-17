@@ -7,7 +7,13 @@ import MissionBanner from "../../components/MissionBanner.astro";
 
 const address = "16603 John Henry Lane, Ramona, CA 92065";
 
-const name = Astro.url.searchParams.get("invitee_full_name");
+const fullName = Astro.url.searchParams.get("invitee_full_name");
+const firstName = Astro.url.searchParams.get("invitee_first_name");
+const lastName = Astro.url.searchParams.get("invitee_last_name");
+const name =
+  fullName ||
+  [firstName, lastName].filter(Boolean).join(" ") ||
+  null;
 const eventTime = Astro.url.searchParams.get("event_start_time");
 
 const heading = name ? `You're Booked, ${name}!` : "You're Booked!";

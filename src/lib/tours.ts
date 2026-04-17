@@ -10,7 +10,7 @@ export const CALENDLY_URL =
  */
 export function sanitizeName(raw: string): string {
   return raw
-    .replace(/[^a-zA-Z\s'\-]/g, "")
+    .replace(/[^a-zA-Z\s'-]/g, "")
     .trim()
     .slice(0, 50);
 }

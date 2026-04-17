@@ -26,7 +26,7 @@ const { url, resize = true, id = "calendly-embed" } = Astro.props;
 
 <script is:inline define:vars={{ url, resize, id }}>
   (function () {
-    var attempts = 0;
+    let attempts = 0;
     function initCalendly() {
       if (window.Calendly) {
         window.Calendly.initInlineWidget({

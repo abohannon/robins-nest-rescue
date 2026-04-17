@@ -620,7 +620,7 @@ Our slogan, "We rescue them. They save us," reflects the deep, ancient bond betw
     family: "ranch-dogs",
     photo: edisonPhoto,
     description:
-      "Edison (Eddie) was born deaf, close to euthanization because he would be \"inconvenient.\" Named after Thomas Edison, who attributed much of his genius to his own deafness.",
+      'Edison (Eddie) was born deaf, close to euthanization because he would be "inconvenient." Named after Thomas Edison, who attributed much of his genius to his own deafness.',
     story: `Eddie is deaf and loves to help children who are hard of hearing. He's our "cuddle bug!"
 
 Eddie is an Australian Cattle Dog, also known as a Blue Heeler, who was born deaf. When his breeder discovered his condition, they planned to euthanize him as a puppy. Thankfully, he was rescued by another breeder who fostered him until he joined RNR in 2022. He's named after Thomas Edison, the renowned inventor who credited much of his brilliance to his deafness.

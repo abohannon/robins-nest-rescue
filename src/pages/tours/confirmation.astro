@@ -38,7 +38,9 @@ if (eventTime) {
 <Layout title="Tour Confirmed" currentPath="/tours">
   <section class="px-6 py-16 md:py-24">
     <div class="mx-auto max-w-3xl text-center">
-      <h1 class="font-heading text-primary mb-4 text-3xl leading-tight md:text-5xl">
+      <h1
+        class="font-heading text-primary mb-4 text-3xl leading-tight md:text-5xl"
+      >
         {heading}
       </h1>
       <p class="text-text-light text-lg leading-relaxed">
@@ -53,9 +55,9 @@ if (eventTime) {
         Complete Your Booking
       </h2>
       <p class="text-text-light mb-8 text-lg leading-relaxed">
-        A minimum donation of $60 is required to confirm your farm tour.
-        As a 501(c)(3) nonprofit, your donation is tax-deductible and goes
-        directly to the care of our rescue animals.
+        A minimum donation of $60 is required to confirm your farm tour. As a
+        501(c)(3) nonprofit, your donation is tax-deductible and goes directly
+        to the care of our rescue animals.
       </p>
       <div class="mx-auto max-w-md">
         <GiveButterWidget id="gKZZE3" />
@@ -70,24 +72,38 @@ if (eventTime) {
       </h2>
       <ul class="text-text space-y-4 text-lg">
         <li class="flex items-start gap-3">
-          <span class="text-primary mt-1 text-xl" aria-hidden="true">&#10003;</span>
+          <span class="text-primary mt-1 text-xl" aria-hidden="true"
+            >&#10003;</span
+          >
           <span>Closed-toe shoes are required</span>
         </li>
         <li class="flex items-start gap-3">
-          <span class="text-primary mt-1 text-xl" aria-hidden="true">&#10003;</span>
+          <span class="text-primary mt-1 text-xl" aria-hidden="true"
+            >&#10003;</span
+          >
           <span>Wear clothes you don't mind getting dirty</span>
         </li>
         <li class="flex items-start gap-3">
-          <span class="text-primary mt-1 text-xl" aria-hidden="true">&#10003;</span>
+          <span class="text-primary mt-1 text-xl" aria-hidden="true"
+            >&#10003;</span
+          >
           <span>Dress in layers — the weather can change quickly</span>
         </li>
         <li class="flex items-start gap-3">
-          <span class="text-primary mt-1 text-xl" aria-hidden="true">&#10003;</span>
-          <span>Feel free to bring leftover fruits or veggies for the animals</span>
+          <span class="text-primary mt-1 text-xl" aria-hidden="true"
+            >&#10003;</span
+          >
+          <span
+            >Feel free to bring leftover fruits or veggies for the animals</span
+          >
         </li>
         <li class="flex items-start gap-3">
-          <span class="text-accent-dark mt-1 text-xl" aria-hidden="true">&#10007;</span>
-          <span><strong>No potatoes or onions</strong> — these are toxic to the animals</span>
+          <span class="text-accent-dark mt-1 text-xl" aria-hidden="true"
+            >&#10007;</span
+          >
+          <span
+            ><strong>No potatoes or onions</strong> — these are toxic to the animals</span
+          >
         </li>
       </ul>
     </div>
@@ -104,5 +120,4 @@ if (eventTime) {
       <GoogleMapEmbed query={address} />
     </div>
   </section>
-
 </Layout>

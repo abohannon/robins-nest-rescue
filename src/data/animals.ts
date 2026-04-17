@@ -20,6 +20,14 @@ import poppyBellePhoto from "../assets/poppy-belle.jpg";
 import hopePhoto from "../assets/hope.jpg";
 import dollyPhoto from "../assets/dolly.jpg";
 import rebaPhoto from "../assets/reba.jpg";
+import oakleyPhoto from "../assets/oakley.jpg";
+import edisonPhoto from "../assets/edison.jpg";
+import lilyPhoto from "../assets/lily.jpg";
+import julioPhoto from "../assets/julio.jpg";
+import albertoPhoto from "../assets/alberto.jpg";
+import banditoPhoto from "../assets/bandito.jpg";
+import smokeyPhoto from "../assets/smokey.jpg";
+import banditPhoto from "../assets/bandit.jpg";
 
 export interface AnimalFamily {
   name: string;
@@ -35,6 +43,7 @@ export interface Animal {
   photo: ImageMetadata;
   description: string;
   story: string;
+  inMemoriam?: boolean;
 }
 
 export const animalFamilies: AnimalFamily[] = [
@@ -72,6 +81,27 @@ export const animalFamilies: AnimalFamily[] = [
     description:
       "If Mary truly had a little lamb, it would be very happy here at Robin's Nest! Our twin Dorper Katahdin crossbreed lambs help maintain the ranch grounds and make sure everyone knows when it's time to go outside.",
     photo: dollyPhoto,
+  },
+  {
+    name: "The Ranch Dogs",
+    slug: "ranch-dogs",
+    description:
+      "Meet the Robin's Nest ranch dogs! Oakley and Edison are Blue Heelers — clever, devoted, and full of energy. Together they bring joy, protection, and companionship to the sanctuary.",
+    photo: oakleyPhoto,
+  },
+  {
+    name: "The Three Chimigos",
+    slug: "chimigos",
+    description:
+      "The heart of Robin's Nest traces back to three Chihuahuas — Lily, Alberto, and Julio. Their legendary bond inspired songs, stories, a children's book series, and the founding of Robin's Nest Rescue.",
+    photo: lilyPhoto,
+  },
+  {
+    name: "Cat Tales",
+    slug: "cats",
+    description:
+      "Our ranch cats keep watch over the property, patrol for pesky varmints, and never miss a golf cart ride. They remind us that every creature has a role to play.",
+    photo: banditoPhoto,
   },
 ];
 
@@ -249,6 +279,7 @@ Rest easy, sweet girl. You will always be a part of our story.
 *Sweet Ayla with the sweet blue eyes.*
 
 *— Dr. Sue Original, April 18, 2025*`,
+    inMemoriam: true,
   },
   {
     name: "Woodrow",
@@ -560,6 +591,192 @@ At Robin's Nest, we also appreciate diversity, and their unique combination is t
 
 **Did you know?** Life expectancy is 10-12 years. However, if used for production, they are usually sold or "put down" around 5. :-(`,
   },
+  {
+    name: "Oakley",
+    slug: "oakley",
+    family: "ranch-dogs",
+    photo: oakleyPhoto,
+    description:
+      "Annie Oakley (or just Oakley), our Blue Heeler girl, is a blue ribbon helper! She is clever and quick, at once a sweet people person while also a devoted protector. She is Eddie's constant companion.",
+    story: `Oakley is a sweetheart and is also Eddie's guide dog. We all need a little help now and then!
+
+While Oakley isn't officially part of our nonprofit rescue mission, she is an invaluable member of the Robin's Nest Rescue family! Named after the strong women in our lives, Oakley embodies the spirit of her namesake, the legendary sharpshooter from the 19th century. She is fiercely strong, spirited, opinionated, enterprising, curious, and exceptionally intelligent — and full of energy! To keep her mind engaged, she thrives on having constant "jobs" to do.
+
+A stocky Australian Cattle Dog, she's related to Australia's famous wild dog, the Dingo, and is known for her cleverness, often outsmarting her owners. Kimber is always on her toes with Oakley; they are best friends, both developing an impressive array of skills together. Oakley's favorite pastime is enthusiastically working her herding ball, and she has a distinctive "voice" that she uses to mark the occasion.
+
+One of Oakley's main roles is to be a companion to Eddie, our born-deaf Blue Heeler. They are a perfect match — Oakley's energy is the yang to Eddie's calm yin. His easygoing nature provides a soothing balance to her rambunctiousness. While Oakley jumps and leaps around, Eddie often collapses in a heap, though he's quick to defend his toys. Oakley helps Eddie navigate the world, guiding him and fetching him on command — an invaluable skill on our expansive 5-acre yard. Together, they bring delightful joy to Robin's Nest!
+
+Our slogan, "We rescue them. They save us," reflects the deep, ancient bond between dogs and humans. Archaeologists discovered 12,000-year-old skeletal remains of a woman cradling a puppy, and cave drawings from 32,000 years ago depict animals alongside humans. Remarkably, all dogs share a common ancestor: the gray wolf, Canis lupus. Today, dogs are the most popular animal companions worldwide, with an estimated population of around one billion.
+
+**Common Myths About Rescue Dogs**
+
+- **"Dogs end up in shelters because they have behavioral issues."** Not all have issues, and if so, many reasons exist, including financial or lifestyle changes.
+- **"Previously abused dogs won't make good pets."** Most crave love and attention and make excellent pets.
+- **"There are no purebreds in shelters."** A variety of purebreds come to shelters; some shelters specialize in a specific breed.`,
+  },
+  {
+    name: "Edison",
+    slug: "edison",
+    family: "ranch-dogs",
+    photo: edisonPhoto,
+    description:
+      "Edison (Eddie) was born deaf, close to euthanization because he would be \"inconvenient.\" Named after Thomas Edison, who attributed much of his genius to his own deafness.",
+    story: `Eddie is deaf and loves to help children who are hard of hearing. He's our "cuddle bug!"
+
+Eddie is an Australian Cattle Dog, also known as a Blue Heeler, who was born deaf. When his breeder discovered his condition, they planned to euthanize him as a puppy. Thankfully, he was rescued by another breeder who fostered him until he joined RNR in 2022. He's named after Thomas Edison, the renowned inventor who credited much of his brilliance to his deafness.
+
+Our goal is to prepare Eddie for our Side by Side animal-assisted therapy program, and he's making great progress! He's already been on a few outings and has proven to be a crowd favorite. Friendly and calm, he recently handled a visit to a large music venue like a pro. Next, we'll take him on more local trips, culminating in participation in our new program for veterans dealing with PTSD. We also envision him forming a special bond with deaf and hard-of-hearing children, showcasing that being "different" can be both charming and exciting.
+
+Eddie loves napping and patrolling the ranch with his companion and fellow Blue Heeler, Oakley, who serves as his guide. His dislikes include the Amazon delivery man and baths! We are grateful every day to the local breeder who rescued Eddie from a situation where another breeder deemed a deaf dog "inconvenient" and unworthy of a loving home.
+
+**Common Myths About Rescue Dogs**
+
+- **"Dogs end up in shelters because they have behavioral issues."** Not all have issues, and if so, many reasons exist, including financial or lifestyle changes.
+- **"Previously abused dogs won't make good pets."** Most crave love and attention and make excellent pets.
+- **"There are no purebreds in shelters."** A variety of purebreds come to shelters; some shelters specialize in a specific breed.
+- **"Rescue dogs are unhealthy and sick."** The majority of rescue dogs don't have illnesses and most that do surface are very minor ones. Approximately one million healthy shelter animals are euthanized every year.
+- **"Getting an older dog means they can't be trained."** Actually, older dogs are usually already trained to some extent. And certainly, old dogs CAN learn new tricks!`,
+  },
+  {
+    name: "Lily",
+    slug: "lily",
+    family: "chimigos",
+    photo: lilyPhoto,
+    inMemoriam: true,
+    description:
+      "Lily was the Matriarch. Larger in spirit and size than her brothers, she was the original greeter, caretaker, and center of the pack. (c. 2008 – April 21, 2025)",
+    story: `Meet Lily — the heart and soul of the Three Chimigos. (c. 2008 – April 21, 2025)
+
+Lily was the beginning. The first rescue, the first heartbeat that started it all, even before Robin's Nest had a name, and the soul of what would become a sanctuary for so many. Kimber met her in 2010 at the San Diego Humane Society — a young Chihuahua mix who had already known the hardship of motherhood too soon. It was clear she had recently given birth, though her puppies were gone.
+
+That quiet loss became her secret, carried silently but lived out in the way she poured her heart into caring for everyone who came after. From that moment on, Lily became not only Kimber's steadfast companion, but also the spark that started it all.
+
+Known affectionately as the Matriarch, Lily carried herself with dignity and purpose. She was the original greeter, caretaker, and center of the pack. Larger in spirit (and in size) than her brothers Alberto and Julio, she lovingly kept them in line, groomed them, and guided them with a maternal devotion that never wavered. Together they were legendary: The Three Chimigos.
+
+Lily was a communicator, her gaze and expressions speaking volumes. Kimber could read her eyes as though they were a language all their own — every wish, every insistence, every bit of wisdom. She was also deeply social, forming bonds that endured across time and distance.
+
+When her brothers passed before her, Lily grieved in a way that reminded us just how deep her heart ran. She called for them on the deck, lifting her voice into the distance as though she could still reach them.
+
+Though she was the oldest, she held on and was the last to go. Her passing was sudden and unexpected, and Kimber was with her at the very end — a tender moment that remains both a gift and a lifelong reminder.
+
+Through nearly two decades of life, surgeries, medications, triumphs, and loss, Lily remained our constant — resilient, tender, insistent, and fiercely loving. She was not just the matriarch of The Three Chimigos; she was the heart of Robin's Nest itself.
+
+**Grieving the Loss of a Beloved Companion**
+
+With the loss of these precious, innocent and giving souls, we've come to understand more deeply the reality of disenfranchised grief — the kind that comes from losing an animal companion but isn't often recognized or supported by society. When a pet passes, there are no casseroles. No days off work. No flowers or formal condolences. Yet for many of us, that loss is profound — and lasting.
+
+*We are all just walking each other home. — Ram Dass*`,
+  },
+  {
+    name: "Julio",
+    slug: "julio",
+    family: "chimigos",
+    photo: julioPhoto,
+    inMemoriam: true,
+    description:
+      "Julio was a little gimpy-legged black Chihuahua, reportedly hard to adopt out. To us, it was simple — he completed us. The third of The Three Chimigos. (c. 2012 – March 23, 2023)",
+    story: `Julio — The Playful Heart of the Chimigos. (c. 2012 – March 23, 2023)
+
+Julio was our explorer and charmer. His long tongue made him instantly unforgettable, and his curious spirit made him everyone's favorite. Always ready for adventure, always ready to answer our call.
+
+We consider ourselves incredibly fortunate to have found Alberto through OC Pound Hounds — and equally blessed to have crossed paths with Michele, whose compassion and philosophy resonated so deeply with us. So when Kimber later spotted a tiny black Chihuahua on their website, it felt like fate calling again. In that moment, The Three Chimigos were born.
+
+Julio had been discovered by Michele in an Orange County shelter. Barely a year old, pure black, underweight at only three pounds, and walking with a noticeable limp, he was one of the most vulnerable little souls she had seen. She couldn't leave him behind. Once he was strong enough, surgery restored much of his mobility — and when she learned we had already adopted his "brother" Alberto, she knew where Julio belonged.
+
+Julio quickly became everyone's favorite. Always cheerful, bouncing from room to room with his signature hop, he radiated joy. As the youngest of the Chimigos, he was our "baby" — playful, mischievous, and full of light.
+
+That's why his sudden illness was so devastating. When Julio was diagnosed with kidney disease, we held on with hope, doing everything possible. But after only a few short months, we faced the unthinkable. His passing left us shattered.
+
+Michele — now leading One Good Last Home Dog Sanctuary & Hospice — often reminds us that sudden goodbyes are the hardest. She is right. And yet, Julio's legacy is joy, resilience, and unconditional love.`,
+  },
+  {
+    name: "Alberto",
+    slug: "alberto",
+    family: "chimigos",
+    photo: albertoPhoto,
+    inMemoriam: true,
+    description:
+      "To some, Alberto could be a puzzle: shy yet fierce, tiny yet strong, cautious yet deeply tender. But to those in his inner circle, he was unforgettable. (c. 2011 – August 4, 2024)",
+    story: `Alberto — The Steadfast Soul. (c. 2011 – August 4, 2024)
+
+Our sweet, quirky boy. Sensitive and sometimes shy, he had his own routines, like only eating from a square Chinet plate. He danced like popcorn when he was happy — and stole our hearts completely.
+
+In 2012, while living in Orange County, Kimber set out to find a friend for Lily, who had joined the family two years earlier. On the OC Pound Hounds website, she spotted a small blonde Chihuahua named Alberto — lovingly called "Bertie" by his first rescuer, Michele. When Lily came along for the meet-and-greet, the choice was clear: they left as a family of three.
+
+Alberto's story began with hardship. He had been found on the streets, half-starved and terrified, then mistreated in the shelter with high-pressure hoses. Michele, with extraordinary patience, helped him heal — feeding him, reassuring him, and waiting for the right family to come along. That family turned out to be us, and from the start we knew he was special.
+
+Alberto had his own code of living, and he made his preferences known. He was not an "outdoor dog." He had refined food tastes, though he never turned down a meal. He had signature moves — his joyful "popcorn" dance and the proud "Hello Kitty" stance that always made us laugh. Behind his sometimes-serious exterior was a dog of remarkable intelligence and deep affection.
+
+On August 4, 2024, we said goodbye to Alberto with love, gratitude, and gentleness. He was the steady anchor of the Three Chimigos, the quiet strength at the center of their bond. Not a day passes that we don't miss him.
+
+Alberto's legacy is devotion and love, lived out every single day. He will always be the best boy, our steadfast companion, and the truest reminder that healing is possible when trust is met with love.`,
+  },
+  {
+    name: "Bandito",
+    slug: "bandito",
+    family: "cats",
+    photo: banditoPhoto,
+    description:
+      "Bandito is a stray we took in — maybe because he reminded us so much of Bandit. He loves to ride the golf cart and stay at Nana's house, uninvited but very happy!",
+    story: `Bandito can often be seen around the ranch, a purr-fect opportunity for loving.
+
+Not long after we lost Bandit — who sadly went missing one night and never returned — Kimber spotted a stray on the side of the road with markings strikingly similar to his. She quickly called home, asking for photos of Bandit... could it really be him? While the unique markings were incredibly close, it wasn't our original Bandit. Still, the resemblance was uncanny — like a little nudge from the universe.
+
+And just like that, Bandito joined the family.
+
+Though he showed signs of neglect when we found him, with some care and love, he's now thriving and clearly loving his new life. Bandito has taken on the role of ranch cat and unofficial guest escort. He's especially fond of golf cart rides — he'll hop on with anyone, anytime! These days, he often lounges at Nana's house (completely uninvited, but always content).
+
+With his white coat and bold black markings, Bandito is hard to miss — and with his friendly nature, even harder not to love. If you see a cat cruising around the property on a random golf cart, chances are it's him. He and Smokey continue to be our loyal ranch cats, and we wouldn't have it any other way.
+
+**Fun Cat Facts:**
+
+- Humans have 206 bones while cats average 244
+- A house cat is genetically 95.6% tiger
+- Cats can run around 30 mph over short distances
+- Cats can jump 5 times their height
+- Cats walk like camels and giraffes, both right feet then both left feet
+- Each cat's nose is unique, much like human fingerprints
+- Cats can dream`,
+  },
+  {
+    name: "Smokey",
+    slug: "smokey",
+    family: "cats",
+    photo: smokeyPhoto,
+    description:
+      "Smokey came to us as a kitten from the Humane Society. Though we don't know Smokey's circumstance, we do know that only 25% of cats born outdoors survive. We're glad Smokey is here!",
+    story: `Smokey is the quintessential black cat. A good ranch cat, Smokey is always on patrol!
+
+Smokey and Bandit were brought to Robin's Nest as kittens, adopted through the San Diego Humane Society in 2023. Smokey is solid black; Bandit was white with black markings. After several months, the pair were let out to wander the ranch and "do their thing" as ranch hands — looking after pesky varmints that cause trouble with the animals' feed. Unfortunately, Bandit didn't come in one night. We don't like to think of what might have happened, but must accept the realities of ranch life.
+
+Smokey, a beautiful black cat with bright green eyes, is still with us and, like a good ranch cat, patrols the ranch daily!
+
+**Common Myths About Cats**
+
+- **Black cats are unlucky.** This folklore varies by culture. In Japan, for example, it is considered good luck. Sadly, abandoned black cats are difficult to rehome.
+- **All cats hate water.** Cats are not big fans of water, probably because their coats don't dry very quickly. But some adapt quite well and are able to swim.
+- **Cats always land on their feet.** Cats do have a "righting reflex" but that's not always the case. It's not worth the chance!`,
+  },
+  {
+    name: "Bandit",
+    slug: "bandit",
+    family: "cats",
+    photo: banditPhoto,
+    inMemoriam: true,
+    description:
+      "Smokey and Bandit came to us as kittens from the Humane Society. Unfortunately, Bandit stayed outdoors one night and never came home. We miss him a lot. (c. 2022 – 2022)",
+    story: `In Memoriam: Bandit (c. 2022 – 2022)
+
+Smokey and Bandit were our original ranch hands. They came to Robin's Nest as tiny kittens, adopted through the San Diego Humane Society in 2023. Smokey, a sleek and solid black boy, and Bandit, striking with his white coat and black markings, quickly became part of the family.
+
+After several months of growing, exploring, and bonding, the duo graduated to full ranch duty — roaming the property and taking on their natural role as guardians of the feed sheds, keeping pesky varmints in check.
+
+Smokey was steady and cautious. Bandit, ever the adventurer, had a bold spirit and a habit of pushing boundaries. One evening, Bandit didn't come home. Despite our hopes, he never returned. We try not to dwell on what might have happened, but we must also face the harder truths of ranch life — where wild things still roam and the balance of nature isn't always kind.
+
+Bandit was beautiful, brave, and deeply loved. Not long after his disappearance, we reviewed outdoor camera footage and noticed something unusual: our alpacas, known protectors in their own right, were standing watch in a way we'd never seen before. We believe they sensed danger that night, and did their best to protect both Bandit and the land he called home.
+
+Though his time with us was too short, Bandit left a lasting impression. His memory lives on through Bandito, his spirited successor.`,
+  },
 ];
 
 export function getFamily(slug: string): AnimalFamily | undefined {
@@ -568,4 +785,8 @@ export function getFamily(slug: string): AnimalFamily | undefined {
 
 export function getAnimalsByFamily(familySlug: string): Animal[] {
   return animals.filter((a) => a.family === familySlug);
+}
+
+export function getMemorialAnimals(): Animal[] {
+  return animals.filter((a) => a.inMemoriam);
 }

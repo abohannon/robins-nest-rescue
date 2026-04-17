@@ -4,6 +4,8 @@ import Hero from "../components/Hero.astro";
 import CalendlyEmbed from "../components/CalendlyEmbed.astro";
 import GoogleMapEmbed from "../components/GoogleMapEmbed.astro";
 import MissionBanner from "../components/MissionBanner.astro";
+
+const address = "16603 John Henry Lane, Ramona, CA 92065";
 ---
 
 <Layout title="Book a Farm Tour" currentPath="/tours">
@@ -65,9 +67,9 @@ import MissionBanner from "../components/MissionBanner.astro";
         Find Us
       </h2>
       <p class="text-text-light mb-8 text-center text-lg">
-        16603 John Henry Lane, Ramona, CA 92065
+        {address}
       </p>
-      <GoogleMapEmbed query="16603 John Henry Lane, Ramona, CA 92065" />
+      <GoogleMapEmbed query={address} />
     </div>
   </section>
 

@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* ──────────────────────────────────────────────
    Layer 1: Raw Color Palette
    Base color scales — named by hue, not by role.

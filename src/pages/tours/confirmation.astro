@@ -1,33 +1,44 @@
 ---
-import Layout from "../components/Layout.astro";
-import Hero from "../components/Hero.astro";
-import CalendlyEmbed from "../components/CalendlyEmbed.astro";
-import GoogleMapEmbed from "../components/GoogleMapEmbed.astro";
-import MissionBanner from "../components/MissionBanner.astro";
+export const prerender = false;
+
+import Layout from "../../components/Layout.astro";
+import GoogleMapEmbed from "../../components/GoogleMapEmbed.astro";
+import MissionBanner from "../../components/MissionBanner.astro";
 
 const address = "16603 John Henry Lane, Ramona, CA 92065";
+
+const name = Astro.url.searchParams.get("invitee_full_name");
+const eventTime = Astro.url.searchParams.get("event_start_time");
+
+const heading = name ? `You're Booked, ${name}!` : "You're Booked!";
+
+let subtext = "We'll see you soon at the sanctuary.";
+if (eventTime) {
+  const date = new Date(eventTime);
+  if (!isNaN(date.getTime())) {
+    const formattedDate = new Intl.DateTimeFormat("en-US", {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+    }).format(date);
+    const formattedTime = new Intl.DateTimeFormat("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+    }).format(date);
+    subtext = `We'll see you on ${formattedDate} at ${formattedTime}.`;
+  }
+}
 ---
 
-<Layout title="Book a Farm Tour" currentPath="/tours">
-  <Hero
-    headline="Book a Farm Tour"
-    subtext="Come visit the sanctuary, meet the animals, and experience the healing power of Robin's Nest in person."
-    primaryCta={{ label: "Book Now", href: "#book" }}
-  />
-
-  <section id="book" class="px-6 py-16 md:py-24">
+<Layout title="Tour Confirmed" currentPath="/tours">
+  <section class="px-6 py-16 md:py-24">
     <div class="mx-auto max-w-3xl text-center">
-      <h2 class="font-heading text-primary mb-4 text-3xl">
-        Schedule Your Visit
-      </h2>
-      <p class="text-text-light mb-8 text-lg leading-relaxed">
-        Farm tours are donation-based, last about an hour, and take place during
-        our regular feeding times. Pick a time that works for you and come
-        experience life at the sanctuary.
+      <h1 class="font-heading text-primary mb-4 text-3xl leading-tight md:text-5xl">
+        {heading}
+      </h1>
+      <p class="text-text-light text-lg leading-relaxed">
+        {subtext}
       </p>
-    </div>
-    <div class="mx-auto max-w-3xl">
-      <CalendlyEmbed url="https://calendly.com/robinsnestrescueevents/30min?hide_event_type_details=1&hide_gdpr_banner=1" />
     </div>
   </section>
 
@@ -64,7 +75,7 @@ const address = "16603 John Henry Lane, Ramona, CA 92065";
   <section class="px-6 py-16 md:py-24">
     <div class="mx-auto max-w-5xl">
       <h2 class="font-heading text-primary mb-4 text-center text-3xl">
-        Find Us
+        Getting Here
       </h2>
       <p class="text-text-light mb-8 text-center text-lg">
         {address}

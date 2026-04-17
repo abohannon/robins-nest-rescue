@@ -14,35 +14,25 @@ test.describe("/tours/confirmation page", () => {
     await expect(subtext).toBeVisible();
   });
 
-  test("renders with invitee_full_name", async ({ page }) => {
-    await page.goto("/tours/confirmation?invitee_full_name=Jane+Smith");
-
-    const heading = page.getByRole("heading", {
-      name: "Almost There, Jane Smith!",
-      level: 1,
-    });
-    await expect(heading).toBeVisible();
-  });
-
-  test("falls back to first + last name when full_name is empty", async ({
-    page,
-  }) => {
-    await page.goto(
-      "/tours/confirmation?invitee_full_name=&invitee_first_name=Adam&invitee_last_name=Bohannon",
-    );
-
-    const heading = page.getByRole("heading", {
-      name: "Almost There, Adam Bohannon!",
-      level: 1,
-    });
-    await expect(heading).toBeVisible();
-  });
-
-  test("uses first name only when last name is missing", async ({ page }) => {
+  test("renders with first name from invitee_first_name", async ({ page }) => {
     await page.goto("/tours/confirmation?invitee_first_name=Adam");
 
     const heading = page.getByRole("heading", {
       name: "Almost There, Adam!",
+      level: 1,
+    });
+    await expect(heading).toBeVisible();
+  });
+
+  test("extracts first name from invitee_full_name when first_name is empty", async ({
+    page,
+  }) => {
+    await page.goto(
+      "/tours/confirmation?invitee_first_name=&invitee_full_name=Jane+Smith",
+    );
+
+    const heading = page.getByRole("heading", {
+      name: "Almost There, Jane!",
       level: 1,
     });
     await expect(heading).toBeVisible();
@@ -59,7 +49,7 @@ test.describe("/tours/confirmation page", () => {
 
   test("renders with both name and time", async ({ page }) => {
     await page.goto(
-      "/tours/confirmation?invitee_full_name=Jane&event_start_time=2026-04-20T08:30:00-07:00",
+      "/tours/confirmation?invitee_first_name=Jane&event_start_time=2026-04-20T08:30:00-07:00",
     );
 
     const heading = page.getByRole("heading", {

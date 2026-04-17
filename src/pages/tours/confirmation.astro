@@ -7,13 +7,9 @@ import GiveButterWidget from "../../components/GiveButterWidget.astro";
 
 const address = "16603 John Henry Lane, Ramona, CA 92065";
 
-const fullName = Astro.url.searchParams.get("invitee_full_name");
 const firstName = Astro.url.searchParams.get("invitee_first_name");
-const lastName = Astro.url.searchParams.get("invitee_last_name");
-const name =
-  fullName ||
-  [firstName, lastName].filter(Boolean).join(" ") ||
-  null;
+const fullName = Astro.url.searchParams.get("invitee_full_name");
+const name = firstName || fullName?.split(" ")[0] || null;
 const eventTime = Astro.url.searchParams.get("event_start_time");
 
 const heading = name ? `Almost There, ${name}!` : "Almost There!";

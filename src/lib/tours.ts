@@ -9,5 +9,8 @@ export const CALENDLY_URL =
  * then truncates to 50 characters.
  */
 export function sanitizeName(raw: string): string {
-  return raw.replace(/[^a-zA-Z\s'\-]/g, "").trim().slice(0, 50);
+  return raw
+    .replace(/[^a-zA-Z\s'\-]/g, "")
+    .trim()
+    .slice(0, 50);
 }

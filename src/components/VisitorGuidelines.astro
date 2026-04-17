@@ -7,7 +7,10 @@ const { variant = "white" } = Astro.props;
 ---
 
 <section
-  class:list={["px-6 py-16 md:py-24", variant === "off-white" && "bg-off-white"]}
+  class:list={[
+    "px-6 py-16 md:py-24",
+    variant === "off-white" && "bg-off-white",
+  ]}
 >
   <div class="mx-auto max-w-3xl">
     <h2 class="font-heading text-primary mb-6 text-center text-3xl">

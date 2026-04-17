@@ -4,12 +4,15 @@ export const prerender = false;
 import Layout from "../../components/Layout.astro";
 import GoogleMapEmbed from "../../components/GoogleMapEmbed.astro";
 import GiveButterWidget from "../../components/GiveButterWidget.astro";
+import VisitorGuidelines from "../../components/VisitorGuidelines.astro";
+import { SANCTUARY_ADDRESS, sanitizeName } from "../../lib/tours";
 
-const address = "16603 John Henry Lane, Ramona, CA 92065";
+const address = SANCTUARY_ADDRESS;
 
-const firstName = Astro.url.searchParams.get("invitee_first_name");
-const fullName = Astro.url.searchParams.get("invitee_full_name");
-const name = firstName || fullName?.split(" ")[0] || null;
+const rawFirstName = Astro.url.searchParams.get("invitee_first_name");
+const rawFullName = Astro.url.searchParams.get("invitee_full_name");
+const rawName = rawFirstName || rawFullName?.split(" ")[0] || null;
+const name = rawName ? sanitizeName(rawName) || null : null;
 const eventTime = Astro.url.searchParams.get("event_start_time");
 
 const heading = name ? `Almost There, ${name}!` : "Almost There!";
@@ -35,7 +38,7 @@ if (eventTime) {
 }
 ---
 
-<Layout title="Tour Confirmed" currentPath="/tours">
+<Layout title="Complete Your Booking" currentPath="/tours">
   <section class="px-6 py-16 md:py-24">
     <div class="mx-auto max-w-3xl text-center">
       <h1
@@ -65,49 +68,7 @@ if (eventTime) {
     </div>
   </section>
 
-  <section class="px-6 py-16 md:py-24">
-    <div class="mx-auto max-w-3xl">
-      <h2 class="font-heading text-primary mb-6 text-center text-3xl">
-        What to Know Before You Visit
-      </h2>
-      <ul class="text-text space-y-4 text-lg">
-        <li class="flex items-start gap-3">
-          <span class="text-primary mt-1 text-xl" aria-hidden="true"
-            >&#10003;</span
-          >
-          <span>Closed-toe shoes are required</span>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="text-primary mt-1 text-xl" aria-hidden="true"
-            >&#10003;</span
-          >
-          <span>Wear clothes you don't mind getting dirty</span>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="text-primary mt-1 text-xl" aria-hidden="true"
-            >&#10003;</span
-          >
-          <span>Dress in layers — the weather can change quickly</span>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="text-primary mt-1 text-xl" aria-hidden="true"
-            >&#10003;</span
-          >
-          <span
-            >Feel free to bring leftover fruits or veggies for the animals</span
-          >
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="text-accent-dark mt-1 text-xl" aria-hidden="true"
-            >&#10007;</span
-          >
-          <span
-            ><strong>No potatoes or onions</strong> — these are toxic to the animals</span
-          >
-        </li>
-      </ul>
-    </div>
-  </section>
+  <VisitorGuidelines />
 
   <section class="px-6 py-16 md:py-24">
     <div class="mx-auto max-w-5xl">

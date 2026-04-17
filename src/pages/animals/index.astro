@@ -2,7 +2,11 @@
 import Layout from "../../components/Layout.astro";
 import Hero from "../../components/Hero.astro";
 import AnimalFamilyCard from "../../components/AnimalFamilyCard.astro";
-import { animalFamilies } from "../../data/animals";
+import { animalFamilies, getMemorialAnimals } from "../../data/animals";
+import { Image } from "astro:assets";
+
+const memorialAnimals = getMemorialAnimals();
+const memorialPhoto = memorialAnimals[0]?.photo;
 ---
 
 <Layout title="Meet the Animals" currentPath="/animals">
@@ -15,6 +19,30 @@ import { animalFamilies } from "../../data/animals";
     <div class="mx-auto max-w-5xl">
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {animalFamilies.map((family) => <AnimalFamilyCard {...family} />)}
+        {memorialPhoto && (
+          <a
+            href="/animals/in-memoriam"
+            class="group border-border block overflow-hidden rounded-lg border bg-white no-underline transition-shadow hover:shadow-lg"
+          >
+            <div class="relative h-48 w-full overflow-hidden">
+              <Image
+                src={memorialPhoto}
+                alt="In Memoriam"
+                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                widths={[400, 600]}
+                sizes="(max-width: 640px) 100vw, 33vw"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="font-heading text-text group-hover:text-primary mb-2 text-xl">
+                In Memoriam
+              </h3>
+              <p class="font-body text-text-light text-sm leading-relaxed">
+                Honoring those who are no longer with us but whose spirits live on in everything we do.
+              </p>
+            </div>
+          </a>
+        )}
       </div>
     </div>
   </section>

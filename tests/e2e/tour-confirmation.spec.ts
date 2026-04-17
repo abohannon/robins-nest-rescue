@@ -5,7 +5,7 @@ test.describe("/tours/confirmation page", () => {
     await page.goto("/tours/confirmation");
 
     const heading = page.getByRole("heading", {
-      name: "You're Booked!",
+      name: "Almost There!",
       level: 1,
     });
     await expect(heading).toBeVisible();
@@ -18,7 +18,7 @@ test.describe("/tours/confirmation page", () => {
     await page.goto("/tours/confirmation?invitee_full_name=Jane+Smith");
 
     const heading = page.getByRole("heading", {
-      name: "You're Booked, Jane Smith!",
+      name: "Almost There, Jane Smith!",
       level: 1,
     });
     await expect(heading).toBeVisible();
@@ -32,7 +32,7 @@ test.describe("/tours/confirmation page", () => {
     );
 
     const heading = page.getByRole("heading", {
-      name: "You're Booked, Adam Bohannon!",
+      name: "Almost There, Adam Bohannon!",
       level: 1,
     });
     await expect(heading).toBeVisible();
@@ -42,7 +42,7 @@ test.describe("/tours/confirmation page", () => {
     await page.goto("/tours/confirmation?invitee_first_name=Adam");
 
     const heading = page.getByRole("heading", {
-      name: "You're Booked, Adam!",
+      name: "Almost There, Adam!",
       level: 1,
     });
     await expect(heading).toBeVisible();
@@ -63,7 +63,7 @@ test.describe("/tours/confirmation page", () => {
     );
 
     const heading = page.getByRole("heading", {
-      name: "You're Booked, Jane!",
+      name: "Almost There, Jane!",
       level: 1,
     });
     await expect(heading).toBeVisible();
@@ -101,16 +101,21 @@ test.describe("/tours/confirmation page", () => {
     await expect(mapIframe).toBeAttached();
   });
 
-  test("renders the closing donation CTA", async ({ page }) => {
+  test("renders the payment section with GiveButter widget", async ({
+    page,
+  }) => {
     await page.goto("/tours/confirmation");
 
     const heading = page.getByRole("heading", {
-      name: "Support the Sanctuary",
+      name: "Complete Your Booking",
       level: 2,
     });
     await expect(heading).toBeVisible();
 
-    const donateLink = page.getByRole("link", { name: "Donate Now" });
-    await expect(donateLink).toHaveAttribute("href", "/donate");
+    const donationText = page.getByText(/minimum donation of \$60/);
+    await expect(donationText).toBeVisible();
+
+    const widget = page.locator('givebutter-widget[id="gKZZE3"]');
+    await expect(widget).toBeAttached();
   });
 });

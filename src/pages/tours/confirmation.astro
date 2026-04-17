@@ -3,7 +3,7 @@ export const prerender = false;
 
 import Layout from "../../components/Layout.astro";
 import GoogleMapEmbed from "../../components/GoogleMapEmbed.astro";
-import MissionBanner from "../../components/MissionBanner.astro";
+import GiveButterWidget from "../../components/GiveButterWidget.astro";
 
 const address = "16603 John Henry Lane, Ramona, CA 92065";
 
@@ -16,7 +16,7 @@ const name =
   null;
 const eventTime = Astro.url.searchParams.get("event_start_time");
 
-const heading = name ? `You're Booked, ${name}!` : "You're Booked!";
+const heading = name ? `Almost There, ${name}!` : "Almost There!";
 
 let subtext = "We'll see you soon at the sanctuary.";
 if (eventTime) {
@@ -52,6 +52,22 @@ if (eventTime) {
   </section>
 
   <section class="bg-off-white px-6 py-16 md:py-24">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="font-heading text-primary mb-4 text-3xl">
+        Complete Your Booking
+      </h2>
+      <p class="text-text-light mb-8 text-lg leading-relaxed">
+        A minimum donation of $60 is required to confirm your farm tour.
+        As a 501(c)(3) nonprofit, your donation is tax-deductible and goes
+        directly to the care of our rescue animals.
+      </p>
+      <div class="mx-auto max-w-md">
+        <GiveButterWidget id="gKZZE3" />
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 py-16 md:py-24">
     <div class="mx-auto max-w-3xl">
       <h2 class="font-heading text-primary mb-6 text-center text-3xl">
         What to Know Before You Visit
@@ -93,10 +109,4 @@ if (eventTime) {
     </div>
   </section>
 
-  <MissionBanner
-    heading="Support the Sanctuary"
-    body="100% of donations go directly to the care and feeding of our rescue animals. Every visit and every dollar makes a difference."
-    cta={{ label: "Donate Now", href: "/donate" }}
-    variant="highlight"
-  />
 </Layout>

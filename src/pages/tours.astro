@@ -1,15 +1,80 @@
 ---
 import Layout from "../components/Layout.astro";
 import Hero from "../components/Hero.astro";
+import CalendlyEmbed from "../components/CalendlyEmbed.astro";
+import GoogleMapEmbed from "../components/GoogleMapEmbed.astro";
+import MissionBanner from "../components/MissionBanner.astro";
 ---
 
 <Layout title="Book a Farm Tour" currentPath="/tours">
   <Hero
     headline="Book a Farm Tour"
     subtext="Come visit the sanctuary, meet the animals, and experience the healing power of Robin's Nest in person."
-    primaryCta={{
-      label: "Contact Us",
-      href: "mailto:info@robinsnestrescue.org",
-    }}
+    primaryCta={{ label: "Book Now", href: "#book" }}
+  />
+
+  <section id="book" class="px-6 py-16 md:py-24">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="font-heading text-primary mb-4 text-3xl">
+        Schedule Your Visit
+      </h2>
+      <p class="text-text-light mb-8 text-lg leading-relaxed">
+        Farm tours are donation-based, last about an hour, and take place during
+        our regular feeding times. Pick a time that works for you and come
+        experience life at the sanctuary.
+      </p>
+    </div>
+    <div class="mx-auto max-w-3xl">
+      <CalendlyEmbed url="https://calendly.com/robinsnestrescueevents/30min?hide_event_type_details=1&hide_gdpr_banner=1" />
+    </div>
+  </section>
+
+  <section class="bg-off-white px-6 py-16 md:py-24">
+    <div class="mx-auto max-w-3xl">
+      <h2 class="font-heading text-primary mb-6 text-center text-3xl">
+        What to Know Before You Visit
+      </h2>
+      <ul class="text-text space-y-4 text-lg">
+        <li class="flex items-start gap-3">
+          <span class="text-primary mt-1 text-xl" aria-hidden="true">&#10003;</span>
+          <span>Closed-toe shoes are required</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-primary mt-1 text-xl" aria-hidden="true">&#10003;</span>
+          <span>Wear clothes you don't mind getting dirty</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-primary mt-1 text-xl" aria-hidden="true">&#10003;</span>
+          <span>Dress in layers — the weather can change quickly</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-primary mt-1 text-xl" aria-hidden="true">&#10003;</span>
+          <span>Feel free to bring leftover fruits or veggies for the animals</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-accent-dark mt-1 text-xl" aria-hidden="true">&#10007;</span>
+          <span><strong>No potatoes or onions</strong> — these are toxic to the animals</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="px-6 py-16 md:py-24">
+    <div class="mx-auto max-w-5xl">
+      <h2 class="font-heading text-primary mb-4 text-center text-3xl">
+        Find Us
+      </h2>
+      <p class="text-text-light mb-8 text-center text-lg">
+        16603 John Henry Lane, Ramona, CA 92065
+      </p>
+      <GoogleMapEmbed query="16603 John Henry Lane, Ramona, CA 92065" />
+    </div>
+  </section>
+
+  <MissionBanner
+    heading="Support the Sanctuary"
+    body="100% of donations go directly to the care and feeding of our rescue animals. Every visit and every dollar makes a difference."
+    cta={{ label: "Donate Now", href: "/donate" }}
+    variant="highlight"
   />
 </Layout>

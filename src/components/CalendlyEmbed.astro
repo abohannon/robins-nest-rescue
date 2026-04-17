@@ -1,0 +1,31 @@
+---
+interface Props {
+  url: string;
+  resize?: boolean;
+  id?: string;
+}
+
+const { url, resize = true, id = "calendly-embed" } = Astro.props;
+---
+
+<div id={id} class="calendly-embed-container" style="min-width: 320px;"></div>
+
+<script
+  is:inline
+  src="https://assets.calendly.com/assets/external/widget.js"
+  async></script>
+
+<script is:inline define:vars={{ url, resize, id }}>
+  function initCalendly() {
+    if (window.Calendly) {
+      window.Calendly.initInlineWidget({
+        url: url,
+        parentElement: document.getElementById(id),
+        resize: resize,
+      });
+    } else {
+      setTimeout(initCalendly, 100);
+    }
+  }
+  initCalendly();
+</script>

@@ -114,3 +114,50 @@ gh project item-edit \
 - Current Status is `In progress` or `Done` → warn the user (work may already exist), ask whether to continue
 - Current Status is `Backlog` → warn (issue isn't `Ready`), ask whether to continue
 - Current Status is `Ready` → proceed silently
+
+## Phase 3 — Plan
+
+The issue body is the spec. There is **no brainstorming phase** in `/do-issue` — that decision was made upfront because the user writes tickets with enough detail to act on.
+
+Invoke `superpowers:writing-plans` with the issue body as the spec input. As you write the plan, collect any **assumptions** you had to make to fill in ambiguity from the ticket (e.g. "I'm assuming this widget goes in the footer, not the header"). Track these — they go into the checkpoint message in Phase 4.
+
+If the ticket is genuinely too thin to plan, do not invent requirements. Surface the gap at the Phase 4 checkpoint and let the user fill it in.
+
+## Phase 4 — Checkpoint
+
+**This is the only user pause in the skill.** Once the user says `yes`, Phases 5–10 run continuously.
+
+Present this message to the user, exactly:
+
+```
+**Issue:** #<N> — <title>
+**Branch:** <type>/<slug>
+**Plan:**
+<rendered plan from Phase 3>
+
+**Assumptions:**
+- <assumption 1>
+- <assumption 2>
+- ...
+
+Proceed? (yes / changes / abort)
+```
+
+Response handling:
+
+- `yes` → continue to Phase 5
+- `changes` → take the user's edits, revise the plan, re-present the checkpoint. Loop until `yes` or `abort`.
+- `abort` → **leave the branch in place** for manual resume. **Do not** delete the branch, do not roll back the Project Status. Exit cleanly with a one-line note explaining how to resume manually.
+
+## Phase 5 — Execute
+
+Invoke `superpowers:executing-plans` to work the plan task-by-task. Use `superpowers:subagent-driven-development` instead when the plan has multiple independent tasks that benefit from parallel execution.
+
+Follow the project's `CLAUDE.md` conventions throughout:
+
+- **Reuse over reinvention** — check for existing components before creating new ones
+- Astro components for static content; React only for complex stateful UI
+- Tailwind responsive prefixes; test mobile widths
+- Semantic HTML + WCAG 2.1 accessibility
+- Sanity queries co-located with consumers
+- Atomic commits per plan task, conventional-commits format

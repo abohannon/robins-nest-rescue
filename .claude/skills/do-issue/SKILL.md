@@ -5,6 +5,41 @@ description: Use when the user invokes `/do-issue <N>` or asks to work a specifi
 
 # /do-issue — Drive one GitHub issue to a PR
 
+## At a glance
+
+Eleven phases (a pre-flight + ten work phases). **One** user pause (the Phase 4 checkpoint between planning and execution). Everything else runs end-to-end.
+
+0. **Pre-flight** — verify `gh` has the `project` scope
+1. **Fetch** the issue
+2. **Setup** — branch off `main`, Project Status → `In progress`
+3. **Plan** via `superpowers:writing-plans` (issue body = spec)
+4. **Checkpoint** — present plan + assumptions; wait for `yes` / `changes` / `abort`
+5. **Execute** via `superpowers:executing-plans` (or `subagent-driven-development`)
+6. **Verify** — lint, format, tests, build, manual UI smoke
+7. **Commit** — conventional commits per `CLAUDE.md`
+8. **PR** — `gh pr create` with `Closes #<N>`
+9. **Status** → `In review`
+10. **Handoff** — print PR URL, suggest `/clear` + next `/do-issue`
+
+After `/clear`, run `/do-issue <next-N>` for the next ticket on the board.
+
+## Phase 0 — Pre-flight (run before anything else)
+
+Verify `gh` is authenticated with the `project` scope:
+
+```bash
+gh auth status 2>&1 | grep -q "'project'"
+```
+
+If that exits non-zero, tell the user:
+
+```
+This skill needs the GitHub `project` scope.
+Run: gh auth refresh -s project
+```
+
+…and stop. Do not run Phase 1.
+
 ## Argument
 
 `<N>` — GitHub issue number or full issue URL (e.g. `12` or `https://github.com/abohannon/robins-nest-rescue/issues/12`).
@@ -267,16 +302,4 @@ The skill ends here.
 | Verification gate fails | Report the failure, fix and re-run; do NOT open the PR |
 | User answers `abort` at the checkpoint | Leave the branch in place; exit cleanly with a resume note |
 
-### Detect missing `gh` scopes upfront
-
-Run at the very start, before any other work:
-
-```bash
-gh auth status 2>&1 | grep -q "'project'" || {
-  echo "Error: this skill needs the GitHub 'project' scope."
-  echo "Run: gh auth refresh -s project"
-  exit 1
-}
-```
-
-If scopes are missing, print the remediation command and stop. Do not attempt any phase.
+The scope check for missing `gh` permissions is documented as Phase 0 above.

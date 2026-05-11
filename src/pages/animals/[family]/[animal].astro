@@ -29,7 +29,11 @@ const storyHtml = renderMarkdown(animal.story);
     <div class="mx-auto max-w-5xl">
       <!-- Hero -->
       <div class="mb-10">
-        <AnimalHero photo={animal.photo} name={animal.name} />
+        <AnimalHero
+          photo={animal.photo}
+          gallery={animal.gallery}
+          name={animal.name}
+        />
       </div>
 
       <!-- Two-column content grid -->

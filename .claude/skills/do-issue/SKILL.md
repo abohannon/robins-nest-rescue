@@ -184,3 +184,72 @@ Exercise the **golden path** and the **specific change** introduced by the ticke
 Run `npm run test:e2e` (Playwright) **only** when the change touches a flow with existing E2E coverage. Otherwise skip and note "no E2E coverage for this flow" in the PR.
 
 **Failure handling:** if any gate fails, fix the underlying issue and re-run the gate. Do not skip. Do not pass `--no-verify`. Do not open the PR until everything passes.
+
+## Phase 7 — Commit
+
+Most commits already exist from Phase 5 (each plan task ends with a commit). Phase 7 is a sanity check on the history.
+
+Project Git conventions (from `CLAUDE.md`):
+
+- Conventional Commits: `<type>(<scope>): <imperative summary>`
+- Types: `feat`, `fix`, `chore`, `refactor`, `style`, `docs`, `test`, `perf`, `ci`, `build`
+- Imperative mood, summary ≤72 chars, no trailing period
+- One logical change per commit; body explains *why*, not *what*
+
+If `git log` shows mixed concerns in one commit, rework before pushing.
+
+## Phase 8 — Open the PR
+
+```bash
+git push -u origin <type>/<slug>
+```
+
+Generate a PR title from the issue title in conventional-commits format (matching the branch type). Compose the body — substituting `<N>` with the issue number — then open the PR:
+
+```bash
+gh pr create --title "<type>(<scope>): <imperative summary>" --body "$(cat <<'EOF'
+## Summary
+- <bullet 1>
+- <bullet 2>
+
+## Test plan
+- [ ] <step>
+- [ ] <step>
+
+Closes #<N>
+EOF
+)"
+```
+
+The `Closes #<N>` trailer is required. It links the PR to the issue, auto-closes the issue on merge, and lets GitHub's built-in Projects v2 workflow move the item to `Done`.
+
+Capture the returned PR URL — Phase 10 prints it.
+
+## Phase 9 — Move to In review
+
+```bash
+gh project item-edit \
+  --project-id "$PROJECT_ID" \
+  --id "$ITEM_ID" \
+  --field-id PVTSSF_lAHOAA2SwM4BXZBHzhSmJ-o \
+  --single-select-option-id df73e18b
+```
+
+Do **not** set Status to `Done`. Merging the PR with `Closes #N` lets GitHub's built-in Projects v2 workflow do that.
+
+If `ITEM_ID` was empty (issue not on the board), skip this phase.
+
+## Phase 10 — Handoff
+
+Print to the user:
+
+```
+Done.
+
+PR:    <pr_url>
+Issue: #<N> — <title>
+
+Suggest: /clear, then /do-issue <next-N> for the next ticket.
+```
+
+The skill ends here.

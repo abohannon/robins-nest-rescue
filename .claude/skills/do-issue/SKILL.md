@@ -84,6 +84,37 @@ ITEM_ID=$(gh api graphql -f query='
 
 If `ITEM_ID` is empty, the issue is not on the Project board. Skip Status updates in Phase 2 and Phase 9 and continue.
 
+## Verify a Status update
+
+`gh project item-edit` has been observed to exit `0` without applying the change. **After every Status change, re-query the field and confirm the new value matches the expected value** — otherwise the board silently falls out of sync with the work.
+
+```bash
+STATUS=$(gh api graphql -f query='
+  query($owner: String!, $number: Int!) {
+    user(login: $owner) {
+      projectV2(number: $number) {
+        items(first: 100) {
+          nodes {
+            content { ... on Issue { number } }
+            fieldValues(first: 20) {
+              nodes {
+                ... on ProjectV2ItemFieldSingleSelectValue {
+                  field { ... on ProjectV2SingleSelectField { name } }
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }' -f owner=abohannon -F number=1 \
+  | jq -r --argjson n <N> '.data.user.projectV2.items.nodes[] | select(.content.number == $n) | .fieldValues.nodes[] | select(.field.name=="Status") | .name')
+echo "$STATUS"
+```
+
+If `$STATUS` matches the expected value, continue. If not: re-run the same `gh project item-edit` command **once** and re-verify. If it still does not match, surface the failure to the user (current status, expected status, suggestion to set it manually on the board) — do not silently proceed.
+
 ## Phase 1 — Fetch the issue
 
 Run:
@@ -143,6 +174,8 @@ gh project item-edit \
   --field-id PVTSSF_lAHOAA2SwM4BXZBHzhSmJ-o \
   --single-select-option-id 47fc9ee4
 ```
+
+Then **verify the update landed** using the [Verify a Status update](#verify-a-status-update) pattern. Expected value: `In progress`.
 
 ### Pre-flight status checks (warn before continuing)
 
@@ -270,6 +303,8 @@ gh project item-edit \
   --single-select-option-id df73e18b
 ```
 
+Then **verify the update landed** using the [Verify a Status update](#verify-a-status-update) pattern. Expected value: `In review`.
+
 Do **not** set Status to `Done`. Merging the PR with `Closes #N` lets GitHub's built-in Projects v2 workflow do that.
 
 If `ITEM_ID` was empty (issue not on the board), skip this phase.
@@ -291,15 +326,16 @@ The skill ends here.
 
 ## Error handling
 
-| Condition                                        | Behavior                                                    |
-| ------------------------------------------------ | ----------------------------------------------------------- |
-| `gh` missing the `project` scope                 | Print `gh auth refresh -s project` and exit before any work |
-| Issue not found                                  | Exit with the `gh` error message                            |
-| Branch already exists (local or remote)          | Abort with a clear message; do not overwrite                |
-| Issue Status is `In progress` or `Done`          | Warn, ask before continuing                                 |
-| Issue Status is `Backlog`                        | Warn (not Ready), ask before continuing                     |
-| Issue not on the Project board (`ITEM_ID` empty) | Skip Status updates, continue with branch + PR flow         |
-| Verification gate fails                          | Report the failure, fix and re-run; do NOT open the PR      |
-| User answers `abort` at the checkpoint           | Leave the branch in place; exit cleanly with a resume note  |
+| Condition                                            | Behavior                                                                                                    |
+| ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `gh` missing the `project` scope                     | Print `gh auth refresh -s project` and exit before any work                                                 |
+| Issue not found                                      | Exit with the `gh` error message                                                                            |
+| Branch already exists (local or remote)              | Abort with a clear message; do not overwrite                                                                |
+| Issue Status is `In progress` or `Done`              | Warn, ask before continuing                                                                                 |
+| Issue Status is `Backlog`                            | Warn (not Ready), ask before continuing                                                                     |
+| Issue not on the Project board (`ITEM_ID` empty)     | Skip Status updates, continue with branch + PR flow                                                         |
+| Verification gate fails                              | Report the failure, fix and re-run; do NOT open the PR                                                      |
+| `gh project item-edit` succeeds but Status unchanged | Retry the same command once; re-verify; if still wrong, surface to the user with current vs expected status |
+| User answers `abort` at the checkpoint               | Leave the branch in place; exit cleanly with a resume note                                                  |
 
 The scope check for missing `gh` permissions is documented as Phase 0 above.

@@ -81,8 +81,9 @@ const labelId = `${id}-label`;
 </dialog>
 
 <script>
-  document.querySelectorAll<HTMLDialogElement>("dialog[data-lightbox]").forEach(
-    (dialog) => {
+  document
+    .querySelectorAll<HTMLDialogElement>("dialog[data-lightbox]")
+    .forEach((dialog) => {
       const count = Number(dialog.dataset.lightboxCount ?? "0");
       if (count === 0) return;
 
@@ -106,9 +107,7 @@ const labelId = `${id}-label`;
 
       // Triggers: anything with data-lightbox-target matching this dialog's id
       document
-        .querySelectorAll<HTMLElement>(
-          `[data-lightbox-target="${dialog.id}"]`,
-        )
+        .querySelectorAll<HTMLElement>(`[data-lightbox-target="${dialog.id}"]`)
         .forEach((trigger) => {
           trigger.addEventListener("click", () => {
             const i = Number(trigger.dataset.lightboxIndex ?? "0");
@@ -150,6 +149,5 @@ const labelId = `${id}-label`;
           show(current + 1);
         }
       });
-    },
-  );
+    });
 </script>

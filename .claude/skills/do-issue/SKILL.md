@@ -253,3 +253,30 @@ Suggest: /clear, then /do-issue <next-N> for the next ticket.
 ```
 
 The skill ends here.
+
+## Error handling
+
+| Condition | Behavior |
+|---|---|
+| `gh` missing the `project` scope | Print `gh auth refresh -s project` and exit before any work |
+| Issue not found | Exit with the `gh` error message |
+| Branch already exists (local or remote) | Abort with a clear message; do not overwrite |
+| Issue Status is `In progress` or `Done` | Warn, ask before continuing |
+| Issue Status is `Backlog` | Warn (not Ready), ask before continuing |
+| Issue not on the Project board (`ITEM_ID` empty) | Skip Status updates, continue with branch + PR flow |
+| Verification gate fails | Report the failure, fix and re-run; do NOT open the PR |
+| User answers `abort` at the checkpoint | Leave the branch in place; exit cleanly with a resume note |
+
+### Detect missing `gh` scopes upfront
+
+Run at the very start, before any other work:
+
+```bash
+gh auth status 2>&1 | grep -q "'project'" || {
+  echo "Error: this skill needs the GitHub 'project' scope."
+  echo "Run: gh auth refresh -s project"
+  exit 1
+}
+```
+
+If scopes are missing, print the remediation command and stop. Do not attempt any phase.

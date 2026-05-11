@@ -105,14 +105,14 @@ Capture and remember:
 
 ### Derive the branch type from labels
 
-| Label | Branch type |
-|---|---|
-| `enhancement` or `feature` | `feat` |
-| `bug` | `fix` |
-| `chore` | `chore` |
-| `refactor` | `refactor` |
-| `docs` | `docs` |
-| (no matching label) | ASK at Phase 4 checkpoint — do not guess |
+| Label                      | Branch type                              |
+| -------------------------- | ---------------------------------------- |
+| `enhancement` or `feature` | `feat`                                   |
+| `bug`                      | `fix`                                    |
+| `chore`                    | `chore`                                  |
+| `refactor`                 | `refactor`                               |
+| `docs`                     | `docs`                                   |
+| (no matching label)        | ASK at Phase 4 checkpoint — do not guess |
 
 ### Generate the branch slug
 
@@ -229,7 +229,7 @@ Project Git conventions (from `CLAUDE.md`):
 - Conventional Commits: `<type>(<scope>): <imperative summary>`
 - Types: `feat`, `fix`, `chore`, `refactor`, `style`, `docs`, `test`, `perf`, `ci`, `build`
 - Imperative mood, summary ≤72 chars, no trailing period
-- One logical change per commit; body explains *why*, not *what*
+- One logical change per commit; body explains _why_, not _what_
 
 If `git log` shows mixed concerns in one commit, rework before pushing.
 
@@ -291,15 +291,15 @@ The skill ends here.
 
 ## Error handling
 
-| Condition | Behavior |
-|---|---|
-| `gh` missing the `project` scope | Print `gh auth refresh -s project` and exit before any work |
-| Issue not found | Exit with the `gh` error message |
-| Branch already exists (local or remote) | Abort with a clear message; do not overwrite |
-| Issue Status is `In progress` or `Done` | Warn, ask before continuing |
-| Issue Status is `Backlog` | Warn (not Ready), ask before continuing |
-| Issue not on the Project board (`ITEM_ID` empty) | Skip Status updates, continue with branch + PR flow |
-| Verification gate fails | Report the failure, fix and re-run; do NOT open the PR |
-| User answers `abort` at the checkpoint | Leave the branch in place; exit cleanly with a resume note |
+| Condition                                        | Behavior                                                    |
+| ------------------------------------------------ | ----------------------------------------------------------- |
+| `gh` missing the `project` scope                 | Print `gh auth refresh -s project` and exit before any work |
+| Issue not found                                  | Exit with the `gh` error message                            |
+| Branch already exists (local or remote)          | Abort with a clear message; do not overwrite                |
+| Issue Status is `In progress` or `Done`          | Warn, ask before continuing                                 |
+| Issue Status is `Backlog`                        | Warn (not Ready), ask before continuing                     |
+| Issue not on the Project board (`ITEM_ID` empty) | Skip Status updates, continue with branch + PR flow         |
+| Verification gate fails                          | Report the failure, fix and re-run; do NOT open the PR      |
+| User answers `abort` at the checkpoint           | Leave the branch in place; exit cleanly with a resume note  |
 
 The scope check for missing `gh` permissions is documented as Phase 0 above.

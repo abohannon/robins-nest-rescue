@@ -161,3 +161,26 @@ Follow the project's `CLAUDE.md` conventions throughout:
 - Semantic HTML + WCAG 2.1 accessibility
 - Sanity queries co-located with consumers
 - Atomic commits per plan task, conventional-commits format
+
+## Phase 6 — Verify
+
+Invoke `superpowers:verification-before-completion` and run these gates **in order**. All applicable gates must pass before opening the PR.
+
+```bash
+npm run lint            # ESLint
+npm run format:check    # Prettier — if it fails, run `npm run format` to auto-fix
+npm run test            # Vitest unit tests
+npm run build           # Astro check + production build
+```
+
+For UI-touching changes, also run a manual smoke test:
+
+```bash
+npm run dev             # then open http://localhost:4321 in a browser
+```
+
+Exercise the **golden path** and the **specific change** introduced by the ticket. If you cannot run a browser yourself (no Playwright MCP or comparable tool available), **say so explicitly** in the PR test plan rather than claiming the UI works. Per project `CLAUDE.md`: "type checking and test suites verify code correctness, not feature correctness."
+
+Run `npm run test:e2e` (Playwright) **only** when the change touches a flow with existing E2E coverage. Otherwise skip and note "no E2E coverage for this flow" in the PR.
+
+**Failure handling:** if any gate fails, fix the underlying issue and re-run the gate. Do not skip. Do not pass `--no-verify`. Do not open the PR until everything passes.

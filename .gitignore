@@ -29,3 +29,6 @@ docs/
 # Playwright
 tests/e2e/test-results/
 tests/e2e/screenshots/
+
+# claude code worktrees
+.claude/worktrees/

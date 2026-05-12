@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { navLinks, navActions } from "./navigation";
+import { navLinks, navActions, isInHeader, isInFooter } from "./navigation";
 
 describe("navigation config", () => {
   it("exports navLinks with required fields", () => {
@@ -7,8 +7,26 @@ describe("navigation config", () => {
     for (const link of navLinks) {
       expect(link).toHaveProperty("label");
       expect(link).toHaveProperty("href");
-      expect(link.href).toMatch(/^\//);
+      expect(link.href).toMatch(/^(\/|https?:\/\/)/);
     }
+  });
+
+  it("links default to appearing in both header and footer", () => {
+    const link = { label: "Test", href: "/test" };
+    expect(isInHeader(link)).toBe(true);
+    expect(isInFooter(link)).toBe(true);
+  });
+
+  it("placement: 'footer' excludes link from header", () => {
+    const link = { label: "Test", href: "/test", placement: "footer" as const };
+    expect(isInHeader(link)).toBe(false);
+    expect(isInFooter(link)).toBe(true);
+  });
+
+  it("placement: 'header' excludes link from footer", () => {
+    const link = { label: "Test", href: "/test", placement: "header" as const };
+    expect(isInHeader(link)).toBe(true);
+    expect(isInFooter(link)).toBe(false);
   });
 
   it("exports navActions with required fields", () => {

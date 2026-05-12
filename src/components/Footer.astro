@@ -1,5 +1,5 @@
 ---
-import { navLinks } from "../config/navigation";
+import { navLinks, isInFooter } from "../config/navigation";
 import JoinTheFamilyForm from "./JoinTheFamilyForm.astro";
 
 const year = new Date().getFullYear();
@@ -33,14 +33,19 @@ const socialLinks = [
     <JoinTheFamilyForm />
     <nav class="flex flex-wrap justify-center gap-6">
       {
-        navLinks.map(({ label, href }) => (
-          <a
-            href={href}
-            class="font-body text-text-light hover:text-primary text-sm no-underline"
-          >
-            {label}
-          </a>
-        ))
+        navLinks.filter(isInFooter).map(({ label, href }) => {
+          const isExternal = href.startsWith("http");
+          return (
+            <a
+              href={href}
+              target={isExternal ? "_blank" : undefined}
+              rel={isExternal ? "noopener noreferrer" : undefined}
+              class="font-body text-text-light hover:text-primary text-sm no-underline"
+            >
+              {label}
+            </a>
+          );
+        })
       }
     </nav>
     <ul class="flex flex-wrap justify-center gap-2" aria-label="Social media">
@@ -68,25 +73,12 @@ const socialLinks = [
         ))
       }
     </ul>
-    <div
-      class="font-body text-text-light flex flex-wrap justify-center gap-4 text-sm"
+    <a
+      href="mailto:info@robinsnestrescue.org"
+      class="font-body text-text-light hover:text-primary text-sm no-underline"
     >
-      <a
-        href="mailto:info@robinsnestrescue.org"
-        class="hover:text-primary no-underline"
-      >
-        info@robinsnestrescue.org
-      </a>
-      <a
-        href="https://robinsnestramona.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Visit The Retreat (opens in new tab)"
-        class="hover:text-primary no-underline"
-      >
-        Visit The Retreat
-      </a>
-    </div>
+      info@robinsnestrescue.org
+    </a>
     <div class="flex flex-col items-center gap-3">
       <p class="font-body text-text-light text-xs opacity-70">
         501(c)(3) Non-profit · FEIN 93-3888904

@@ -1,6 +1,9 @@
+export type NavPlacement = "header" | "footer" | "both";
+
 export interface NavLink {
   label: string;
   href: string;
+  placement?: NavPlacement;
 }
 
 export interface NavAction {
@@ -14,7 +17,22 @@ export const navLinks: NavLink[] = [
   { label: "The Sanctuary", href: "/sanctuary" },
   { label: "Events", href: "/events" },
   { label: "About", href: "/about" },
+  {
+    label: "Visit The Retreat",
+    href: "https://robinsnestramona.com",
+    placement: "footer",
+  },
 ];
+
+export function isInHeader(link: NavLink): boolean {
+  const placement = link.placement ?? "both";
+  return placement === "header" || placement === "both";
+}
+
+export function isInFooter(link: NavLink): boolean {
+  const placement = link.placement ?? "both";
+  return placement === "footer" || placement === "both";
+}
 
 export const navActions: NavAction[] = [
   { label: "Book a Tour", href: "/tours", style: "primary" },

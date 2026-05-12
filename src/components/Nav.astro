@@ -2,7 +2,7 @@
 import Logo from "./Logo.astro";
 import Button from "./Button.astro";
 import DonateButton from "./DonateButton.astro";
-import { navLinks, navActions } from "../config/navigation";
+import { navLinks, navActions, isInHeader } from "../config/navigation";
 
 interface Props {
   currentPath?: string;
@@ -24,7 +24,7 @@ const { currentPath = "/" } = Astro.props;
     </button>
     <div class="hidden items-center gap-6 md:flex">
       {
-        navLinks.map(({ label, href }) => (
+        navLinks.filter(isInHeader).map(({ label, href }) => (
           <a
             href={href}
             aria-current={currentPath === href ? "page" : undefined}
@@ -57,7 +57,7 @@ const { currentPath = "/" } = Astro.props;
         class="border-border flex flex-col items-center gap-6 border-b bg-white p-6"
       >
         {
-          navLinks.map(({ label, href }) => (
+          navLinks.filter(isInHeader).map(({ label, href }) => (
             <a
               href={href}
               aria-current={currentPath === href ? "page" : undefined}

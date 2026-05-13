@@ -82,9 +82,7 @@ test.describe("/tours page", () => {
     });
     await expect(heading).toBeVisible();
 
-    const guidelinesSection = page
-      .locator("section")
-      .filter({ has: heading });
+    const guidelinesSection = page.locator("section").filter({ has: heading });
     const items = guidelinesSection.locator("ul li");
     await expect(items).toHaveCount(5);
   });

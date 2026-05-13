@@ -1,0 +1,60 @@
+---
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  heading: string;
+  subheading?: string;
+  items: FaqItem[];
+}
+
+const { heading, subheading, items } = Astro.props;
+---
+
+<section class="bg-white px-6 py-16">
+  <div class="mx-auto max-w-3xl">
+    <h2 class="font-heading text-primary mb-2 text-center text-3xl">
+      {heading}
+    </h2>
+    {
+      subheading && (
+        <p class="font-body text-text-light mb-8 text-center text-base">
+          {subheading}
+        </p>
+      )
+    }
+    <ul class="border-border divide-border divide-y border-t border-b">
+      {
+        items.map((item) => (
+          <li>
+            <details class="group">
+              <summary class="font-body text-text hover:text-primary flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-left font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2">
+                <span>{item.question}</span>
+                <span
+                  aria-hidden="true"
+                  class="text-primary text-2xl leading-none transition-transform group-open:rotate-45"
+                >
+                  +
+                </span>
+              </summary>
+              <div class="font-body text-text-light pb-4 leading-relaxed whitespace-pre-line">
+                {item.answer}
+              </div>
+            </details>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary::marker {
+    content: "";
+  }
+</style>

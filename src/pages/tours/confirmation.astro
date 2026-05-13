@@ -5,6 +5,7 @@ import Layout from "../../components/Layout.astro";
 import GoogleMapEmbed from "../../components/GoogleMapEmbed.astro";
 import GiveButterWidget from "../../components/GiveButterWidget.astro";
 import VisitorGuidelines from "../../components/VisitorGuidelines.astro";
+import TourPricingTiers from "../../components/TourPricingTiers.astro";
 import { SANCTUARY_ADDRESS, sanitizeName } from "../../lib/tours";
 
 const address = SANCTUARY_ADDRESS;
@@ -52,17 +53,26 @@ if (eventTime) {
     </div>
   </section>
 
-  <section class="bg-off-white px-6 py-16 md:py-24">
-    <div class="mx-auto max-w-2xl text-center">
-      <h2 class="font-heading text-primary mb-4 text-3xl">
+  <section
+    class="bg-off-white px-6 py-16 md:py-24"
+    aria-labelledby="complete-your-booking-heading"
+  >
+    <div class="mx-auto max-w-5xl text-center">
+      <h2
+        id="complete-your-booking-heading"
+        class="font-heading text-primary mb-4 text-3xl"
+      >
         Complete Your Booking
       </h2>
-      <p class="text-text-light mb-8 text-lg leading-relaxed">
-        A minimum donation of $60 is required to confirm your farm tour. As a
-        501(c)(3) nonprofit, your donation is tax-deductible and goes directly
-        to the care of our rescue animals.
+      <p
+        class="text-text-light mx-auto mb-10 max-w-2xl text-lg leading-relaxed"
+      >
+        {
+          "As a 501(c)(3) nonprofit, your donation is tax-deductible and goes directly to the care of our rescue animals. Choose the suggested amount that matches your group size."
+        }
       </p>
-      <div class="mx-auto max-w-md">
+      <TourPricingTiers />
+      <div class="mx-auto mt-12 max-w-md">
         <GiveButterWidget id="gKZZE3" />
       </div>
     </div>

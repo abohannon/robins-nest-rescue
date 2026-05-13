@@ -7,20 +7,40 @@ test.describe("/tours page", () => {
 
   test("renders the hero with correct heading", async ({ page }) => {
     const heading = page.getByRole("heading", {
-      name: "Book a Farm Tour",
+      name: "An Immersive Farm Experience",
       level: 1,
     });
     await expect(heading).toBeVisible();
   });
 
-  test("Book Now CTA links to the booking section", async ({ page }) => {
-    const bookNowLink = page.getByRole("link", { name: "Book Now" });
-    await expect(bookNowLink).toHaveAttribute("href", "#book");
+  test("Reserve Your Visit CTA links to the booking section", async ({
+    page,
+  }) => {
+    const reserveLink = page.getByRole("link", { name: "Reserve Your Visit" });
+    await expect(reserveLink).toHaveAttribute("href", "#book");
   });
 
-  test("renders the Schedule Your Visit section", async ({ page }) => {
+  test("renders the What to Expect section", async ({ page }) => {
     const heading = page.getByRole("heading", {
-      name: "Schedule Your Visit",
+      name: "What to Expect",
+      level: 2,
+    });
+    await expect(heading).toBeVisible();
+
+    await expect(
+      page.getByRole("heading", { name: "Meet the Animals", level: 3 }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Feed the Critters", level: 3 }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Lend a Hand", level: 3 }),
+    ).toBeVisible();
+  });
+
+  test("renders the Reserve Your Experience section", async ({ page }) => {
+    const heading = page.getByRole("heading", {
+      name: "Reserve Your Experience",
       level: 2,
     });
     await expect(heading).toBeVisible();

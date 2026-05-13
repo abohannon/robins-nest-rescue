@@ -4,28 +4,49 @@ import Hero from "../../components/Hero.astro";
 import CalendlyEmbed from "../../components/CalendlyEmbed.astro";
 import GoogleMapEmbed from "../../components/GoogleMapEmbed.astro";
 import MissionBanner from "../../components/MissionBanner.astro";
+import ProcessSteps from "../../components/ProcessSteps.astro";
 import VisitorGuidelines from "../../components/VisitorGuidelines.astro";
 import { SANCTUARY_ADDRESS, CALENDLY_URL } from "../../lib/tours";
 
 const address = SANCTUARY_ADDRESS;
+
+const experienceSteps = [
+  {
+    title: "Meet the Animals",
+    description:
+      "Spend time with 25+ rescued animals across eight species — from potbelly pigs and Quarter Horses to alpacas, tortoises, and sheep — and hear each one's story.",
+  },
+  {
+    title: "Feed the Critters",
+    description:
+      "Visits land at morning or evening feeding time, so you'll roll up your sleeves and help serve breakfast or dinner to the herd.",
+  },
+  {
+    title: "Lend a Hand",
+    description:
+      "Time and willingness permitting, pitch in mucking enclosures and laying down fresh hay — often the kids' favorite part of the day.",
+  },
+];
 ---
 
 <Layout title="Book a Farm Tour" currentPath="/tours">
   <Hero
-    headline="Book a Farm Tour"
-    subtext="Come visit the sanctuary, meet the animals, and experience the healing power of Robin's Nest in person."
-    primaryCta={{ label: "Book Now", href: "#book" }}
+    headline="An Immersive Farm Experience"
+    subtext="Spend an hour at the sanctuary with 25+ rescued animals — meet them, feed them, and step into a day in their life."
+    primaryCta={{ label: "Reserve Your Visit", href: "#book" }}
   />
+
+  <ProcessSteps heading="What to Expect" steps={experienceSteps} />
 
   <section id="book" class="px-6 py-16 md:py-24">
     <div class="mx-auto max-w-3xl text-center">
       <h2 class="font-heading text-primary mb-4 text-3xl">
-        Schedule Your Visit
+        Reserve Your Experience
       </h2>
       <p class="text-text-light mb-8 text-lg leading-relaxed">
-        Farm tours are donation-based, last about an hour, and take place during
-        our regular feeding times. Pick a time that works for you and come
-        experience life at the sanctuary.
+        Visits run about an hour around our morning (8:30 a.m.) and evening
+        (5:30 p.m.) feeding times. Donation-based — every dollar goes directly
+        to the care of our rescue animals.
       </p>
     </div>
     <div class="mx-auto max-w-3xl">

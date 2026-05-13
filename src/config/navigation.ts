@@ -16,6 +16,7 @@ export const navLinks: NavLink[] = [
   { label: "Meet the Animals", href: "/animals" },
   { label: "The Sanctuary", href: "/sanctuary" },
   { label: "Events", href: "/events" },
+  { label: "Get Involved", href: "/get-involved" },
   { label: "About", href: "/about" },
   {
     label: "Visit The Retreat",

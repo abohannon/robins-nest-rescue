@@ -1,0 +1,214 @@
+---
+import Layout from "../components/Layout.astro";
+import ImageHero from "../components/ImageHero.astro";
+import MissionBanner from "../components/MissionBanner.astro";
+import ActionCardGrid from "../components/ActionCardGrid.astro";
+import Button from "../components/Button.astro";
+import Faq from "../components/Faq.astro";
+import ranchAerial from "../assets/ranch-aerial.jpg";
+
+const VOLUNTEER_APPLICATION_URL = "https://forms.gle/m5xTVNXcYE8GBSvd6";
+
+const volunteerLevels = [
+  {
+    icon: "🦙",
+    title: "Level 1 — Agent Alpaca",
+    description:
+      "Help keep the sanctuary running. Clean and rake pens, refresh food and water bowls, and tidy the grounds around our animal enclosures.",
+    linkHref: "#volunteer-faqs",
+    linkLabel: "Learn more",
+  },
+  {
+    icon: "🐷",
+    title: "Level 2 — Private Piggy",
+    description:
+      "Everything in Level 1, plus feeding all six-plus species breakfast and dinner, with basic hands-on interaction inside the enclosures.",
+    linkHref: "#volunteer-faqs",
+    linkLabel: "Learn more",
+  },
+  {
+    icon: "🫏",
+    title: "Level 3 — Deputy Donkey",
+    description:
+      "Advanced animal care: haltering, grooming, hoof and foot care, leading and walking, desensitization work — plus lots of love.",
+    linkHref: "#volunteer-faqs",
+    linkLabel: "Learn more",
+  },
+];
+
+const volunteerFaqs = [
+  {
+    question: "Are you a 501c3 nonprofit?",
+    answer:
+      "Yes, we are! Your time and monetary donations do benefit our charitable organization. You can confirm our nonprofit status on Guidestar, the gold-standard for registered nonprofits.",
+  },
+  {
+    question: "What volunteer opportunities are available?",
+    answer:
+      "RNR has a progressive volunteer program that provides one-on-one time with our 21+ animals. There are three levels of animal care volunteer opportunities — Level 1 (Agent Alpaca), Level 2 (Private Piggy), and Level 3 (Deputy Donkey) — and volunteers must start at Level 1 and work their way up, earning more responsibility as they advance.\n\nIf you're not able or willing to physically help care for the animals, there are still plenty of other ways to volunteer your time: social media, marketing, fundraising, grant writing, event planning, and more. Have a special talent that's not listed here? Let's chat — we're always open to a conversation about how to further involve our community.",
+  },
+  {
+    question: "What is the first step in becoming a volunteer?",
+    answer:
+      "All prospective volunteers must fill out our RNR Volunteer Application form and attend a Volunteer Orientation and tour. This will help you learn about our program, the benefits to the animals and community, and the commitment involved.",
+  },
+  {
+    question: "What is the minimum age to volunteer?",
+    answer:
+      "The minimum age is 14 years old. Any volunteer under 18 must have their parent or guardian's express permission, and all relevant waivers and forms must be completed by the parent or guardian.",
+  },
+  {
+    question: "What is the time commitment needed to become a volunteer?",
+    answer:
+      "Volunteer positions require a monthly commitment of at least 3 hours, with a minimum of 1 hour per visit to the ranch.\n\nVolunteer Level 1 can volunteer anytime between 8:30am and 5:30pm once they've gone through orientation and received permission to work independently.\n\nVolunteer Levels 2 and 3 should plan to volunteer at meal times (8:30am and 5:30pm every day) if they'd like to help feed the animals.\n\nOnline sign-up sheets are provided after orientation to coordinate coverage and avoid over-staffing any single shift.",
+  },
+  {
+    question:
+      "After applying and attending orientation, am I guaranteed a volunteer position?",
+    answer:
+      "Not automatically. We accept most applicants, but we can't guarantee a spot for every individual. At different times throughout the year we may have more applicants than positions available, and sometimes an applicant's availability doesn't match the program's schedule.",
+  },
+  {
+    question: "Are there specific qualifications for the volunteer positions?",
+    answer:
+      "Yes and no. We don't require any previous animal experience — we just need your willingness to learn and love. If you do have a background in animal care, we may consider fast-tracking you through the progressive levels. Let us know if you have any special talents or skills you think would be useful to RNR.\n\nWe do adhere to the golden rule of volunteering: if you commit to doing something, do it!",
+  },
+  {
+    question: "When and where are Volunteer Orientations held?",
+    answer:
+      "Orientation sessions are scheduled based on incoming applications. Typically they're held on Saturday or Sunday, and we do our best to accommodate the most schedules.",
+  },
+  {
+    question:
+      "Can I volunteer at your special events? Do I need to attend a Volunteer Orientation to participate?",
+    answer:
+      "Yes — we always need help at our fundraisers! Our main fundraising event is in October, and we need a lot of hands on deck.\n\nYou don't need to attend an orientation for these projects, though the tasks for fundraisers may not include hands-on activity with the animals. Examples include: registration, cashiering, check-in, stuffing bags, and flyer distribution.",
+  },
+  {
+    question: "If accepted, when do I start?",
+    answer:
+      "If accepted, training dates and volunteer schedules are usually assigned within the same month. You'll hear from us within one week of submitting your application. We look forward to having you join as soon as is feasible!",
+  },
+  {
+    question:
+      "I can't commit to volunteering. Can I still visit the ranch and animals?",
+    answer:
+      "Absolutely! Email us to schedule a private Farm Tour where you can meet our animals, give them treats, and help feed during breakfast or dinner. A donation of $60 (for 1–5 guests) is suggested; for larger groups please inquire further. Breakfast is at 8:30am and dinner at 5:30pm every day.\n\nIf you're interested in a weekend stay, check out our vintage Airstream Airbnb at airbnb.com/h/robinsnestramona.",
+  },
+  {
+    question: "How else can I help?",
+    answer:
+      "There are a few other ways you can lend a hand:\n\n• Become a recurring donor — monthly, predictable gifts (no matter the size) ensure the animals are consistently fed and cared for.\n• Contribute leftover fruits and vegetables for the pigs and tortoises. As long as they're not rotten or moldy, we can accept most produce — but no potatoes or onions. Piggy favorites: ripe bananas (peel and all), pumpkin, watermelon. Tortoise favorites: romaine, collard and mustard greens, fresh-cut bermuda or fountain grass, cactus pads (spines removed), hibiscus and dandelion flowers. Horses and alpacas love carrots and apples.\n• Check out the needed and wanted items on our Amazon Wishlist.\n• Become an individual or corporate sponsor for our annual Music Fest Fundraiser in October — email us for details.\n• Make a one-time donation. Every little bit helps, and we appreciate your support!",
+  },
+  {
+    question: "Does RNR offer court-ordered community service?",
+    answer:
+      "Unfortunately, RNR is unable to verify hours for court-ordered community service at this time. Please contact the court for a list of participating nonprofit organizations.",
+  },
+];
+
+const otherWaysToGive = [
+  {
+    icon: "📦",
+    title: "Amazon Wishlist",
+    description:
+      "Send supplies directly to the sanctuary. Hay, feed buckets, grooming tools — every item helps care for our 21+ residents.",
+    linkHref: "https://www.amazon.com/hz/wishlist/ls/1EQLUJ0SF09EX",
+    linkLabel: "View the wishlist",
+  },
+  {
+    icon: "💝",
+    title: "Make a Donation",
+    description:
+      "One-time or recurring gifts directly fund veterinary care, food, shelter, and the programs that pair our animals with the people they help heal.",
+    linkHref: "/donate",
+    linkLabel: "Donate now",
+  },
+  {
+    icon: "📨",
+    title: "Planned Giving",
+    description:
+      "Leave a lasting legacy by including Robin's Nest Rescue in your estate plans. Get in touch to discuss the options that work for you.",
+    linkHref:
+      "mailto:Kimber@RobinsNestRescue.com?subject=Planned%20Giving%20Inquiry",
+    linkLabel: "Contact us",
+  },
+];
+---
+
+<Layout title="Get Involved" currentPath="/get-involved">
+  <ImageHero
+    headline="Get Involved"
+    subtext="Dedicated folks like you are the only reason we can continue our mission. Whether you have an hour a month or a closet full of talents, there's a place for you at Robin's Nest."
+    image={ranchAerial}
+    primaryCta={{
+      label: "Apply to Volunteer",
+      href: VOLUNTEER_APPLICATION_URL,
+    }}
+    secondaryCta={{ label: "See Volunteer FAQs", href: "#volunteer-faqs" }}
+    size="tall"
+  />
+
+  <MissionBanner
+    heading="Why Volunteer?"
+    body="The lifeblood of any sanctuary is its volunteers. At Robin's Nest, every hour you give helps a rescued animal heal — and helps us share that healing with veterans, at-risk youth, and others who need it most. Our program is open to anyone 14 and older, no prior animal experience required. Just bring your willingness to learn and love."
+    variant="subtle"
+  />
+
+  <ActionCardGrid
+    heading="Three Levels, One Goal"
+    subheading="Every volunteer starts at Level 1 and earns more responsibility as they grow. No prior animal experience required."
+    cards={volunteerLevels}
+  />
+
+  <section class="bg-white px-6 py-16">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="font-heading text-primary mb-4 text-3xl">Ready to Apply?</h2>
+      <p class="font-body text-text mb-8 text-lg leading-relaxed">
+        Review the volunteer handbook for our policies and program details, then
+        fill out a short application. We'll follow up within a week to schedule
+        your orientation — typically held on a Saturday or Sunday.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <Button
+          href={VOLUNTEER_APPLICATION_URL}
+          variant="primary"
+          target="_blank"
+        >
+          Apply to Volunteer
+        </Button>
+        <Button
+          href="/documents/volunteer-handbook.pdf"
+          variant="accent"
+          target="_blank"
+        >
+          Read the Handbook (PDF)
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <div id="volunteer-faqs">
+    <Faq
+      heading="Volunteer FAQs"
+      subheading="Most of your questions are probably answered below. If not, reach out to Kimber and the team."
+      items={volunteerFaqs}
+    />
+  </div>
+
+  <ActionCardGrid
+    heading="Other Ways to Give"
+    subheading="Time isn't the only way to support our mission."
+    cards={otherWaysToGive}
+  />
+
+  <MissionBanner
+    heading="Still Have Questions?"
+    body="We'd love to hear from you. Reach out to Kimber and the team — whether you're ready to apply, curious about a specific volunteer role, or just want to learn more about what we do."
+    cta={{
+      label: "Email Kimber@RobinsNestRescue.com",
+      href: "mailto:Kimber@RobinsNestRescue.com",
+    }}
+    variant="highlight"
+  />
+</Layout>

@@ -4,6 +4,8 @@ interface Props {
   variant?: "primary" | "secondary" | "accent" | "ghost";
   size?: "sm" | "default";
   class?: string;
+  target?: "_blank" | "_self" | "_parent" | "_top";
+  rel?: string;
 }
 
 const {
@@ -11,6 +13,8 @@ const {
   variant = "primary",
   size = "default",
   class: className,
+  target,
+  rel,
 } = Astro.props;
 
 const base =
@@ -28,11 +32,16 @@ const variantStyles: Record<string, string> = {
   accent: "bg-accent text-white hover:bg-accent-dark",
   ghost: "bg-white text-primary hover:bg-off-white",
 };
+
+const computedRel =
+  rel ?? (target === "_blank" ? "noopener noreferrer" : undefined);
 ---
 
 <a
   href={href}
   class:list={[base, sizeStyles[size], variantStyles[variant], className]}
+  target={target}
+  rel={computedRel}
 >
   <slot />
 </a>

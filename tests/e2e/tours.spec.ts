@@ -51,6 +51,30 @@ test.describe("/tours page", () => {
     await expect(container).toBeAttached();
   });
 
+  test("renders the Suggested Donation section with all tiers", async ({
+    page,
+  }) => {
+    const heading = page.getByRole("heading", {
+      name: "Suggested Donation",
+      level: 2,
+    });
+    await expect(heading).toBeVisible();
+
+    const pricingSection = page.locator("section").filter({ has: heading });
+
+    for (const amount of ["$60", "$100", "$150", "$200", "Get in touch"]) {
+      await expect(pricingSection.getByText(amount)).toBeVisible();
+    }
+
+    const emailLink = pricingSection.getByRole("link", {
+      name: "booking@robinsnestrescue.com",
+    });
+    await expect(emailLink).toHaveAttribute(
+      "href",
+      "mailto:booking@robinsnestrescue.com",
+    );
+  });
+
   test("renders visitor guidelines", async ({ page }) => {
     const heading = page.getByRole("heading", {
       name: "What to Know Before You Visit",
@@ -58,8 +82,10 @@ test.describe("/tours page", () => {
     });
     await expect(heading).toBeVisible();
 
-    const guidelinesList = page.locator("section ul");
-    const items = guidelinesList.locator("li");
+    const guidelinesSection = page
+      .locator("section")
+      .filter({ has: heading });
+    const items = guidelinesSection.locator("ul li");
     await expect(items).toHaveCount(5);
   });
 

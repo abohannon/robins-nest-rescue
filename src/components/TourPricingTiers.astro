@@ -1,0 +1,30 @@
+---
+import { TOUR_PRICING_TIERS, BOOKING_EMAIL } from "../lib/tours";
+---
+
+<ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-5">
+  {
+    TOUR_PRICING_TIERS.map((tier) => (
+      <li class="border-border rounded-lg border bg-white p-4 text-center">
+        <p class="font-body text-text-light mb-1 text-sm">{tier.range}</p>
+        <p
+          class:list={[
+            "font-heading text-text",
+            "isCallout" in tier && tier.isCallout
+              ? "text-base font-semibold"
+              : "text-2xl font-bold",
+          ]}
+        >
+          {tier.amount}
+        </p>
+      </li>
+    ))
+  }
+</ul>
+
+<p class="text-text-light mt-8 text-center text-base">
+  Bringing 21 or more? Email <a
+    href={`mailto:${BOOKING_EMAIL}`}
+    class="text-primary underline">{BOOKING_EMAIL}</a
+  > and we'll plan accordingly.
+</p>

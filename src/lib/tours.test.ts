@@ -12,7 +12,7 @@ describe("TOUR_PRICING_TIERS", () => {
       { range: "6–10 guests", amount: "$100" },
       { range: "11–15 guests", amount: "$150" },
       { range: "16–20 guests", amount: "$200" },
-      { range: "21+ guests", amount: "Get in touch" },
+      { range: "21+ guests", amount: "Get in touch", isCallout: true },
     ]);
   });
 });

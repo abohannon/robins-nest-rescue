@@ -22,6 +22,11 @@ export const navLinks: NavLink[] = [
     href: "https://robinsnestramona.com",
     placement: "footer",
   },
+  {
+    label: "In the News",
+    href: "/in-the-news",
+    placement: "footer",
+  },
 ];
 
 export function isInHeader(link: NavLink): boolean {

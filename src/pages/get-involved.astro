@@ -6,6 +6,12 @@ import ActionCardGrid from "../components/ActionCardGrid.astro";
 import Button from "../components/Button.astro";
 import Faq from "../components/Faq.astro";
 import ranchAerial from "../assets/ranch-aerial.jpg";
+import { Image } from "astro:assets";
+import volunteerPhoto1 from "../assets/get-involved/volunteer-pouring-feed-into-bowls.jpeg";
+import volunteerPhoto2 from "../assets/get-involved/volunteer-carrying-hay-bundle.jpeg";
+import volunteerPhoto3 from "../assets/get-involved/volunteer-filling-hay-feeder.jpg";
+import volunteerPhoto4 from "../assets/get-involved/volunteer-feeding-pumpkin-to-pigs.jpg";
+import volunteerPhoto5 from "../assets/get-involved/volunteer-mucking-horse-paddock.jpg";
 
 const VOLUNTEER_APPLICATION_URL = "https://forms.gle/m5xTVNXcYE8GBSvd6";
 
@@ -134,6 +140,29 @@ const otherWaysToGive = [
     linkLabel: "Contact us",
   },
 ];
+
+const volunteerGallery = [
+  {
+    src: volunteerPhoto1,
+    alt: "Young volunteer pouring feed pellets from a scoop into colorful bowls during morning feeding at Robin's Nest Rescue",
+  },
+  {
+    src: volunteerPhoto2,
+    alt: "Smiling young volunteer carrying an armful of fresh hay to feed animals at Robin's Nest Rescue",
+  },
+  {
+    src: volunteerPhoto3,
+    alt: "Volunteer refilling a metal hay feeder in a sunlit pasture at Robin's Nest Rescue",
+  },
+  {
+    src: volunteerPhoto4,
+    alt: "Volunteer tossing fresh pumpkin to a group of rescued pigs in their enclosure at Robin's Nest Rescue",
+  },
+  {
+    src: volunteerPhoto5,
+    alt: "Young volunteer mucking out a horse paddock with a rake and bucket while horses graze nearby at Robin's Nest Rescue",
+  },
+];
 ---
 
 <Layout title="Get Involved" currentPath="/get-involved">
@@ -160,6 +189,33 @@ const otherWaysToGive = [
     subheading="Every volunteer starts at Level 1 and earns more responsibility as they grow. No prior animal experience required."
     cards={volunteerLevels}
   />
+
+  <section class="bg-white px-6 py-16">
+    <div class="mx-auto max-w-5xl">
+      <div class="mb-8 text-center">
+        <h2 class="font-heading text-text mb-2 text-3xl">Volunteers in Action</h2>
+        <p class="font-body text-text-light text-base">
+          Real moments from the folks who keep the sanctuary running.
+        </p>
+      </div>
+      <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+        {
+          volunteerGallery.map((photo, index) => (
+            <li class="overflow-hidden rounded-lg shadow-sm transition-transform duration-200 hover:-translate-y-1 hover:shadow-md">
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                widths={[400, 600, 900]}
+                sizes="(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
+                loading={index < 3 ? "eager" : "lazy"}
+                class="aspect-[4/5] h-full w-full object-cover"
+              />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
 
   <section class="bg-white px-6 py-16">
     <div class="mx-auto max-w-3xl text-center">

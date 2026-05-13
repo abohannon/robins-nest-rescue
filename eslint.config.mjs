@@ -5,7 +5,7 @@ import jsxA11y from "eslint-plugin-jsx-a11y";
 import eslintConfigPrettier from "eslint-config-prettier";
 
 export default tseslint.config(
-  { ignores: ["dist/", ".astro/"] },
+  { ignores: ["dist/", ".astro/", ".claude/"] },
   js.configs.recommended,
   {
     files: ["*.config.mjs", "*.config.js", "*.config.ts"],

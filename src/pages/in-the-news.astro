@@ -1,0 +1,31 @@
+---
+import Layout from "../components/Layout.astro";
+import Hero from "../components/Hero.astro";
+import NewsCard from "../components/NewsCard.astro";
+import { getSortedNewsItems } from "../data/news";
+
+const items = getSortedNewsItems();
+---
+
+<Layout title="In the News" currentPath="/in-the-news">
+  <Hero
+    headline="In the News"
+    subtext="Coverage of Robin's Nest Rescue from local press, podcasts, and partners."
+    primaryCta={{ label: "Book a Tour", href: "/tours" }}
+  />
+  <section class="px-6 py-16">
+    <div class="mx-auto max-w-5xl">
+      <ul
+        class="grid list-none grid-cols-1 gap-6 p-0 sm:grid-cols-2 lg:grid-cols-3"
+      >
+        {
+          items.map((item) => (
+            <li>
+              <NewsCard {...item} />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Layout>

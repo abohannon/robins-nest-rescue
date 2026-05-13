@@ -41,6 +41,7 @@ export interface Animal {
   slug: string;
   family: string;
   photo: ImageMetadata;
+  gallery?: ImageMetadata[];
   description: string;
   story: string;
   inMemoriam?: boolean;

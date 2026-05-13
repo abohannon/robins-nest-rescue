@@ -6,6 +6,7 @@ import GoogleMapEmbed from "../../components/GoogleMapEmbed.astro";
 import MissionBanner from "../../components/MissionBanner.astro";
 import ProcessSteps from "../../components/ProcessSteps.astro";
 import VisitorGuidelines from "../../components/VisitorGuidelines.astro";
+import TourPricingTiers from "../../components/TourPricingTiers.astro";
 import { SANCTUARY_ADDRESS, CALENDLY_URL } from "../../lib/tours";
 
 const address = SANCTUARY_ADDRESS;
@@ -37,6 +38,28 @@ const experienceSteps = [
   />
 
   <ProcessSteps heading="What to Expect" steps={experienceSteps} />
+
+  <section
+    class="px-6 pt-16 pb-8 md:pt-24 md:pb-12"
+    aria-labelledby="suggested-donation-heading"
+  >
+    <div class="mx-auto max-w-5xl">
+      <div class="mx-auto mb-10 max-w-2xl text-center">
+        <h2
+          id="suggested-donation-heading"
+          class="font-heading text-primary mb-4 text-3xl"
+        >
+          Suggested Donation
+        </h2>
+        <p class="text-text-light text-lg leading-relaxed">
+          We're a 501(c)(3) nonprofit, so 100% of your donation goes directly to
+          the care of our rescue animals and is tax-deductible. Suggested
+          amounts are for the entire group.
+        </p>
+      </div>
+      <TourPricingTiers />
+    </div>
+  </section>
 
   <section id="book" class="px-6 py-16 md:py-24">
     <div class="mx-auto max-w-3xl text-center">

@@ -71,7 +71,8 @@ test.describe("/tours/confirmation page", () => {
     });
     await expect(heading).toBeVisible();
 
-    const items = page.locator("section ul li");
+    const guidelinesSection = page.locator("section").filter({ has: heading });
+    const items = guidelinesSection.locator("ul li");
     await expect(items).toHaveCount(5);
   });
 
@@ -91,7 +92,7 @@ test.describe("/tours/confirmation page", () => {
     await expect(mapIframe).toBeAttached();
   });
 
-  test("renders the payment section with GiveButter widget", async ({
+  test("renders the payment section with tier ladder and GiveButter widget", async ({
     page,
   }) => {
     await page.goto("/tours/confirmation");
@@ -102,8 +103,24 @@ test.describe("/tours/confirmation page", () => {
     });
     await expect(heading).toBeVisible();
 
-    const donationText = page.getByText(/minimum donation of \$60/);
-    await expect(donationText).toBeVisible();
+    const paymentSection = page.locator("section").filter({ has: heading });
+
+    const introText = paymentSection.getByText(
+      /Choose the suggested amount that matches your group size/,
+    );
+    await expect(introText).toBeVisible();
+
+    for (const amount of ["$60", "$100", "$150", "$200", "Get in touch"]) {
+      await expect(paymentSection.getByText(amount)).toBeVisible();
+    }
+
+    const emailLink = paymentSection.getByRole("link", {
+      name: "booking@robinsnestrescue.com",
+    });
+    await expect(emailLink).toHaveAttribute(
+      "href",
+      "mailto:booking@robinsnestrescue.com",
+    );
 
     const widget = page.locator('givebutter-widget[id="gKZZE3"]');
     await expect(widget).toBeAttached();

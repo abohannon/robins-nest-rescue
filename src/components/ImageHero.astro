@@ -3,11 +3,19 @@ import Button from "./Button.astro";
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 
+type CtaTarget = "_blank" | "_self" | "_parent" | "_top";
+
+interface Cta {
+  label: string;
+  href: string;
+  target?: CtaTarget;
+}
+
 interface Props {
   headline: string;
   subtext: string;
-  primaryCta: { label: string; href: string };
-  secondaryCta?: { label: string; href: string };
+  primaryCta: Cta;
+  secondaryCta?: Cta;
   image: ImageMetadata;
   size?: "default" | "tall" | "full";
 }
@@ -52,12 +60,16 @@ const sizeClasses: Record<"default" | "tall" | "full", string> = {
       {subtext}
     </p>
     <div class="flex flex-wrap justify-center gap-4">
-      <Button href={primaryCta.href} variant="ghost">
+      <Button href={primaryCta.href} variant="ghost" target={primaryCta.target}>
         {primaryCta.label}
       </Button>
       {
         secondaryCta && (
-          <Button href={secondaryCta.href} variant="secondary">
+          <Button
+            href={secondaryCta.href}
+            variant="secondary"
+            target={secondaryCta.target}
+          >
             {secondaryCta.label}
           </Button>
         )

@@ -4,6 +4,7 @@ import Layout from "../components/Layout.astro";
 import ImageHero from "../components/ImageHero.astro";
 import MissionBanner from "../components/MissionBanner.astro";
 import ActionCardGrid from "../components/ActionCardGrid.astro";
+import FeatureCardGrid from "../components/FeatureCardGrid.astro";
 import Button from "../components/Button.astro";
 import Faq from "../components/Faq.astro";
 import ranchAerial from "../assets/ranch-aerial.jpg";
@@ -17,28 +18,22 @@ const VOLUNTEER_APPLICATION_URL = "https://forms.gle/m5xTVNXcYE8GBSvd6";
 
 const volunteerLevels = [
   {
-    icon: "🦙",
     title: "Level 1 — Agent Alpaca",
     description:
       "Help keep the sanctuary running. Clean and rake pens, refresh food and water bowls, and tidy the grounds around our animal enclosures.",
-    linkHref: "#volunteer-faqs",
-    linkLabel: "Learn more",
+    href: "#volunteer-faqs",
   },
   {
-    icon: "🐷",
     title: "Level 2 — Private Piggy",
     description:
       "Everything in Level 1, plus feeding all six-plus species breakfast and dinner, with basic hands-on interaction inside the enclosures.",
-    linkHref: "#volunteer-faqs",
-    linkLabel: "Learn more",
+    href: "#volunteer-faqs",
   },
   {
-    icon: "🫏",
     title: "Level 3 — Deputy Donkey",
     description:
       "Advanced animal care: haltering, grooming, hoof and foot care, leading and walking, desensitization work — plus lots of love.",
-    linkHref: "#volunteer-faqs",
-    linkLabel: "Learn more",
+    href: "#volunteer-faqs",
   },
 ];
 
@@ -173,6 +168,7 @@ const volunteerGallery = [
     primaryCta={{
       label: "Apply to Volunteer",
       href: VOLUNTEER_APPLICATION_URL,
+      target: "_blank",
     }}
     secondaryCta={{ label: "See Volunteer FAQs", href: "#volunteer-faqs" }}
     size="tall"
@@ -184,7 +180,7 @@ const volunteerGallery = [
     variant="subtle"
   />
 
-  <ActionCardGrid
+  <FeatureCardGrid
     heading="Three Levels, One Goal"
     subheading="Every volunteer starts at Level 1 and earns more responsibility as they grow. No prior animal experience required."
     cards={volunteerLevels}
@@ -222,10 +218,17 @@ const volunteerGallery = [
   <section class="bg-white px-6 py-16">
     <div class="mx-auto max-w-3xl text-center">
       <h2 class="font-heading text-primary mb-4 text-3xl">Ready to Apply?</h2>
-      <p class="font-body text-text mb-8 text-lg leading-relaxed">
+      <p class="font-body text-text mb-4 text-lg leading-relaxed">
         Review the volunteer handbook for our policies and program details, then
-        fill out a short application. We'll follow up within a week to schedule
-        your orientation — typically held on a Saturday or Sunday.
+        fill out a short application. Once your application is in, you'll be
+        able to sign up for your training visits. For your first few shifts,
+        we'll be right there with you — showing you the ropes, introducing you
+        to the animals, and walking through how we care for their spaces.
+      </p>
+      <p class="font-body text-text mb-8 text-lg leading-relaxed">
+        Those initial training sessions are a bit limited, but after 2–3 visits,
+        you'll unlock access to our full volunteer calendar with many more shift
+        options — and at that point, you can come out just about anytime!
       </p>
       <div class="flex flex-wrap justify-center gap-4">
         <Button

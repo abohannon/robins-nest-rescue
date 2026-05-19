@@ -7,6 +7,7 @@ import MissionBanner from "../../components/MissionBanner.astro";
 import ProcessSteps from "../../components/ProcessSteps.astro";
 import VisitorGuidelines from "../../components/VisitorGuidelines.astro";
 import TourPricingTiers from "../../components/TourPricingTiers.astro";
+import YouTubeEmbed from "../../components/YouTubeEmbed.astro";
 import { SANCTUARY_ADDRESS, CALENDLY_URL } from "../../lib/tours";
 
 const address = SANCTUARY_ADDRESS;
@@ -36,6 +37,26 @@ const experienceSteps = [
     subtext="Spend an hour at the sanctuary with 25+ rescued animals — meet them, feed them, and step into a day in their life."
     primaryCta={{ label: "Reserve Your Visit", href: "#book" }}
   />
+
+  <section class="px-6 py-16 md:py-24" aria-labelledby="tour-preview-heading">
+    <div class="mx-auto max-w-4xl">
+      <div class="mx-auto mb-10 max-w-2xl text-center">
+        <h2
+          id="tour-preview-heading"
+          class="font-heading text-primary mb-4 text-3xl"
+        >
+          Watch a Tour Preview
+        </h2>
+        <p class="text-text-light text-lg leading-relaxed">
+          Take a quick look at what a visit to the sanctuary feels like.
+        </p>
+      </div>
+      <YouTubeEmbed
+        videoId="cjwKUT18Dh4"
+        title="Robin's Nest Rescue farm tour preview"
+      />
+    </div>
+  </section>
 
   <ProcessSteps heading="What to Expect" steps={experienceSteps} />
 

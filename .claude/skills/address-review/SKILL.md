@@ -189,3 +189,114 @@ No unresolved review threads on PR #<N>. Nothing to do.
 ```
 
 Do not proceed to Phase 4.
+
+## Phase 4 — Plan and identify disagreements
+
+### Outdated-thread resolution check
+
+For every thread flagged `[OUTDATED]` in Phase 3, before planning a code change, check whether the suggested change is already present:
+
+1. Read the file at `thread.path`.
+2. Compare the current content (around `thread.line` if still valid, or by semantic search if the line shifted) against the comment's request.
+3. If the change is already in the file: mark the entry as "reply only", find the commit that introduced it, and capture that SHA for the Phase 7b reply. Useful commands:
+
+   ```bash
+   git log -p -- <path> | head -200
+   # or, if you can identify a unique string from the change:
+   git log --diff-filter=A -S '<unique snippet>' -- <path>
+   ```
+
+4. If the change is not present: process as a normal thread — the `[OUTDATED]` flag just means line numbers shifted; the request still applies.
+
+If the agent cannot confidently determine whether an outdated thread is already addressed, treat it as **not addressed** and plan a normal code change. False-positive replies ("already addressed in <sha>") are harder to recover from than redundant work.
+
+### Plan entries
+
+For each kept thread or review body, produce a structured entry. Example:
+
+```
+T1  src/components/DonateForm.astro:42
+    "Can we use the existing <Button> component here instead of raw <button>?"
+    → Replace <button> with shared <Button variant="primary"> at line 42.
+    Commit group: A
+
+T2  src/lib/sanity.ts:88  [OUTDATED]
+    "This query is missing the 'image' field"
+    → Already addressed in commit a1b2c3d (image field present at line 91).
+      Reply only, no code change.
+    Commit group: — (reply only)
+
+T3  REVIEW BODY
+    "Overall looks good, but please add a loading state to the donate button."
+    → Add aria-busy + spinner to DonateForm submit during fetch.
+    Commit group: A
+```
+
+Each entry needs:
+
+- A short ID (`T1`, `T2`, …) — used at the checkpoint for "skip T3" edits
+- File + line (or `REVIEW BODY` for non-inline)
+- The comment text in quotes
+- A `→` line stating the intent (what the agent will do, or "reply only")
+- A commit group letter (`A`, `B`, `C`, …) or `— (reply only)`
+
+### Commit grouping rules
+
+Group entries to minimize commits while keeping each commit one logical change (per `CLAUDE.md`):
+
+- Same file + related concern → same group.
+- Different files but one logical change (e.g. adding a loading state across a form + button) → same group.
+- Different concerns in the same file → separate groups.
+- Aim for the minimum number of commits that still satisfies "one logical change per commit".
+
+Each group produces one conventional-commits commit at execute time. Example commit message for group A above:
+
+```
+fix(donate-form): use shared Button component and add loading state
+
+Replaces raw <button> with <Button variant="primary"> and adds aria-busy +
+spinner during submit, per review feedback.
+```
+
+### Disagreements ("Will NOT change")
+
+Some comments the agent should not silently apply — e.g. the suggested change would break the architecture, contradicts the project's conventions, or is already addressed differently. Render these as a separate block in the checkpoint:
+
+```
+WILL NOT CHANGE
+T5  src/pages/index.astro:12
+    "Use useEffect to fetch tour dates on mount"
+    → Reason: this is a static Astro page (server-rendered). useEffect would
+      force a React island unnecessarily. Suggest fetching at build time via
+      the Sanity client.
+```
+
+The user can override at the checkpoint with a `changes` reply ("apply T5 anyway"). The reason text becomes the body of the Phase 7b reply posted to the thread.
+
+## Phase 5 — Checkpoint
+
+**This is the only user pause in the skill.** Once the user says `yes`, Phases 6–8 run continuously.
+
+Present this message to the user, exactly:
+
+```
+**PR:** #<N> — <title>
+**Branch:** <headRefName>
+**Threads addressed:** <m>
+**Threads marked won't-change:** <k>
+**Outdated threads acknowledged:** <j>
+
+**Plan:**
+<rendered Phase 4 entries grouped by commit>
+
+**Will NOT change:**
+<rendered disagreement entries>
+
+Proceed? (yes / changes / abort)
+```
+
+Response handling:
+
+- `yes` → continue to Phase 6.
+- `changes` → take the user's edits (e.g. "skip T3", "change T5 reason to X", "merge group A and B"), revise the plan, re-present the checkpoint. Loop until `yes` or `abort`.
+- `abort` → leave the worktree/branch as-is. No commits, no push, no replies. Exit cleanly with a one-line note.

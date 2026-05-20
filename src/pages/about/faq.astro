@@ -1,0 +1,43 @@
+---
+import Layout from "../../components/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import Faq from "../../components/Faq.astro";
+import MissionBanner from "../../components/MissionBanner.astro";
+
+const faqs = [
+  {
+    question: "Where is Robin's Nest Rescue located?",
+    answer:
+      "We're located in Ramona, California. Specific directions and parking details are shared after you book a tour.",
+  },
+  {
+    question: "How can I visit the animals?",
+    answer:
+      "The best way to meet our animals is to book a farm tour. Tours are scheduled in advance so we can give you a personalized, calm experience.",
+  },
+  {
+    question: "Are you a registered nonprofit?",
+    answer:
+      "Yes — Robin's Nest Rescue is a 501(c)(3) nonprofit organization (FEIN 93-3888904). Donations are tax-deductible to the extent allowed by law.",
+  },
+  {
+    question: "How can I support the sanctuary?",
+    answer:
+      "There are several ways: donate, volunteer, book a tour, attend an event, or sponsor an animal. Visit our Get Involved page for the full list.",
+  },
+];
+---
+
+<Layout title="FAQ" currentPath="/about/faq">
+  <Hero
+    headline="Frequently Asked Questions"
+    subtext="Answers to the questions we hear most often. More to come."
+    primaryCta={{ label: "Book a Tour", href: "/tours" }}
+  />
+  <Faq heading="General questions" items={faqs} />
+  <MissionBanner
+    heading="Still have a question?"
+    body="If you didn't see your question above, reach out and we'll get back to you."
+    cta={{ label: "Email Us", href: "mailto:info@robinsnestrescue.org" }}
+  />
+</Layout>

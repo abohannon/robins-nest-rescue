@@ -1,0 +1,18 @@
+---
+import Layout from "../../components/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import MissionBanner from "../../components/MissionBanner.astro";
+---
+
+<Layout title="Founder's Story" currentPath="/about/founders-story">
+  <Hero
+    headline="Founder's Story"
+    subtext="The story behind Robin's Nest Rescue — coming soon."
+    primaryCta={{ label: "Book a Tour", href: "/tours" }}
+  />
+  <MissionBanner
+    heading="A page in progress"
+    body="We're working on sharing how Robin's Nest Rescue came to be. In the meantime, the best way to hear the story is in person — come visit the sanctuary."
+    cta={{ label: "Book a Farm Tour", href: "/tours" }}
+  />
+</Layout>

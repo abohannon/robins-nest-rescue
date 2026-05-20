@@ -1,0 +1,18 @@
+---
+import Layout from "../../components/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import MissionBanner from "../../components/MissionBanner.astro";
+---
+
+<Layout title="Mission and Vision" currentPath="/about/mission-and-vision">
+  <Hero
+    headline="Mission and Vision"
+    subtext="What drives us, and where we're headed — coming soon."
+    primaryCta={{ label: "Book a Tour", href: "/tours" }}
+  />
+  <MissionBanner
+    heading="Our why, in detail"
+    body="A fuller statement of our mission and long-term vision is on its way. Until then, the short version: every animal deserves safety, compassion, and a second chance — and the human-animal bond is healing in both directions."
+    cta={{ label: "Get Involved", href: "/get-involved" }}
+  />
+</Layout>

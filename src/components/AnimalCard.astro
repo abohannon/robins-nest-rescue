@@ -21,7 +21,7 @@ const { name, slug, family, description, photo } = Astro.props;
     <Image
       src={photo}
       alt={name}
-      class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+      class="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
       widths={[400, 600]}
       sizes="(max-width: 640px) 100vw, 33vw"
     />

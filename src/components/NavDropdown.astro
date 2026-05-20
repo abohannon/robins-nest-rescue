@@ -1,0 +1,131 @@
+---
+import type { NavChild } from "../config/navigation";
+import { isActiveLink } from "../config/navigation";
+
+interface Props {
+  label: string;
+  href: string;
+  items: NavChild[];
+  currentPath: string;
+}
+
+const { label, href, items, currentPath } = Astro.props;
+
+const isActive = isActiveLink(href, currentPath);
+---
+
+<div class="nav-dropdown group relative">
+  <a
+    href={href}
+    aria-current={isActive ? "page" : undefined}
+    aria-haspopup="true"
+    aria-expanded="false"
+    class:list={[
+      "nav-dropdown-trigger font-body hover:text-primary inline-flex items-center gap-1 text-sm no-underline",
+      isActive ? "text-primary font-semibold" : "text-text",
+    ]}
+  >
+    {label}
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 12 12"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="nav-dropdown-caret h-3 w-3 transition-transform duration-200"
+    >
+      <polyline points="3 5 6 8 9 5"></polyline>
+    </svg>
+  </a>
+  <div
+    role="menu"
+    aria-label={`${label} submenu`}
+    class="nav-dropdown-panel border-border invisible absolute top-full left-1/2 z-50 mt-2 w-56 -translate-x-1/2 translate-y-1 rounded-lg border bg-white p-2 opacity-0 shadow-lg transition-[opacity,transform,visibility] duration-200 ease-out group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100"
+  >
+    <ul class="m-0 list-none p-0">
+      {
+        items.map((child) => {
+          const childActive = isActiveLink(child.href, currentPath);
+          return (
+            <li>
+              <a
+                href={child.href}
+                role="menuitem"
+                aria-current={childActive ? "page" : undefined}
+                class:list={[
+                  "font-body hover:text-primary hover:bg-off-white focus-visible:text-primary focus-visible:bg-off-white block rounded-md px-3 py-2 text-sm no-underline",
+                  childActive ? "text-primary font-semibold" : "text-text",
+                ]}
+              >
+                {child.label}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</div>
+
+<script>
+  // Keyboard accessibility for desktop dropdowns:
+  // - ArrowDown opens the panel and focuses the first item
+  // - Escape closes the panel and returns focus to the trigger
+  // Hover/focus-within handles the visible state via CSS.
+  const dropdowns = document.querySelectorAll<HTMLElement>(".nav-dropdown");
+
+  dropdowns.forEach((dropdown) => {
+    const trigger = dropdown.querySelector<HTMLAnchorElement>(
+      ".nav-dropdown-trigger",
+    );
+    const panel = dropdown.querySelector<HTMLElement>(".nav-dropdown-panel");
+    if (!trigger || !panel) return;
+
+    const items = Array.from(
+      panel.querySelectorAll<HTMLAnchorElement>('a[role="menuitem"]'),
+    );
+
+    const setExpanded = (open: boolean) => {
+      trigger.setAttribute("aria-expanded", String(open));
+    };
+
+    // Mark expanded whenever focus enters or leaves the dropdown.
+    dropdown.addEventListener("focusin", () => setExpanded(true));
+    dropdown.addEventListener("focusout", (event) => {
+      const next = event.relatedTarget as Node | null;
+      if (!next || !dropdown.contains(next)) setExpanded(false);
+    });
+    dropdown.addEventListener("mouseenter", () => setExpanded(true));
+    dropdown.addEventListener("mouseleave", () => {
+      if (!dropdown.contains(document.activeElement)) setExpanded(false);
+    });
+
+    trigger.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        items[0]?.focus();
+      } else if (event.key === "Escape") {
+        setExpanded(false);
+        trigger.blur();
+      }
+    });
+
+    items.forEach((item, index) => {
+      item.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowDown") {
+          event.preventDefault();
+          items[(index + 1) % items.length]?.focus();
+        } else if (event.key === "ArrowUp") {
+          event.preventDefault();
+          items[(index - 1 + items.length) % items.length]?.focus();
+        } else if (event.key === "Escape") {
+          event.preventDefault();
+          setExpanded(false);
+          trigger.focus();
+        }
+      });
+    });
+  });
+</script>

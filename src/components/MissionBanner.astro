@@ -2,8 +2,8 @@
 import Button from "./Button.astro";
 
 interface Props {
-  heading: string;
-  body: string;
+  heading?: string;
+  body?: string;
   cta?: { label: string; href: string };
   variant?: "default" | "highlight" | "subtle";
 }
@@ -38,7 +38,7 @@ const ctaVariants: Record<string, "primary" | "ghost"> = {
 <section class:list={["px-6 py-16", sectionStyles[variant]]}>
   <div class="mx-auto max-w-3xl text-center">
     <h2 class:list={["font-heading mb-4 text-3xl", headingStyles[variant]]}>
-      {heading}
+      <slot name="heading">{heading}</slot>
     </h2>
     <p
       class:list={[
@@ -46,7 +46,7 @@ const ctaVariants: Record<string, "primary" | "ghost"> = {
         bodyStyles[variant],
       ]}
     >
-      {body}
+      <slot name="body">{body}</slot>
     </p>
     {
       cta && (

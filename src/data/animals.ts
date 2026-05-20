@@ -28,6 +28,7 @@ import albertoPhoto from "../assets/alberto.jpg";
 import banditoPhoto from "../assets/bandito.jpg";
 import smokeyPhoto from "../assets/smokey.jpg";
 import banditPhoto from "../assets/bandit.jpg";
+import daisyMinnieHazelPhoto from "../assets/daisy-minnie-hazel.jpg";
 
 export interface AnimalFamily {
   name: string;
@@ -49,7 +50,7 @@ export interface Animal {
 
 export const animalFamilies: AnimalFamily[] = [
   {
-    name: "The Three Little Pigs",
+    name: "The Three Little Pigs + 1",
     slug: "pigs",
     description:
       "The three little black pigs were rescued from an extreme hoarding situation. For these three — plus one — Robin's Nest is their forever home.",
@@ -91,18 +92,18 @@ export const animalFamilies: AnimalFamily[] = [
     photo: oakleyPhoto,
   },
   {
-    name: "The Three Chimigos",
-    slug: "chimigos",
-    description:
-      "The heart of Robin's Nest traces back to three Chihuahuas — Lily, Alberto, and Julio. Their legendary bond inspired songs, stories, a children's book series, and the founding of Robin's Nest Rescue.",
-    photo: lilyPhoto,
-  },
-  {
     name: "Cat Tales",
     slug: "cats",
     description:
       "Our ranch cats keep watch over the property, patrol for pesky varmints, and never miss a golf cart ride. They remind us that every creature has a role to play.",
     photo: banditoPhoto,
+  },
+  {
+    name: "The Three Chimigos",
+    slug: "chimigos",
+    description:
+      "The heart of Robin's Nest traces back to three Chihuahuas — Lily, Alberto, and Julio. Their legendary bond inspired songs, stories, a children's book series, and the founding of Robin's Nest Rescue.",
+    photo: lilyPhoto,
   },
 ];
 
@@ -639,6 +640,39 @@ Eddie loves napping and patrolling the ranch with his companion and fellow Blue 
 - **"Getting an older dog means they can't be trained."** Actually, older dogs are usually already trained to some extent. And certainly, old dogs CAN learn new tricks!`,
   },
   {
+    name: "Daisy Minnie Hazel",
+    slug: "daisy-minnie-hazel",
+    family: "ranch-dogs",
+    photo: daisyMinnieHazelPhoto,
+    description:
+      'Daisy is a delightful Chiweenie mix who loves to run, play, and charm everyone who walks by. She loves company, goes nose-to-nose with Tivio and the alpacas, and is learning her "big girl" bark!',
+    story: `Daisy is impossible to ignore and is already proving her worth as the littlest of our therapy animals!
+
+**Meet Daisy: A New Beginning Amidst Heartache**
+
+Monday morning began like any other at Robin's Nest, with the gentle rustle of leaves and sunshine pouring through the windows of the beloved Airstream. Just as I was settling into the rhythm of the day, a last-minute booking brightened my spirits — a short stay for a guest named Stephanie, who was eager to enjoy a reprieve from the city and find peace and quiet at our little country sanctuary. Little did I know, the day would take a heart-wrenching turn.
+
+Late Monday night, we lost Lily, our beloved matriarch and my first official rescue 15+ years ago. She wasn't just a Robin's Nest resident; she was the queen bee, the OG of the Three Chimigos, and the heart and soul of the ranch. All signs pointed to a severe stroke or perhaps a heart attack, and despite our desperate attempts at CPR — 20 long minutes with Nicholas Spear at my side — Lily slipped away from us.
+
+The shock was profound. Lily was so deeply loved; she held together a family of misfits, creating a warm home where friendship flourished among her fellow Chihuahua rescue brothers, Julio and Alberto. As my mom, Sue Williams, and I sat in the silence that followed her departure, wrought with our grief, the reality hit — the end of this incredible Three Chimigos era had arrived. We could almost hear her commanding presence; we knew she was off running freely once more, joining her brothers in that great beyond, lovingly trying to keep them in line and cleaning their faces as she always did.
+
+Amidst the grief washing over us, I was touched to learn the next morning that Stephanie, who seemingly had come to light up our space, had brought along four dogs — two of whom were fosters. One puppy especially caught my heart: Daisy — a tiny, 12-week-old Chihuahua/Dachshund mix, just 3 pounds, who had a backstory that echoed the vulnerability we felt.
+
+Daisy was rescued from the San Bernardino Animal Shelter. Her mother, a tiny black chihuahua, had arrived as a stray, unknowingly pregnant. After giving birth to two puppies, the pair quickly found homes, but Daisy was a different story. Parvo hit the shelter hard, and while Daisy was spared, she needed to be in a safe, healthy environment. Gratefully, Stephanie had stepped in as her foster mom, offering her a home filled with love and care.
+
+The timing of their arrival seemed both too soon but pressing. This tiny girl puppy immediately bonded with me; it became evident that the universe had spoken, and we decided to adopt her. It was an emotional rollercoaster when we received word that we were actually second in line to adopt Daisy, yet another twist in the fate that had seemed so perfectly aligned. My heart was gripped in dread again.
+
+The potential adopting family ahead of us had been eagerly anticipating Daisy's arrival, but fate intervened again in an unexpected way. Stephanie, who had lovingly cared for Daisy since her rescue, found herself stuck in traffic, delayed on her journey to deliver Daisy to her new family. Consumed with worry, the first family ultimately decided to decline the adoption due to their concerns about potential early health issues that had since resolved. The irony of it all was not lost on us; it was as though the universe was truly conspiring to bring Daisy to us.
+
+None of us had realized the serendipity of the situation — the sweet little pup was destined to be the newest member of the Robin's Nest family. Her arrival felt like a gentle embrace from the universe, a gift of comfort sent to help fill the gaping hole that Lily had left behind. While we were drowning in sorrow, this tiny creature embodied hope.
+
+As Daisy wobbled around the Airstream, her playful spirit began to draw smiles from our grieving hearts. Our tagline, "We rescue them. They save us," resonated deeply as we welcomed her with open arms. While nobody could ever take Lily's place, Daisy brought a joyful reminder that life continues to bloom and there are others who still need us!
+
+Daisy has already become a beacon of light, flinging herself into our lives and transforming tears into laughter. Her infectious energy seemed to synchronize with Stephanie's own need for solace, creating an unspoken bond between all of us. As Stephanie found peace among the oak trees, boulders, and our animal sanctuary, Daisy mirrored her journey, offering a shared sense of healing.
+
+With each playful bark and wagging tail, Daisy is guiding us through this new chapter together, honoring Lily's memory while embracing the little life that is now blossoming at Robin's Nest. Further honoring Lily's memory (named for her favorite flower), we've chosen to name the newest member of the family Daisy, a cheerful flower that embodies hope and renewal. We are all healing — together, surrounded by the spirit of love both given and received by Lily AND Daisy.`,
+  },
+  {
     name: "Lily",
     slug: "lily",
     family: "chimigos",
@@ -785,7 +819,9 @@ export function getFamily(slug: string): AnimalFamily | undefined {
 }
 
 export function getAnimalsByFamily(familySlug: string): Animal[] {
-  return animals.filter((a) => a.family === familySlug);
+  // Animals marked `inMemoriam` are shown only on the In Memoriam page,
+  // not alongside their living family members.
+  return animals.filter((a) => a.family === familySlug && !a.inMemoriam);
 }
 
 export function getMemorialAnimals(): Animal[] {

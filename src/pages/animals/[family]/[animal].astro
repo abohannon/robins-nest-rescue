@@ -53,7 +53,10 @@ const storyHtml = renderMarkdown(animal.story);
 
         <div class="order-2 md:row-span-2">
           <div class="md:sticky md:top-36">
-            <AnimalSupportCard animalName={animal.name} />
+            <AnimalSupportCard
+              animalName={animal.name}
+              isMemorial={animal.inMemoriam ?? false}
+            />
           </div>
         </div>
 

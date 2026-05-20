@@ -84,4 +84,13 @@ describe("getAnimalsByFamily", () => {
   it("returns empty array for unknown family", () => {
     expect(getAnimalsByFamily("dragons")).toEqual([]);
   });
+
+  it("excludes animals marked inMemoriam", () => {
+    for (const family of animalFamilies) {
+      const familyAnimals = getAnimalsByFamily(family.slug);
+      for (const animal of familyAnimals) {
+        expect(animal.inMemoriam).not.toBe(true);
+      }
+    }
+  });
 });

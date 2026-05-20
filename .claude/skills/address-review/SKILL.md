@@ -1,6 +1,6 @@
 ---
 name: address-review
-description: Use when the user invokes `/address-review [<PR#>]` or asks to address review comments on a Robin's Nest Rescue PR. Fetches unresolved review threads + non-empty review bodies, plans a response with explicit disagreements, pauses once for user approval, then executes fixes, pushes, and posts replies on each addressed thread. Does not modify the Project board and does not resolve threads.
+description: Use when the user invokes `/address-review [<PR#>]` or asks to address review comments on a Robin's Nest Rescue PR. Fetches unresolved review threads, non-empty review bodies, and issue-level PR comments, plans a response with explicit disagreements, pauses once for user approval, then executes fixes, pushes, and posts replies on each addressed thread/comment. Does not modify the Project board and does not resolve threads.
 ---
 
 # `/address-review` — Address review feedback on one PR
@@ -12,12 +12,12 @@ Nine phases (a pre-flight + eight work phases). **One** user pause (the Phase 5 
 0. **Pre-flight** — verify `gh` has the `repo` scope
 1. **Fetch** the PR (number, title, branch, URL)
 2. **Workspace** — reuse `.claude/worktrees/<type>-<slug>/` if it exists; else switch the main checkout to the PR branch
-3. **Fetch unresolved comments** via GraphQL — inline threads + non-empty review bodies newer than the head branch's latest commit
+3. **Fetch unresolved comments** via GraphQL — inline threads + non-empty review bodies + issue-level PR comments newer than the head branch's latest commit (bot authors filtered out)
 4. **Plan + identify disagreements** — one-line intent per thread; group into logical commits; list "Will NOT change" items
 5. **Checkpoint** — present plan + disagreements; wait for `yes` / `changes` / `abort`
 6. **Execute** via `superpowers:executing-plans`, then verify (lint, format:check, test, build)
-7. **Push + reply on threads** — `git push`, then post a reply on each addressed thread referencing the fix commit
-8. **Handoff** — print PR URL, counts of addressed/won't-change/outdated threads, manual UI verification flag
+7. **Push + reply** — `git push`, then post a reply on each addressed thread / review body / issue comment referencing the fix commit
+8. **Handoff** — print PR URL, counts of addressed/won't-change/outdated items, manual UI verification flag
 
 After running, review the agent's replies on the PR, resolve threads when satisfied, then re-request review or merge.
 
@@ -124,7 +124,7 @@ If the worktree exists but is on the wrong branch, **abort** — do not auto-fix
 
 ## Phase 3 — Fetch unresolved comments
 
-One GraphQL round-trip returns inline review threads and review submissions:
+One GraphQL round-trip returns inline review threads, review submissions, **and** issue-level PR comments. All three are feedback channels on this project — Adam sometimes submits a formal review, sometimes types a plain PR comment. Missing the issue-comment channel means missing real feedback (this happened on PR #57).
 
 ```bash
 gh api graphql -f query='
@@ -162,6 +162,16 @@ gh api graphql -f query='
             url
           }
         }
+        comments(first: 100) {
+          nodes {
+            id
+            databaseId
+            author { __typename login }
+            body
+            url
+            createdAt
+          }
+        }
       }
     }
   }' -f owner="$OWNER" -f repo="$REPO" -F pr="$PR"
@@ -169,10 +179,10 @@ gh api graphql -f query='
 
 ### Filtering rules
 
-- Drop threads where `isResolved == true`.
-- Do **not** filter by author. On this project the PR author and reviewer are the same GitHub identity — filtering by author would drop all feedback.
-- Keep `isOutdated` threads but mark them with an `[OUTDATED]` flag (handled explicitly in Phase 4).
-- For `reviews`: keep only entries whose `body` is non-empty **and** whose `submittedAt` is newer than the head branch's latest commit timestamp. Inline threads use `isResolved` for the same purpose; review bodies have no resolution mechanism on GitHub, so timestamp is the next-best proxy.
+- **Inline `reviewThreads`:** drop where `isResolved == true`. Keep `isOutdated` threads but mark them `[OUTDATED]` (handled in Phase 4).
+- **`reviews`:** keep only entries whose `body` is non-empty **and** whose `submittedAt` is newer than the head branch's latest commit timestamp. Review bodies have no resolution mechanism on GitHub, so timestamp is the next-best proxy.
+- **`comments` (issue-level PR comments):** drop entries where `author.__typename == "Bot"` (cloudflare-workers-and-pages, dependabot, github-actions, etc. — these are deployment status and automation noise, never feedback). Note: GraphQL strips the `[bot]` suffix from bot logins, so checking `__typename` is the reliable filter (don't string-match on `[bot]`). Then keep only entries whose `createdAt` is newer than the head branch's latest commit timestamp — same staleness rule as review bodies.
+- **Do not filter by author.** On this project the PR author and reviewer are the same GitHub identity — filtering by author would drop all feedback.
 
 Head-branch latest commit timestamp:
 
@@ -180,12 +190,12 @@ Head-branch latest commit timestamp:
 LATEST_COMMIT_AT=$(git log -1 --format=%cI "origin/$HEAD_REF")
 ```
 
-The `databaseId` on each thread's top comment is required for posting replies in Phase 7 (the reply REST endpoint takes the integer ID, not the GraphQL node ID). Capture it.
+The `databaseId` on each inline thread's top comment is required for posting replies in Phase 7 (the reply REST endpoint takes the integer ID, not the GraphQL node ID). Issue-level comments don't support threaded replies — Phase 7b posts a fresh issue comment for those, no `databaseId` needed for the reply itself. Capture `databaseId` for inline threads and for issue-comment items (the latter is still useful for logging / handoff URLs).
 
-If after filtering there are zero items, exit cleanly:
+If after filtering there are zero items across all three channels, exit cleanly:
 
 ```
-No unresolved review threads on PR #<N>. Nothing to do.
+No unresolved review threads, review bodies, or open PR comments on PR #<N>. Nothing to do.
 ```
 
 Do not proceed to Phase 4.
@@ -212,7 +222,7 @@ If the agent cannot confidently determine whether an outdated thread is already 
 
 ### Plan entries
 
-For each kept thread or review body, produce a structured entry. Example:
+For each kept thread, review body, or issue comment, produce a structured entry. Example:
 
 ```
 T1  src/components/DonateForm.astro:42
@@ -230,15 +240,22 @@ T3  REVIEW BODY
     "Overall looks good, but please add a loading state to the donate button."
     → Add aria-busy + spinner to DonateForm submit during fetch.
     Commit group: A
+
+T4  ISSUE COMMENT
+    "Hero copy feels long; can we tighten the second sentence?"
+    → Trim VideoHero subtext line 57 from two clauses to one.
+    Commit group: B
 ```
 
 Each entry needs:
 
 - A short ID (`T1`, `T2`, …) — used at the checkpoint for "skip T3" edits
-- File + line (or `REVIEW BODY` for non-inline)
+- One of: file + line (inline thread), `REVIEW BODY` (formal review), or `ISSUE COMMENT` (plain PR comment)
 - The comment text in quotes
 - A `→` line stating the intent (what the agent will do, or "reply only")
 - A commit group letter (`A`, `B`, `C`, …) or `— (reply only)`
+
+A single issue comment may bundle multiple asks (as Adam often does — one comment, three bullet points). Split it into separate plan entries (T4a, T4b, T4c) when the asks touch different files or different logical changes, so they can be grouped into commits independently. Use a single entry only when all asks are one logical change.
 
 ### Commit grouping rules
 
@@ -282,8 +299,8 @@ Present this message to the user, exactly:
 ```
 **PR:** #<N> — <title>
 **Branch:** <headRefName>
-**Threads addressed:** <m>
-**Threads marked won't-change:** <k>
+**Items addressed:** <m>          (threads + review bodies + issue comments)
+**Items marked won't-change:** <k>
 **Outdated threads acknowledged:** <j>
 
 **Plan:**
@@ -369,6 +386,13 @@ gh api -X POST "repos/$OWNER/$REPO/issues/$PR/comments" \
   -f body="Re: review body — addressed in $SHA: $ONE_LINE_SUMMARY."
 ```
 
+For each **issue-comment** entry the agent addressed (a plain PR comment), post a reply as a new issue comment on the same endpoint. If the original comment bundled multiple asks that became multiple plan entries (T4a, T4b, T4c), post **one** combined reply referencing all the fix commits — don't spam the thread with one comment per entry:
+
+```bash
+gh api -X POST "repos/$OWNER/$REPO/issues/$PR/comments" \
+  -f body="Re: your comment — addressed in $SHA_A ($SUMMARY_A) and $SHA_B ($SUMMARY_B)."
+```
+
 For each **"Will NOT change"** thread, the user approved the reason at Phase 5 — post that reason as the reply:
 
 ```bash
@@ -399,10 +423,10 @@ Done.
 PR:     <pr_url>
 Branch: <head_branch>
 Commits pushed: <n>
-Threads addressed: <m>
-Threads marked won't-change: <k>
+Items addressed: <m>          (threads + review bodies + issue comments)
+Items marked won't-change: <k>
 Outdated threads acknowledged: <j>
-Reply failures: <list of thread URLs, if any; "none" otherwise>
+Reply failures: <list of comment URLs, if any; "none" otherwise>
 
 Manual UI verification: <performed / recommended>
 
@@ -421,7 +445,7 @@ The skill ends here.
 | PR is closed or merged                                 | Warn; ask whether to continue                                                           |
 | Worktree exists at expected path but on wrong branch   | Abort with a clear message; do not auto-fix                                             |
 | Main checkout has uncommitted changes and no worktree  | Abort; ask user to stash or commit                                                      |
-| Zero unresolved threads found                          | Exit cleanly: "No unresolved review threads on PR #\<N\>. Nothing to do."               |
+| Zero unresolved items found across all three channels  | Exit cleanly: "No unresolved review threads, review bodies, or open PR comments on PR #\<N\>. Nothing to do." |
 | All threads are disagreements                          | Skip Phase 6 (no code to execute); go to Phase 7b for replies; handoff reflects this    |
 | Verification gate fails                                | Fix the underlying issue and re-run; do not skip; do not `--no-verify`; do not push     |
 | `git push` rejected                                    | Abort; tell user to rebase manually and re-run                                          |

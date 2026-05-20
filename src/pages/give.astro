@@ -1,0 +1,200 @@
+---
+import Layout from "../components/Layout.astro";
+import ImageHero from "../components/ImageHero.astro";
+import MissionBanner from "../components/MissionBanner.astro";
+import ActionCardGrid from "../components/ActionCardGrid.astro";
+import ranchAerial from "../assets/ranch-aerial.jpg";
+
+const CONTACT_EMAIL = "info@robinsnestrescue.com";
+const AMAZON_WISHLIST_URL =
+  "https://www.amazon.com/hz/wishlist/ls/1EQLUJ0SF09EX";
+const PLANNED_GIVING_HREF = `mailto:${CONTACT_EMAIL}?subject=Planned%20Giving%20Inquiry`;
+const PET_GUARDIANSHIP_HREF = `mailto:${CONTACT_EMAIL}?subject=Pet%20Guardianship%20Program%20Inquiry`;
+const SPONSORSHIP_HREF = `mailto:${CONTACT_EMAIL}?subject=Sponsorship%20Inquiry`;
+const IN_KIND_HREF = `mailto:${CONTACT_EMAIL}?subject=In-Kind%20Donation%20Inquiry`;
+const STOCK_HREF = `mailto:${CONTACT_EMAIL}?subject=Stock%20%26%20Securities%20Gift%20Inquiry`;
+const GENERAL_GIVING_HREF = `mailto:${CONTACT_EMAIL}?subject=Ways%20to%20Give%20Inquiry`;
+
+const waysToGive = [
+  {
+    icon: "💝",
+    title: "Monthly Giving",
+    description:
+      "Recurring monthly gifts — no matter the size — give us the predictable resources to feed, shelter, and care for our 21+ residents year-round.",
+    linkHref: "/donate",
+    linkLabel: "Become a monthly donor",
+  },
+  {
+    icon: "🎁",
+    title: "One-Time Donation",
+    description:
+      "A single gift directly funds veterinary care, food, fencing, and the healing-centered programs that pair our animals with the people they help heal.",
+    linkHref: "/donate",
+    linkLabel: "Donate now",
+  },
+  {
+    icon: "📦",
+    title: "Amazon Wishlist",
+    description:
+      "Send hay, feed buckets, grooming tools, and other supplies straight to the sanctuary. Every item shortens our shopping list.",
+    linkHref: AMAZON_WISHLIST_URL,
+    linkLabel: "View the wishlist",
+  },
+  {
+    icon: "🥬",
+    title: "In-Kind Gifts",
+    description:
+      "Leftover fruits and vegetables for the pigs and tortoises, building materials, fencing, or services — reach out and we'll match your contribution to a need.",
+    linkHref: IN_KIND_HREF,
+    linkLabel: "Email about in-kind",
+  },
+  {
+    icon: "🎶",
+    title: "Sponsorship",
+    description:
+      "Sponsor our annual Music Fest Fundraiser in October as an individual or business, or partner with us on a corporate giving campaign.",
+    linkHref: SPONSORSHIP_HREF,
+    linkLabel: "Ask about sponsorship",
+  },
+  {
+    icon: "📈",
+    title: "Stocks & Securities",
+    description:
+      "Gifting appreciated stocks or securities can be a tax-advantaged way to support the sanctuary. We'll connect you with the details.",
+    linkHref: STOCK_HREF,
+    linkLabel: "Inquire about stock gifts",
+  },
+  {
+    icon: "📨",
+    title: "Planned Giving",
+    description:
+      "Leave a lasting legacy by including Robin's Nest Rescue in your estate plans, will, or trust. Get in touch to discuss the options that work for you.",
+    linkHref: PLANNED_GIVING_HREF,
+    linkLabel: "Contact us",
+  },
+  {
+    icon: "🐾",
+    title: "Pet Guardianship Program",
+    description:
+      "Name Robin's Nest Rescue as a future guardian for your animals through thoughtful planning and charitable giving — peace of mind for the unexpected.",
+    linkHref: "#pet-guardianship",
+    linkLabel: "Learn more",
+  },
+];
+---
+
+<Layout title="Other Ways to Give" currentPath="/give">
+  <ImageHero
+    headline="Other Ways to Give"
+    subtext="Beyond a one-time gift, there are many ways to support the animals of Robin's Nest Rescue. Whatever you can offer — supplies, expertise, sponsorship, or a place in your estate plans — makes a lasting difference."
+    image={ranchAerial}
+    primaryCta={{ label: "Donate Now", href: "/donate" }}
+    secondaryCta={{ label: "Explore Ways to Give", href: "#ways" }}
+    size="tall"
+  />
+
+  <MissionBanner
+    heading="Every Gift, Every Form"
+    body="Robin's Nest Rescue is a 501(c)(3) nonprofit. Your support — in whatever form — fuels veterinary care, food, shelter, and the healing-centered programs that connect our rescued animals with the people who need them most."
+    variant="subtle"
+  />
+
+  <div id="ways">
+    <ActionCardGrid
+      heading="Ways to Give"
+      subheading="Pick the option that fits your situation — or combine a few."
+      cards={waysToGive}
+    />
+  </div>
+
+  <section
+    id="pet-guardianship"
+    class="bg-white px-6 py-16 md:py-24"
+    aria-labelledby="pet-guardianship-heading"
+  >
+    <div class="mx-auto max-w-3xl">
+      <div class="mb-8 text-center">
+        <p
+          class="font-body text-primary mb-2 text-sm font-semibold tracking-widest uppercase"
+        >
+          A Lifelong Safety Net
+        </p>
+        <h2
+          id="pet-guardianship-heading"
+          class="font-heading text-text text-3xl md:text-4xl"
+        >
+          Pet Guardianship Program
+        </h2>
+      </div>
+      <div
+        class="font-body text-text space-y-5 text-lg leading-relaxed [&_strong]:font-semibold"
+      >
+        <p>
+          At Robin's Nest Rescue, we believe the animals who share our lives are
+          family, in every sense of the word. For many guardians, one of the
+          most difficult questions is what would happen to them if the
+          unexpected were to occur. While loved ones are often the first choice,
+          that option isn't always available or practical.
+        </p>
+        <p>
+          The <strong>Pet Guardianship Program</strong> is created to offer peace
+          of mind during those moments of uncertainty. Through thoughtful planning
+          and charitable giving, friends of Robin's Nest Rescue ("RNR") may choose
+          to name the sanctuary as a future guardian for their animals, ensuring they
+          are met with familiarity, compassion, and lifelong care if their person
+          is no longer able to provide it. It is a way to honor the bond you share
+          — by knowing they will always have a safe place to land.
+        </p>
+        <p>
+          While we always encourage identifying a trusted person whenever
+          possible, we understand that life does not always make that easy.
+          Guided by compassion for both animals and those who love them, the
+          board and leadership of RNR have put the following guidelines in place
+          to help support thoughtful planning and giving.
+        </p>
+        <p>
+          Our Founder &amp; President, Kimber Williams, has long been guided by
+          a deep respect for the powerful and well-documented bond between
+          humans and animals. The scientific benefits of this connection —
+          supporting emotional regulation, healing, and well-being for both
+          animals and people — are a central tenet of RNR's therapeutic
+          programming.
+        </p>
+        <p>
+          This belief also lies at the heart of our Pet Guardianship Program.
+          The RNR team is deeply committed to ensuring that animals,
+          particularly those who may be vulnerable, displaced, or facing
+          uncertainty, are welcomed into environments rooted in compassion,
+          stability, and lifelong care. At RNR, every decision reflects a
+          commitment to dignity, safety, and honoring the profound relationships
+          animals share with the humans who love them.
+        </p>
+        <blockquote
+          class="border-primary text-text my-6 border-l-4 pl-6 text-xl italic"
+        >
+          In keeping with this philosophy, the following guidelines provide a
+          framework for planning and participation in the Pet Guardianship
+          Program.
+        </blockquote>
+        <p class="text-center">
+          <a
+            href={PET_GUARDIANSHIP_HREF}
+            class="text-primary font-semibold underline hover:no-underline"
+          >
+            Email us to learn more about the Pet Guardianship Program
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <MissionBanner
+    heading="Questions About Giving?"
+    body="Every situation is different, and we'd love to help you find the right way to support the sanctuary. Reach out and we'll walk through the options together."
+    cta={{
+      label: "Email info@robinsnestrescue.com",
+      href: GENERAL_GIVING_HREF,
+    }}
+    variant="highlight"
+  />
+</Layout>

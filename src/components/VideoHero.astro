@@ -2,7 +2,7 @@
 import Button from "./Button.astro";
 
 interface Props {
-  headline: string;
+  headline?: string;
   subtext: string;
   primaryCta: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
@@ -46,7 +46,7 @@ const sizeClasses: Record<"default" | "tall" | "full", string> = {
 
   <div class="relative z-10 mx-auto max-w-5xl px-6 text-center text-white">
     <h1 class="font-heading mb-4 text-3xl leading-tight md:text-5xl">
-      {headline}
+      <slot name="headline">{headline}</slot>
     </h1>
     <p class="mx-auto mb-8 max-w-xl text-lg leading-relaxed opacity-90">
       {subtext}

@@ -300,3 +300,142 @@ Response handling:
 - `yes` → continue to Phase 6.
 - `changes` → take the user's edits (e.g. "skip T3", "change T5 reason to X", "merge group A and B"), revise the plan, re-present the checkpoint. Loop until `yes` or `abort`.
 - `abort` → leave the worktree/branch as-is. No commits, no push, no replies. Exit cleanly with a one-line note.
+
+## Phase 6 — Execute and verify
+
+Invoke `superpowers:executing-plans` with the locked plan from Phase 5. Each commit group becomes one plan task ending in a conventional-commits commit (per `CLAUDE.md`):
+
+```
+fix(<scope>): <imperative summary>
+
+<body explaining why the change was made, referencing the review feedback>
+```
+
+After execution, run `superpowers:verification-before-completion` with these gates **in order**:
+
+```bash
+npm run lint
+npm run format:check    # if it fails, run `npm run format` and re-run format:check
+npm run test
+npm run build
+```
+
+UI smoke (`npm run dev` + browser) is **optional** for `/address-review` — only run it if the comments touched user-visible UI. Mark the choice in the Phase 8 handoff:
+
+- "Manual UI verification: performed" — agent confirmed in browser
+- "Manual UI verification: recommended" — agent could not or did not
+
+If any gate fails: fix the underlying issue and re-run that gate. Do not skip, do not pass `--no-verify`, do not push.
+
+## Phase 7 — Push and reply
+
+### 7a — Push
+
+```bash
+git push
+```
+
+No `-u` (the branch already tracks), no `--force`, no `--force-with-lease`. If the push is rejected (upstream diverged), abort with:
+
+```
+Push rejected — upstream has changes not in your local branch.
+Rebase manually (git pull --rebase, resolve any conflicts) and re-run /address-review.
+```
+
+Do not attempt to rebase autonomously. Local code changes are already committed; the user can resolve and re-run cleanly.
+
+Capture each new commit's SHA from `git log <previous-HEAD>..HEAD --format=%H` — Phase 7b uses these in the thread replies.
+
+### 7b — Reply on threads
+
+For each **inline** thread the agent addressed, post a reply via the REST API. The endpoint takes the **top comment's `databaseId`** (captured in Phase 3):
+
+```bash
+gh api -X POST \
+  "repos/$OWNER/$REPO/pulls/$PR/comments/$TOP_COMMENT_DATABASE_ID/replies" \
+  -f body="Addressed in $SHA — $ONE_LINE_SUMMARY."
+```
+
+Example body:
+
+```
+Addressed in a1b2c3d — replaced raw <button> with shared <Button variant="primary">.
+```
+
+For each **review-body** comment the agent addressed, post an issue comment (PRs share the issues endpoint for general comments):
+
+```bash
+gh api -X POST "repos/$OWNER/$REPO/issues/$PR/comments" \
+  -f body="Re: review body — addressed in $SHA: $ONE_LINE_SUMMARY."
+```
+
+For each **"Will NOT change"** thread, the user approved the reason at Phase 5 — post that reason as the reply:
+
+```bash
+gh api -X POST \
+  "repos/$OWNER/$REPO/pulls/$PR/comments/$TOP_COMMENT_DATABASE_ID/replies" \
+  -f body="Won't change — $REASON_FROM_PHASE_5."
+```
+
+For each **`[OUTDATED]` thread already addressed** in an earlier commit, point at that prior commit:
+
+```bash
+gh api -X POST \
+  "repos/$OWNER/$REPO/pulls/$PR/comments/$TOP_COMMENT_DATABASE_ID/replies" \
+  -f body="Addressed in $EARLIER_SHA — $FIELD_OR_CHANGE is now at $NEW_LOCATION."
+```
+
+**Do not resolve any threads.** Resolution is the user's manual step after spot-checking.
+
+If a reply POST fails (e.g. `404` because the comment was deleted), log the failure into the Phase 8 handoff and **continue with remaining replies**. Do not abort — the code change already landed on the remote.
+
+## Phase 8 — Handoff
+
+Print to the user:
+
+```
+Done.
+
+PR:     <pr_url>
+Branch: <head_branch>
+Commits pushed: <n>
+Threads addressed: <m>
+Threads marked won't-change: <k>
+Outdated threads acknowledged: <j>
+Reply failures: <list of thread URLs, if any; "none" otherwise>
+
+Manual UI verification: <performed / recommended>
+
+Next: review the agent's replies on the PR, resolve threads when satisfied,
+re-request review or merge.
+```
+
+The skill ends here.
+
+## Error handling
+
+| Condition                                              | Behavior                                                                                |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| `gh` missing `repo` scope                              | Print `gh auth refresh -s repo`; exit before any work                                   |
+| No `<PR#>` arg and current branch has no PR            | Exit with "no PR for branch \<X\>" message                                              |
+| PR is closed or merged                                 | Warn; ask whether to continue                                                           |
+| Worktree exists at expected path but on wrong branch   | Abort with a clear message; do not auto-fix                                             |
+| Main checkout has uncommitted changes and no worktree  | Abort; ask user to stash or commit                                                      |
+| Zero unresolved threads found                          | Exit cleanly: "No unresolved review threads on PR #\<N\>. Nothing to do."               |
+| All threads are disagreements                          | Skip Phase 6 (no code to execute); go to Phase 7b for replies; handoff reflects this    |
+| Verification gate fails                                | Fix the underlying issue and re-run; do not skip; do not `--no-verify`; do not push     |
+| `git push` rejected                                    | Abort; tell user to rebase manually and re-run                                          |
+| Thread reply POST fails                                | Log to handoff; continue with remaining replies; do not abort                           |
+| User answers `abort` at Phase 5 checkpoint             | Leave worktree/branch untouched; exit cleanly                                           |
+| User answers `changes` at Phase 5 checkpoint           | Take edits; re-present; loop until `yes` or `abort`                                     |
+| `[OUTDATED]` thread already addressed                  | Plan as "reply only"; reply points at the earlier commit                                |
+
+## Out of scope
+
+For future-you reading this skill and wondering whether it should do these — it should not:
+
+- The skill does **not** call `gh project item-edit`. The Project board stays at `In review` throughout. Status transitions are owned by `/do-issue`.
+- The skill does **not** create or delete worktrees. It reuses existing ones from `/do-ready-issues` or operates in the main checkout.
+- The skill does **not** request a re-review (`gh pr review`). The user decides when to re-request after spot-checking replies.
+- The skill does **not** support multi-PR batch operation. One PR per invocation.
+- The skill does **not** resolve threads. That is a deliberate human step.

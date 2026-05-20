@@ -42,7 +42,7 @@ const isActive = isActiveLink(href, currentPath);
   <div
     role="menu"
     aria-label={`${label} submenu`}
-    class="nav-dropdown-panel border-border invisible absolute top-full left-1/2 z-50 mt-2 w-56 -translate-x-1/2 translate-y-1 rounded-lg border bg-white p-2 opacity-0 shadow-lg transition-[opacity,transform,visibility] duration-200 ease-out group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100"
+    class="nav-dropdown-panel border-border invisible absolute top-full left-1/2 z-50 mt-2 w-56 -translate-x-1/2 rounded-lg border bg-white p-2 opacity-0 shadow-lg transition-[opacity,visibility] duration-200 ease-out group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100 before:absolute before:-top-2 before:right-0 before:left-0 before:h-2 before:content-['']"
   >
     <ul class="m-0 list-none p-0">
       {

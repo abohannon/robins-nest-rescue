@@ -91,18 +91,18 @@ export const animalFamilies: AnimalFamily[] = [
     photo: oakleyPhoto,
   },
   {
-    name: "The Three Chimigos",
-    slug: "chimigos",
-    description:
-      "The heart of Robin's Nest traces back to three Chihuahuas — Lily, Alberto, and Julio. Their legendary bond inspired songs, stories, a children's book series, and the founding of Robin's Nest Rescue.",
-    photo: lilyPhoto,
-  },
-  {
     name: "Cat Tales",
     slug: "cats",
     description:
       "Our ranch cats keep watch over the property, patrol for pesky varmints, and never miss a golf cart ride. They remind us that every creature has a role to play.",
     photo: banditoPhoto,
+  },
+  {
+    name: "The Three Chimigos",
+    slug: "chimigos",
+    description:
+      "The heart of Robin's Nest traces back to three Chihuahuas — Lily, Alberto, and Julio. Their legendary bond inspired songs, stories, a children's book series, and the founding of Robin's Nest Rescue.",
+    photo: lilyPhoto,
   },
 ];
 

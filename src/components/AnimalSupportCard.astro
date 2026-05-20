@@ -7,11 +7,7 @@ interface Props {
   suggestedAmount?: number;
 }
 
-const {
-  animalName,
-  isMemorial = false,
-  suggestedAmount = 25,
-} = Astro.props;
+const { animalName, isMemorial = false, suggestedAmount = 25 } = Astro.props;
 
 const heading = isMemorial ? "Support Robin's Nest" : `Support ${animalName}`;
 const subtext = isMemorial

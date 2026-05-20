@@ -645,7 +645,7 @@ Eddie loves napping and patrolling the ranch with his companion and fellow Blue 
     family: "ranch-dogs",
     photo: daisyMinnieHazelPhoto,
     description:
-      "Daisy is a delightful Chiweenie mix who loves to run, play, and charm everyone who walks by. She loves company, goes nose-to-nose with Tivio and the alpacas, and is learning her \"big girl\" bark!",
+      'Daisy is a delightful Chiweenie mix who loves to run, play, and charm everyone who walks by. She loves company, goes nose-to-nose with Tivio and the alpacas, and is learning her "big girl" bark!',
     story: `Daisy is impossible to ignore and is already proving her worth as the littlest of our therapy animals!
 
 **Meet Daisy: A New Beginning Amidst Heartache**

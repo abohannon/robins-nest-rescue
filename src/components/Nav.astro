@@ -8,6 +8,7 @@ import {
   navActions,
   isInHeader,
   isActiveLink,
+  isExternalHref,
 } from "../config/navigation";
 
 interface Props {
@@ -123,10 +124,13 @@ const headerLinks = navLinks.filter(isInHeader);
                     </li>
                     {link.children.map((child) => {
                       const childActive = isActiveLink(child.href, currentPath);
+                      const isExternal = isExternalHref(child.href);
                       return (
                         <li>
                           <a
                             href={child.href}
+                            target={isExternal ? "_blank" : undefined}
+                            rel={isExternal ? "noopener noreferrer" : undefined}
                             aria-current={childActive ? "page" : undefined}
                             class:list={[
                               "font-body hover:text-primary block text-sm no-underline",

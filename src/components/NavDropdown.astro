@@ -1,6 +1,6 @@
 ---
 import type { NavChild } from "../config/navigation";
-import { isActiveLink } from "../config/navigation";
+import { isActiveLink, isExternalHref } from "../config/navigation";
 
 interface Props {
   label: string;
@@ -48,11 +48,14 @@ const isActive = isActiveLink(href, currentPath);
       {
         items.map((child) => {
           const childActive = isActiveLink(child.href, currentPath);
+          const isExternal = isExternalHref(child.href);
           return (
             <li>
               <a
                 href={child.href}
                 role="menuitem"
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noopener noreferrer" : undefined}
                 aria-current={childActive ? "page" : undefined}
                 class:list={[
                   "font-body hover:text-primary hover:bg-off-white focus-visible:text-primary focus-visible:bg-off-white block rounded-md px-3 py-2 text-sm no-underline",

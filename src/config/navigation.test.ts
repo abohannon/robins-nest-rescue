@@ -5,6 +5,7 @@ import {
   isInHeader,
   isInFooter,
   isActiveLink,
+  isExternalHref,
 } from "./navigation";
 
 describe("navigation config", () => {
@@ -35,8 +36,7 @@ describe("navigation config", () => {
     expect(isInFooter(link)).toBe(false);
   });
 
-  it("exports navActions with required fields", () => {
-    expect(navActions.length).toBeGreaterThan(0);
+  it("navActions entries (if any) have required fields", () => {
     for (const action of navActions) {
       expect(action).toHaveProperty("label");
       expect(action).toHaveProperty("href");
@@ -50,9 +50,9 @@ describe("navigation config", () => {
     expect(homeLink).toBeUndefined();
   });
 
-  it("navActions includes Book a Tour", () => {
+  it("navActions does not include Book a Tour (lives in Visit the Sanctuary submenu)", () => {
     const labels = navActions.map((a) => a.label);
-    expect(labels).toContain("Book a Tour");
+    expect(labels).not.toContain("Book a Tour");
   });
 
   it("navActions does not include Donate (handled by DonateButton component)", () => {
@@ -85,6 +85,62 @@ describe("navigation config", () => {
         "FAQ",
       ]),
     );
+  });
+
+  it("Visit the Sanctuary link points to /sanctuary and exposes children", () => {
+    const visitLink = navLinks.find(
+      (link) => link.label === "Visit the Sanctuary",
+    );
+    expect(visitLink).toBeDefined();
+    expect(visitLink?.href).toBe("/sanctuary");
+    expect(visitLink?.children).toBeDefined();
+    expect(visitLink?.children?.length).toBeGreaterThan(0);
+  });
+
+  it("Visit the Sanctuary children include all required items in order", () => {
+    const visitLink = navLinks.find(
+      (link) => link.label === "Visit the Sanctuary",
+    );
+    const labels = visitLink?.children?.map((c) => c.label) ?? [];
+    expect(labels).toEqual([
+      "Book a Tour",
+      "Virtual Tour",
+      "Airbnb",
+      "Corporate Wellness & Team Retreats",
+      "Events",
+    ]);
+  });
+
+  it("Visit the Sanctuary children have correct hrefs", () => {
+    const visitLink = navLinks.find(
+      (link) => link.label === "Visit the Sanctuary",
+    );
+    const childMap = Object.fromEntries(
+      (visitLink?.children ?? []).map((c) => [c.label, c.href]),
+    );
+    expect(childMap["Book a Tour"]).toBe("/tours");
+    expect(childMap["Virtual Tour"]).toBe("/virtual-tour");
+    expect(childMap["Airbnb"]).toBe("https://www.robinsnestramona.com/home");
+    expect(childMap["Corporate Wellness & Team Retreats"]).toBe("/retreats");
+    expect(childMap["Events"]).toBe("/events");
+  });
+
+  it("navLinks no longer exposes Events or The Sanctuary as standalone top-level items", () => {
+    const labels = navLinks.map((l) => l.label);
+    expect(labels).not.toContain("Events");
+    expect(labels).not.toContain("The Sanctuary");
+  });
+});
+
+describe("isExternalHref", () => {
+  it("returns true for http(s) URLs", () => {
+    expect(isExternalHref("https://example.com")).toBe(true);
+    expect(isExternalHref("http://example.com")).toBe(true);
+  });
+
+  it("returns false for site-internal hrefs", () => {
+    expect(isExternalHref("/tours")).toBe(false);
+    expect(isExternalHref("/about/team")).toBe(false);
   });
 });
 

@@ -7,17 +7,18 @@ import FeatureCardGrid from "../components/FeatureCardGrid.astro";
 import animalsImage from "../assets/alpaca-smile.jpg";
 import sanctuaryImage from "../assets/ranch-aerial.jpg";
 import eventsImage from "../assets/rockin-robin-2023-music-1800.jpg";
+import processBackground from "../assets/ranch-aerial.jpg";
 
 const processSteps = [
   {
     title: "Rescue",
     description:
-      "Animals rescued from neglect, abuse, or abandonment receive care and safety.",
+      "Animals rescued from neglect, abuse, or abandonment receive care and lifelong safety.",
   },
   {
     title: "Nurture",
     description:
-      "Participants connect with rescued animals through guided, hands-on experiences.",
+      "People in need of connection, healing, and hope—including veterans and youth—build meaningful bonds with rescued animals through guided, hands-on experiences.",
   },
   {
     title: "Rebuild",
@@ -53,17 +54,32 @@ const exploreCards = [
 
 <Layout title="Home" currentPath="/">
   <VideoHero
-    headline="A Place Where Animals and People Heal Together"
     subtext="Robin's Nest Rescue is a sanctuary where rescued animals and people rediscover trust, connection, and healing — side by side."
     primaryCta={{ label: "Visit the Sanctuary", href: "/sanctuary" }}
     secondaryCta={{ label: "Book a Tour", href: "/tours" }}
+  >
+    <Fragment slot="headline">
+      A Place Where Animals and People<br class="hidden md:inline" />
+      {" "}Heal Together
+    </Fragment>
+  </VideoHero>
+  <ProcessSteps
+    heading="How It Works"
+    tagline="We rescue them. They save us."
+    steps={processSteps}
+    backgroundImage={processBackground}
   />
-  <ProcessSteps heading="How It Works" steps={processSteps} />
-  <MissionBanner
-    heading="Robin's Nest isn't just an animal rescue. It's really a place where broken trust is repaired."
-    body="That's why the animals matter. That's why the people matter. That's why the work matters."
-    variant="highlight"
-  />
+  <MissionBanner variant="highlight">
+    <Fragment slot="heading">
+      Robin's Nest isn't just an animal rescue.<br class="hidden md:inline" />
+      {" "}It's really a place where broken trust is repaired.
+    </Fragment>
+    <Fragment slot="body">
+      That's why the animals matter.<br />
+      That's why the people matter.<br />
+      That's why the work matters.
+    </Fragment>
+  </MissionBanner>
   <FeatureCardGrid cards={exploreCards} />
   <MissionBanner
     heading="Whether you come to connect, to learn, or simply to spend time among the animals"

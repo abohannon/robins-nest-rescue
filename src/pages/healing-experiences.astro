@@ -1,0 +1,354 @@
+---
+import Layout from "../components/Layout.astro";
+import ImageHero from "../components/ImageHero.astro";
+import MissionBanner from "../components/MissionBanner.astro";
+import FeatureCardGrid from "../components/FeatureCardGrid.astro";
+import Faq from "../components/Faq.astro";
+import ranchAerial from "../assets/ranch-aerial.jpg";
+
+const CONTACT_EMAIL = "info@robinsnestrescue.org";
+const CONTACT_HREF = `mailto:${CONTACT_EMAIL}?subject=Side%20by%20Side%20Inquiry`;
+const SCHOLARSHIP_HREF = `mailto:${CONTACT_EMAIL}?subject=Side%20by%20Side%20Scholarship%20%26%20Sponsorship`;
+
+const audiences = [
+  "Veterans and active military",
+  "First responders and healthcare professionals",
+  "At-risk, system-impacted, or justice-involved youth",
+  "Foster youth and young adults",
+  "Families navigating life transitions or hardship",
+  "Caregivers experiencing compassion fatigue",
+  "Corporate teams seeking wellness and connection",
+  "Individuals experiencing grief, stress, anxiety, burnout, or loneliness",
+  "Anyone who feels drawn to the healing presence of animals",
+];
+
+const sessionTypes = [
+  {
+    title: "Individual Sessions",
+    description:
+      "One-on-one personalized experiences focused on connection, grounding, and emotional restoration.",
+    href: "#book",
+  },
+  {
+    title: "Family Sessions",
+    description:
+      "Meaningful shared experiences designed to foster bonding, communication, and joyful connection.",
+    href: "#book",
+  },
+  {
+    title: "Youth Experiences",
+    description:
+      "Supportive animal-assisted experiences designed for young people navigating stress, transition, or life challenges.",
+    href: "#book",
+  },
+  {
+    title: "Veteran & First Responder Sessions",
+    description:
+      "Specially designed restorative experiences honoring those who serve and the unique stressors they carry.",
+    href: "#book",
+  },
+  {
+    title: "Small Group Experiences",
+    description:
+      "Ideal for friend groups, support circles, leadership teams, or organizations seeking connection and renewal.",
+    href: "#book",
+  },
+  {
+    title: "Corporate Wellness Experiences",
+    description:
+      "A refreshing and meaningful team-building alternative focused on wellness, empathy, communication, and stress relief.",
+    href: "#book",
+  },
+  {
+    title: "Custom Retreat Experiences",
+    description:
+      "Interested in creating something unique? We'd love to design a tailored experience for your group.",
+    href: "#book",
+  },
+];
+
+const pricingTiers = [
+  {
+    name: "Individual Sessions",
+    price: "Starting at $150",
+  },
+  {
+    name: "Family Sessions",
+    price: "Starting at $250",
+  },
+  {
+    name: "Small Groups",
+    price: "Custom pricing",
+  },
+  {
+    name: "Corporate Experiences",
+    price: "Custom pricing",
+  },
+];
+
+const faqItems = [
+  {
+    question: "Is this therapy?",
+    answer:
+      "No. Side by Side is not clinical mental health treatment or psychotherapy. These are guided therapeutic wellness experiences designed to support emotional wellbeing through meaningful animal connection.",
+  },
+  {
+    question: "How is Side by Side different from a Farm Tour?",
+    answer:
+      "Our Farm Tours are fun, interactive visits designed to introduce guests to the animals of Robin's Nest. You'll meet our sanctuary residents, hear their rescue stories, help with feeding, and experience a behind-the-scenes glimpse of life on the ranch.\n\nSide by Side is something different. While animals are still at the heart of the experience, Side by Side is intentionally designed to foster emotional connection, reflection, grounding, and healing through guided interactions with our rescued animals in a supportive, slower-paced environment.\n\nThink of it this way:\n\nFarm Tour = educational + fun + immersive ranch experience\nSide by Side = connection + restoration + therapeutic animal-assisted experience\n\nA Farm Tour helps you meet the animals. Side by Side helps you connect with them — and often with yourself.",
+  },
+  {
+    question: "Do I need animal experience?",
+    answer: "Not at all. Experiences are designed for all comfort levels.",
+  },
+  {
+    question: "What animals will I meet?",
+    answer:
+      "That depends on the experience! Sessions may include horses, alpacas, pigs, sheep, tortoises, dogs, and other sanctuary residents.",
+  },
+  {
+    question: "Is this appropriate for children?",
+    answer: "Yes! We offer age-appropriate experiences for youth and families.",
+  },
+  {
+    question: "Are sessions private?",
+    answer:
+      "Many experiences can be private or customized based on your needs.",
+  },
+  {
+    question: "What should I wear?",
+    answer:
+      "Closed-toe shoes and comfortable clothing suitable for being outdoors around animals.",
+  },
+  {
+    question: "Where does the money go?",
+    answer:
+      "Proceeds directly support the care of our rescued animals and Robin's Nest's healing-centered programs.",
+  },
+  {
+    question: "Can groups book private experiences?",
+    answer: "Absolutely.",
+  },
+];
+---
+
+<Layout title="Healing Experiences" currentPath="/healing-experiences">
+  <ImageHero
+    headline="Side by Side"
+    subtext="Robin's Nest Rescue's signature animal-assisted healing experience — meaningful, guided connections with our rescued animals in a safe, supportive, nature-based environment."
+    image={ranchAerial}
+    primaryCta={{ label: "Book a Session", href: "#book" }}
+    secondaryCta={{ label: "Explore Session Types", href: "#session-types" }}
+    size="tall"
+  />
+
+  <section class="bg-off-white px-6 py-16 md:py-24">
+    <div class="mx-auto max-w-3xl">
+      <div class="mb-8 text-center">
+        <p
+          class="font-body text-primary mb-2 text-sm font-semibold tracking-widest uppercase"
+        >
+          What Is Side by Side?
+        </p>
+        <h2 class="font-heading text-text text-3xl md:text-4xl">
+          Healing Happens in Relationship
+        </h2>
+      </div>
+      <div
+        class="font-body text-text space-y-5 text-lg leading-relaxed [&_strong]:font-semibold"
+      >
+        <p>At Robin's Nest Rescue, healing goes both ways.</p>
+        <p>
+          <strong>Side by Side</strong> is our signature animal-assisted healing experience,
+          creating meaningful opportunities for people to connect with rescued animals
+          in a safe, supportive, nature-based environment.
+        </p>
+        <p>
+          Through guided, hands-on interactions with horses, alpacas, pigs,
+          goats, tortoises, and other beloved sanctuary residents, guests are
+          invited to slow down, be present, and experience the powerful
+          connection that can happen between humans and animals.
+        </p>
+        <p>
+          Many of the animals at Robin's Nest have experienced neglect,
+          abandonment, trauma, or uncertainty. Here, they find lifelong
+          sanctuary, safety, and love. In turn, they offer something
+          extraordinary to the humans they meet: connection, calm, trust, joy,
+          and hope.
+        </p>
+        <blockquote
+          class="border-primary text-text my-6 border-l-4 pl-6 text-xl italic"
+        >
+          Side by Side is not traditional therapy — but it is deeply
+          therapeutic.
+        </blockquote>
+        <p>
+          Whether someone is navigating stress, grief, burnout, transition,
+          trauma, or simply seeking meaningful connection, these experiences are
+          designed to nurture emotional wellbeing, resilience, and healing.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white px-6 py-16 md:py-24" aria-labelledby="who-its-for">
+    <div class="mx-auto max-w-4xl">
+      <div class="mb-10 text-center">
+        <p
+          class="font-body text-primary mb-2 text-sm font-semibold tracking-widest uppercase"
+        >
+          Who It's For
+        </p>
+        <h2
+          id="who-its-for"
+          class="font-heading text-text mb-4 text-3xl md:text-4xl"
+        >
+          Healing Has No Age Limit
+        </h2>
+        <p
+          class="font-body text-text-light mx-auto max-w-2xl text-base leading-relaxed"
+        >
+          Side by Side is designed for individuals and groups seeking
+          connection, restoration, and emotional wellbeing. Our experiences may
+          be especially meaningful for:
+        </p>
+      </div>
+      <ul
+        class="grid grid-cols-1 gap-3 sm:grid-cols-2"
+        aria-label="Who Side by Side is for"
+      >
+        {
+          audiences.map((audience) => (
+            <li class="border-border flex items-start gap-3 rounded-lg border bg-white p-4 transition-shadow hover:shadow-sm">
+              <span
+                aria-hidden="true"
+                class="bg-primary/10 text-primary mt-0.5 inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  class="h-4 w-4"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.704 5.29a1 1 0 010 1.42l-8 8a1 1 0 01-1.42 0l-4-4a1 1 0 111.42-1.42L8 12.585l7.29-7.29a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </span>
+              <span class="font-body text-text text-base leading-relaxed">
+                {audience}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+      <p
+        class="font-body text-text-light mt-8 text-center text-base leading-relaxed italic"
+      >
+        No prior animal experience is necessary — just an open heart.
+      </p>
+    </div>
+  </section>
+
+  <div id="session-types">
+    <FeatureCardGrid
+      heading="Experiences Designed for Connection"
+      subheading="A variety of guided experiences tailored to different needs, ages, and group sizes."
+      cards={sessionTypes}
+    />
+  </div>
+
+  <section
+    class="bg-off-white px-6 py-16 md:py-24"
+    aria-labelledby="pricing-heading"
+  >
+    <div class="mx-auto max-w-4xl">
+      <div class="mb-10 text-center">
+        <p
+          class="font-body text-primary mb-2 text-sm font-semibold tracking-widest uppercase"
+        >
+          Pricing &amp; Scholarships
+        </p>
+        <h2
+          id="pricing-heading"
+          class="font-heading text-text mb-4 text-3xl md:text-4xl"
+        >
+          Healing Should Be Accessible
+        </h2>
+        <p
+          class="font-body text-text-light mx-auto max-w-2xl text-base leading-relaxed"
+        >
+          Side by Side experiences help support both our rescue animals and the
+          mission of Robin's Nest Rescue. Pricing varies based on session type,
+          duration, and group size.
+        </p>
+      </div>
+
+      <h3
+        class="font-body text-text mb-4 text-center text-sm font-semibold tracking-wider uppercase"
+      >
+        Sample Starting Rates
+      </h3>
+      <ul
+        class="border-border divide-border mb-10 grid grid-cols-1 divide-y overflow-hidden rounded-lg border bg-white sm:grid-cols-2 sm:divide-x sm:divide-y-0"
+        aria-label="Sample starting rates"
+      >
+        {
+          pricingTiers.map((tier, index) => (
+            <li
+              class:list={[
+                "flex items-baseline justify-between gap-4 p-5",
+                index >= 2 && "sm:border-border sm:border-t",
+              ]}
+            >
+              <span class="font-body text-text text-base font-medium">
+                {tier.name}
+              </span>
+              <span class="font-body text-primary text-base font-semibold whitespace-nowrap">
+                {tier.price}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="bg-primary/5 border-primary/20 rounded-lg border p-6 md:p-8">
+        <h3 class="font-heading text-primary mb-3 text-2xl">
+          Scholarships &amp; Sponsorship
+        </h3>
+        <p class="font-body text-text mb-4 leading-relaxed">
+          We believe healing should be accessible. Thanks to generous donors and
+          community supporters, limited scholarship opportunities may be
+          available for veterans, youth, and individuals experiencing financial
+          hardship.
+        </p>
+        <p class="font-body text-text leading-relaxed">
+          Interested in sponsorship or scholarship support?{" "}
+          <a
+            href={SCHOLARSHIP_HREF}
+            class="text-primary font-semibold underline hover:no-underline"
+          >
+            Contact us.
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Faq
+    heading="Frequently Asked Questions"
+    subheading="Everything you might want to know before your Side by Side experience."
+    items={faqItems}
+  />
+
+  <div id="book">
+    <MissionBanner
+      heading="Come Heal Side by Side"
+      body="Whether you're seeking peace, connection, restoration, or simply a meaningful moment with extraordinary animals, we'd love to welcome you. Every session supports the rescued animals who call Robin's Nest home — and helps create healing experiences for others."
+      cta={{ label: "Contact Us to Book", href: CONTACT_HREF }}
+      variant="highlight"
+    />
+  </div>
+</Layout>

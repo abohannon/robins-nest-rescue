@@ -26,11 +26,11 @@ const headerLinks = navLinks.filter(isInHeader);
       id="nav-toggle"
       aria-label="Toggle menu"
       aria-expanded="false"
-      class="text-text block cursor-pointer border-none bg-transparent p-1 text-2xl md:hidden"
+      class="text-text block cursor-pointer border-none bg-transparent p-1 text-2xl lg:hidden"
     >
       ☰
     </button>
-    <div class="hidden items-center gap-6 md:flex">
+    <div class="hidden items-center gap-5 lg:flex">
       {
         headerLinks.map((link) => {
           if (link.children && link.children.length > 0) {
@@ -49,7 +49,7 @@ const headerLinks = navLinks.filter(isInHeader);
               href={link.href}
               aria-current={active ? "page" : undefined}
               class:list={[
-                "font-body hover:text-primary text-sm no-underline",
+                "font-body hover:text-primary text-sm whitespace-nowrap no-underline",
                 active ? "text-primary font-semibold" : "text-text",
               ]}
             >
@@ -71,7 +71,7 @@ const headerLinks = navLinks.filter(isInHeader);
   <nav
     id="nav-menu"
     data-open="false"
-    class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out data-[open=true]:grid-rows-[1fr] md:hidden"
+    class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out data-[open=true]:grid-rows-[1fr] lg:hidden"
   >
     <div class="overflow-hidden">
       <div

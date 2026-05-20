@@ -1,13 +1,13 @@
 ---
 name: do-issue
-description: Use when the user invokes `/do-issue <N>` or asks to work a specific GitHub issue from the Robin's Nest Rescue Project board (https://github.com/users/abohannon/projects/1). Accepts a bare issue number or full issue URL. Drives the ticket from Ready to a linked PR in `In review`, pausing once for user approval of the plan.
+description: Use when the user invokes `/do-issue <N>` or asks to work a specific GitHub issue from the Robin's Nest Rescue Project board (https://github.com/users/abohannon/projects/1). Accepts a bare issue number or full issue URL. Drives the ticket from Ready to a linked PR in `In review`, pausing once for user approval of the plan. Pass `--autonomous` for no-checkpoint parallel invocation by `/do-ready-issues` from inside a pre-prepared worktree.
 ---
 
 # /do-issue — Drive one GitHub issue to a PR
 
 ## At a glance
 
-Eleven phases (a pre-flight + ten work phases). **One** user pause (the Phase 4 checkpoint between planning and execution). Everything else runs end-to-end.
+Eleven phases (a pre-flight + ten work phases). **One** user pause (the Phase 4 checkpoint between planning and execution) in interactive mode; **zero** pauses in `--autonomous` mode (see Arguments). Everything else runs end-to-end.
 
 0. **Pre-flight** — verify `gh` has the `project` scope
 1. **Fetch** the issue
@@ -147,6 +147,8 @@ Capture and remember:
 | `docs`                     | `docs`                                   |
 | (no matching label)        | ASK at Phase 4 checkpoint — do not guess |
 
+**In `--autonomous` mode**, a missing branch-type label is a fatal error: exit immediately with the `STATUS: failure` reply (see Phase 10) and `ERROR: no branch-type label`. The `/do-ready-issues` orchestrator should drop such candidates before dispatch, so this path should be unreachable when invoked from the orchestrator.
+
 ### Generate the branch slug
 
 Kebab-case from the issue title, at most **4 meaningful words** (drop common stopwords: `the`, `a`, `an`, `to`, `for`, `of`, `in`, `on`, `and`, `or`). Examples:
@@ -204,9 +206,9 @@ Then **verify the update landed** using the [Verify a Status update](#verify-a-s
 
 The issue body is the spec. There is **no brainstorming phase** in `/do-issue` — that decision was made upfront because the user writes tickets with enough detail to act on.
 
-Invoke `superpowers:writing-plans` with the issue body as the spec input. As you write the plan, collect any **assumptions** you had to make to fill in ambiguity from the ticket (e.g. "I'm assuming this widget goes in the footer, not the header"). Track these — they go into the checkpoint message in Phase 4.
+Invoke `superpowers:writing-plans` with the issue body as the spec input. As you write the plan, collect any **assumptions** you had to make to fill in ambiguity from the ticket (e.g. "I'm assuming this widget goes in the footer, not the header"). Track these — they go into the checkpoint message in Phase 4 (interactive) or the PR body in Phase 8 under an `## Assumptions` heading (`--autonomous`).
 
-If the ticket is genuinely too thin to plan, do not invent requirements. Surface the gap at the Phase 4 checkpoint and let the user fill it in.
+If the ticket is genuinely too thin to plan, do not invent requirements. Surface the gap at the Phase 4 checkpoint and let the user fill it in. In `--autonomous` mode, since Phase 4 is skipped, emit the `STATUS: failure` reply (see Phase 10) with `ERROR: ticket too thin to plan` rather than inventing requirements.
 
 ## Phase 4 — Checkpoint
 
@@ -397,7 +399,7 @@ Invoked as `/do-issue <N> --autonomous`. Five overlays apply; default behavior i
 
 | Overlay                    | Effect                                                                                                  |
 | -------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Phase 2 — Setup            | Assert HEAD is already on `<type>/<slug>`; skip `git checkout main` / `git pull` / `git checkout -b`    |
+| Phase 2 — Setup            | Assert HEAD is already on `<type>/<slug>`; skip `git checkout main` / `git pull` / `git checkout -b`   |
 | Phase 4 — Checkpoint       | Skipped. Assumptions collected during planning carry to Phase 8's PR body                               |
 | Phase 6 — Verify           | Skip `npm run dev` + manual smoke test. All four automated gates still run                              |
 | Phase 8 — Open the PR      | Test plan starts with "Manual UI verification required". Include optional `## Assumptions` section      |
@@ -426,7 +428,7 @@ Re-doing any of that is unnecessary (and would fail).
 | Verification gate fails                              | Report the failure, fix and re-run; do NOT open the PR                                                      |
 | `gh project item-edit` succeeds but Status unchanged | Retry the same command once; re-verify; if still wrong, surface to the user with current vs expected status |
 | User answers `abort` at the checkpoint               | Leave the branch in place; exit cleanly with a resume note                                                  |
-| `--autonomous` and HEAD does not match expected branch | Exit with a clear error; do not attempt to checkout the expected branch (a worktree mismatch indicates orchestrator failure)            |
-| `--autonomous` and any phase fails                     | Print `STATUS: failure` structured reply; leave worktree + branch in place; do not roll back Project Status; orchestrator aggregates    |
+| `--autonomous` and HEAD does not match expected branch | Exit with a clear error; do not attempt to checkout the expected branch (a worktree mismatch indicates orchestrator failure) |
+| `--autonomous` and any phase fails                     | Print `STATUS: failure` structured reply; leave worktree + branch in place; do not roll back Project Status; orchestrator aggregates |
 
 The scope check for missing `gh` permissions is documented as Phase 0 above.

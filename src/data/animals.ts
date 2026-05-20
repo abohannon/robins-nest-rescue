@@ -785,7 +785,9 @@ export function getFamily(slug: string): AnimalFamily | undefined {
 }
 
 export function getAnimalsByFamily(familySlug: string): Animal[] {
-  return animals.filter((a) => a.family === familySlug);
+  // Animals marked `inMemoriam` are shown only on the In Memoriam page,
+  // not alongside their living family members.
+  return animals.filter((a) => a.family === familySlug && !a.inMemoriam);
 }
 
 export function getMemorialAnimals(): Animal[] {

@@ -26,9 +26,28 @@ const familyAnimals = getAnimalsByFamily(family.slug);
   />
   <section class="px-6 py-16">
     <div class="mx-auto max-w-5xl">
-      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {familyAnimals.map((animal) => <AnimalCard {...animal} />)}
-      </div>
+      {
+        familyAnimals.length > 0 ? (
+          <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {familyAnimals.map((animal) => (
+              <AnimalCard {...animal} />
+            ))}
+          </div>
+        ) : (
+          <div class="text-center">
+            <p class="font-body text-text-light mb-6 text-lg leading-relaxed">
+              The members of this family are no longer with us, but their
+              spirits live on in everything we do.
+            </p>
+            <a
+              href="/animals/in-memoriam"
+              class="font-body text-primary hover:underline"
+            >
+              Visit them on the In Memoriam page →
+            </a>
+          </div>
+        )
+      }
     </div>
   </section>
 </Layout>

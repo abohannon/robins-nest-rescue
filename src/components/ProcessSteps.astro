@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
 interface Step {
   title: string;
   description: string;
@@ -6,24 +9,61 @@ interface Step {
 
 interface Props {
   heading: string;
+  tagline?: string;
   steps: Step[];
+  backgroundImage?: ImageMetadata;
+  backgroundImageAlt?: string;
 }
 
-const { heading, steps } = Astro.props;
+const {
+  heading,
+  tagline,
+  steps,
+  backgroundImage,
+  backgroundImageAlt = "",
+} = Astro.props;
 ---
 
-<section class="bg-off-white px-6 py-16">
-  <div class="mx-auto max-w-5xl">
-    <h2 class="font-heading text-text mb-12 text-center text-3xl">{heading}</h2>
+<section class="bg-off-white relative overflow-hidden px-6 py-16">
+  {
+    backgroundImage && (
+      <>
+        <Image
+          src={backgroundImage}
+          alt={backgroundImageAlt}
+          class="absolute inset-0 h-full w-full object-cover"
+          loading="lazy"
+          aria-hidden={backgroundImageAlt === "" ? "true" : undefined}
+        />
+        <div class="bg-off-white/85 absolute inset-0" aria-hidden="true" />
+      </>
+    )
+  }
+  <div class="relative mx-auto max-w-5xl">
+    <h2
+      class:list={[
+        "font-heading text-text text-center text-3xl",
+        tagline ? "mb-2" : "mb-12",
+      ]}
+    >
+      {heading}
+    </h2>
+    {
+      tagline && (
+        <p class="font-body text-text-light mb-12 text-center text-base italic">
+          {tagline}
+        </p>
+      )
+    }
     <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
       {
         steps.map((step, index) => (
           <div class="relative flex flex-col items-center text-center">
-            <div class="bg-primary mb-4 flex h-12 w-12 items-center justify-center rounded-full text-lg font-semibold text-white">
+            <div class="bg-primary relative z-10 mb-4 flex h-12 w-12 items-center justify-center rounded-full text-lg font-semibold text-white">
               {index + 1}
             </div>
             {index < steps.length - 1 && (
-              <div class="bg-border absolute top-6 left-1/2 hidden h-px w-full translate-x-1/2 -translate-y-1/2 md:block" />
+              <div class="bg-border absolute top-6 left-1/2 hidden h-px w-full -translate-y-1/2 md:block" />
             )}
             <h3 class="font-heading text-text mb-2 text-xl">{step.title}</h3>
             <p class="font-body text-text-light text-sm leading-relaxed">

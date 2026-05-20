@@ -21,6 +21,7 @@ export interface NavAction {
 export const navLinks: NavLink[] = [
   { label: "Meet the Animals", href: "/animals" },
   { label: "The Sanctuary", href: "/sanctuary" },
+  { label: "Healing Experiences", href: "/healing-experiences" },
   { label: "Events", href: "/events" },
   { label: "Get Involved", href: "/get-involved" },
   {

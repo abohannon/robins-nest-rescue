@@ -40,11 +40,13 @@ Run: gh auth refresh -s project
 
 …and stop. Do not run Phase 1.
 
-## Argument
+## Arguments
 
 `<N>` — GitHub issue number or full issue URL (e.g. `12` or `https://github.com/abohannon/robins-nest-rescue/issues/12`).
 
 If a URL is given, extract the trailing integer for use as `<N>` in `Closes #<N>` and any `gh api` queries. `gh issue view <URL>` accepts the URL directly.
+
+`--autonomous` (optional) — Run without the Phase 4 user checkpoint and without the Phase 6 dev-server smoke test. Intended for invocation by the `/do-ready-issues` orchestrator from inside an already-prepared worktree. The interactive default is unchanged when this flag is absent. See "Autonomous mode" below for the full overlay.
 
 ## Project metadata (cached)
 
@@ -163,6 +165,21 @@ git checkout main && git pull && git checkout -b <type>/<slug>
 
 If the branch already exists locally or on the remote: **abort**. Tell the user and stop. Do not delete or overwrite.
 
+**In `--autonomous` mode**, the orchestrator has already created a worktree and is invoking this skill from inside it on the target branch. Override the create-branch step:
+
+```bash
+# In --autonomous mode only:
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+EXPECTED_BRANCH="<type>/<slug>"
+if [ "$CURRENT_BRANCH" != "$EXPECTED_BRANCH" ]; then
+  echo "autonomous mode expects branch $EXPECTED_BRANCH but HEAD is $CURRENT_BRANCH" >&2
+  exit 1
+fi
+# Skip git checkout main / git pull / git checkout -b — already on the right branch.
+```
+
+The Status → `In progress` move and the [Verify a Status update](#verify-a-status-update) pattern that follow still run unchanged.
+
 ### Move Project Status: `Ready` → `In progress`
 
 If `ITEM_ID` is non-empty:
@@ -192,6 +209,10 @@ Invoke `superpowers:writing-plans` with the issue body as the spec input. As you
 If the ticket is genuinely too thin to plan, do not invent requirements. Surface the gap at the Phase 4 checkpoint and let the user fill it in.
 
 ## Phase 4 — Checkpoint
+
+**In `--autonomous` mode**, skip this entire phase. Flow goes directly from Phase 3 to Phase 5. The "Assumptions" collected during Phase 3 are not discarded — they are carried into Phase 8 (Open the PR) and rendered under an `## Assumptions` heading in the PR body so the human reviewer sees them.
+
+---
 
 **This is the only user pause in the skill.** Once the user says `yes`, Phases 5–10 run continuously.
 
@@ -249,6 +270,8 @@ npm run dev             # then open http://localhost:4321 in a browser
 
 Exercise the **golden path** and the **specific change** introduced by the ticket. If you cannot run a browser yourself (no Playwright MCP or comparable tool available), **say so explicitly** in the PR test plan rather than claiming the UI works. Per project `CLAUDE.md`: "type checking and test suites verify code correctness, not feature correctness."
 
+**In `--autonomous` mode**, **skip** `npm run dev` and the manual UI smoke test entirely. There is no human at the keyboard to look at the browser, and parallel autonomous runs would collide on port 4321. The four automated gates (`lint`, `format:check`, `test`, `build`) still run and still must all pass. The PR test plan in Phase 8 gains a leading checklist item flagging that manual UI verification is required — see Phase 8.
+
 Run `npm run test:e2e` (Playwright) **only** when the change touches a flow with existing E2E coverage. Otherwise skip and note "no E2E coverage for this flow" in the PR.
 
 **Failure handling:** if any gate fails, fix the underlying issue and re-run the gate. Do not skip. Do not pass `--no-verify`. Do not open the PR until everything passes.
@@ -291,6 +314,28 @@ EOF
 
 The `Closes #<N>` trailer is required. It links the PR to the issue, auto-closes the issue on merge, and lets GitHub's built-in Projects v2 workflow move the item to `Done`.
 
+**In `--autonomous` mode**, the PR body has two additions:
+
+1. The Test plan starts with a manual-verification flag:
+
+   ```markdown
+   ## Test plan
+   - [ ] **Manual UI verification required** — autonomous run, no browser smoke test performed
+   - [ ] <other steps>
+   ```
+
+2. If any Assumptions were collected during Phase 3 (planning), include them as a final section before the `Closes #<N>` trailer:
+
+   ```markdown
+   ## Assumptions
+   - <assumption 1>
+   - <assumption 2>
+   ```
+
+   Omit the section if there were no assumptions.
+
+The `Closes #<N>` trailer is required in both modes.
+
 Capture the returned PR URL — Phase 10 prints it.
 
 ## Phase 9 — Move to In review
@@ -311,7 +356,7 @@ If `ITEM_ID` was empty (issue not on the board), skip this phase.
 
 ## Phase 10 — Handoff
 
-Print to the user:
+**In interactive mode**, print to the user:
 
 ```
 Done.
@@ -322,7 +367,51 @@ Issue: #<N> — <title>
 Suggest: /clear, then /do-issue <next-N> for the next ticket.
 ```
 
-The skill ends here.
+**In `--autonomous` mode**, suppress the interactive message. Instead, print exactly the following structured reply so the calling orchestrator can parse it:
+
+```
+STATUS: success
+PR: <pr_url>
+ISSUE: #<N>
+WORKTREE: .claude/worktrees/<worktree-name>/
+```
+
+If any earlier phase failed in autonomous mode, **do not silently exit** — print the failure form of the structured reply and stop:
+
+```
+STATUS: failure
+ISSUE: #<N>
+PHASE: <phase number or name where the failure occurred>
+ERROR: <one-line summary>
+WORKTREE: .claude/worktrees/<worktree-name>/
+BRANCH: <type>/<slug>
+```
+
+Leave the worktree and branch in place. Do not roll back the Project Status (it remains `In progress`, signaling "in flight, needs attention").
+
+The skill ends here in both modes.
+
+## Autonomous mode
+
+Invoked as `/do-issue <N> --autonomous`. Five overlays apply; default behavior is otherwise unchanged. This section is a one-stop reference; the authoritative behavior lives in each phase above.
+
+| Overlay                    | Effect                                                                                                  |
+| -------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Phase 2 — Setup            | Assert HEAD is already on `<type>/<slug>`; skip `git checkout main` / `git pull` / `git checkout -b`    |
+| Phase 4 — Checkpoint       | Skipped. Assumptions collected during planning carry to Phase 8's PR body                               |
+| Phase 6 — Verify           | Skip `npm run dev` + manual smoke test. All four automated gates still run                              |
+| Phase 8 — Open the PR      | Test plan starts with "Manual UI verification required". Include optional `## Assumptions` section      |
+| Phase 10 — Handoff         | Suppress interactive copy; print `STATUS: success` or `STATUS: failure` structured reply                |
+
+When invoked autonomously, the orchestrator (`/do-ready-issues`) has already:
+
+- Created the worktree at `.claude/worktrees/<worktree-name>/`
+- Created the branch `<type>/<slug>` off `origin/main` inside that worktree
+- Symlinked `.env` into the worktree
+- Run `npm install` inside the worktree
+- `cd`'d into the worktree before invoking this skill
+
+Re-doing any of that is unnecessary (and would fail).
 
 ## Error handling
 
@@ -337,5 +426,7 @@ The skill ends here.
 | Verification gate fails                              | Report the failure, fix and re-run; do NOT open the PR                                                      |
 | `gh project item-edit` succeeds but Status unchanged | Retry the same command once; re-verify; if still wrong, surface to the user with current vs expected status |
 | User answers `abort` at the checkpoint               | Leave the branch in place; exit cleanly with a resume note                                                  |
+| `--autonomous` and HEAD does not match expected branch | Exit with a clear error; do not attempt to checkout the expected branch (a worktree mismatch indicates orchestrator failure)            |
+| `--autonomous` and any phase fails                     | Print `STATUS: failure` structured reply; leave worktree + branch in place; do not roll back Project Status; orchestrator aggregates    |
 
 The scope check for missing `gh` permissions is documented as Phase 0 above.

@@ -3,18 +3,28 @@ import DonateButton from "./DonateButton.astro";
 
 interface Props {
   animalName: string;
+  isMemorial?: boolean;
   suggestedAmount?: number;
 }
 
-const { animalName, suggestedAmount = 25 } = Astro.props;
+const {
+  animalName,
+  isMemorial = false,
+  suggestedAmount = 25,
+} = Astro.props;
+
+const heading = isMemorial ? "Support Robin's Nest" : `Support ${animalName}`;
+const subtext = isMemorial
+  ? "Help us care for all the animals in our sanctuary"
+  : "Help cover food, shelter, and medical care";
 ---
 
 <div class="border-border bg-off-white rounded-lg border p-6 text-center">
   <h2 class="font-heading text-text mb-2 text-xl">
-    Support {animalName}
+    {heading}
   </h2>
   <p class="font-body text-text-light mb-4 text-sm">
-    Help cover food, shelter, and medical care
+    {subtext}
   </p>
   <p class="font-body text-text-light mb-1 text-xs tracking-wide uppercase">
     Suggested donation

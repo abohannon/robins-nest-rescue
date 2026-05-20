@@ -1,0 +1,21 @@
+---
+import Layout from "../components/Layout.astro";
+import Hero from "../components/Hero.astro";
+import MissionBanner from "../components/MissionBanner.astro";
+
+const CONTACT_EMAIL = "info@robinsnestrescue.com";
+const CONTACT_HREF = `mailto:${CONTACT_EMAIL}?subject=Corporate%20Wellness%20%26%20Team%20Retreats%20Inquiry`;
+---
+
+<Layout title="Corporate Wellness & Team Retreats" currentPath="/retreats">
+  <Hero
+    headline="Corporate Wellness & Team Retreats"
+    subtext="A restorative, animal-centered experience for teams seeking connection, wellness, and a meaningful break from the everyday — coming soon."
+    primaryCta={{ label: "Email Us", href: CONTACT_HREF }}
+  />
+  <MissionBanner
+    heading="A page in progress"
+    body={`We're putting together the details for our corporate wellness and team retreat offerings. For more information in the meantime, reach out to us at ${CONTACT_EMAIL} and we'd love to help plan your visit.`}
+    cta={{ label: "Email Us", href: CONTACT_HREF }}
+  />
+</Layout>

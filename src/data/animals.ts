@@ -49,7 +49,7 @@ export interface Animal {
 
 export const animalFamilies: AnimalFamily[] = [
   {
-    name: "The Three Little Pigs",
+    name: "The Three Little Pigs + 1",
     slug: "pigs",
     description:
       "The three little black pigs were rescued from an extreme hoarding situation. For these three — plus one — Robin's Nest is their forever home.",

@@ -1,0 +1,18 @@
+---
+import Layout from "../../components/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import MissionBanner from "../../components/MissionBanner.astro";
+---
+
+<Layout title="Team" currentPath="/about/team">
+  <Hero
+    headline="Our Team"
+    subtext="Meet the people who care for the animals every day — coming soon."
+    primaryCta={{ label: "Book a Tour", href: "/tours" }}
+  />
+  <MissionBanner
+    heading="Introductions on the way"
+    body="We're putting together short bios for the staff and lead volunteers who keep Robin's Nest Rescue running. Check back soon."
+    cta={{ label: "Volunteer With Us", href: "/get-involved" }}
+  />
+</Layout>

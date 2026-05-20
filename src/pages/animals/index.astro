@@ -2,6 +2,7 @@
 import Layout from "../../components/Layout.astro";
 import Hero from "../../components/Hero.astro";
 import AnimalFamilyCard from "../../components/AnimalFamilyCard.astro";
+import DonateButton from "../../components/DonateButton.astro";
 import { animalFamilies, getMemorialAnimals } from "../../data/animals";
 
 const memorialAnimals = getMemorialAnimals();
@@ -11,8 +12,9 @@ const memorialAnimals = getMemorialAnimals();
   <Hero
     headline="Meet the Animals"
     subtext="Meet the rescued animals who call Robin's Nest home. Each has a story of survival, and as a lifelong sanctuary, we are committed to loving and caring for them for life—while creating healing and connection for both the animals and the humans whose lives they touch."
-    primaryCta={{ label: "Book a Tour", href: "/tours" }}
-  />
+  >
+    <DonateButton slot="primary-cta" variant="ghost" />
+  </Hero>
   <section class="px-6 py-16">
     <div class="mx-auto max-w-5xl">
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

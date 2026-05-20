@@ -12,6 +12,9 @@ const env = loadEnv(process.env.NODE_ENV || "", process.cwd(), "PUBLIC_");
 export default defineConfig({
   output: "static",
   adapter: cloudflare({ imageService: "compile" }),
+  redirects: {
+    "/get-involved": "/volunteer",
+  },
   integrations: [
     sanity({
       projectId: env.PUBLIC_SANITY_PROJECT_ID,

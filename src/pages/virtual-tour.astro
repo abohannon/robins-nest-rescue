@@ -1,0 +1,42 @@
+---
+import Layout from "../components/Layout.astro";
+import Hero from "../components/Hero.astro";
+import YouTubeEmbed from "../components/YouTubeEmbed.astro";
+import MissionBanner from "../components/MissionBanner.astro";
+---
+
+<Layout title="Virtual Tour" currentPath="/virtual-tour">
+  <Hero
+    headline="Virtual Tour"
+    subtext="Can't make it out to the ranch? Take a virtual stroll through Robin's Nest Rescue and meet some of the residents who call the sanctuary home."
+    primaryCta={{ label: "Book an In-Person Tour", href: "/tours" }}
+  />
+
+  <section class="px-6 py-16 md:py-24" aria-labelledby="virtual-tour-heading">
+    <div class="mx-auto max-w-4xl">
+      <div class="mx-auto mb-10 max-w-2xl text-center">
+        <h2
+          id="virtual-tour-heading"
+          class="font-heading text-primary mb-4 text-3xl"
+        >
+          A Visit From Anywhere
+        </h2>
+        <p class="text-text-light text-lg leading-relaxed">
+          Walk the property, meet the animals, and get a feel for what a day at
+          the sanctuary looks like — all from wherever you are.
+        </p>
+      </div>
+      <YouTubeEmbed
+        videoId="cjwKUT18Dh4"
+        title="Robin's Nest Rescue virtual tour"
+      />
+    </div>
+  </section>
+
+  <MissionBanner
+    heading="Ready to visit in person?"
+    body="Nothing replaces meeting the animals face to face. Book a farm tour and spend an hour at the sanctuary."
+    cta={{ label: "Book a Tour", href: "/tours" }}
+    variant="highlight"
+  />
+</Layout>

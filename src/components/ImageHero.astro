@@ -14,7 +14,7 @@ interface Cta {
 interface Props {
   headline: string;
   subtext: string;
-  primaryCta: Cta;
+  primaryCta?: Cta;
   secondaryCta?: Cta;
   image: ImageMetadata;
   size?: "default" | "tall" | "full";
@@ -59,21 +59,29 @@ const sizeClasses: Record<"default" | "tall" | "full", string> = {
     <p class="mx-auto mb-8 max-w-xl text-lg leading-relaxed opacity-90">
       {subtext}
     </p>
-    <div class="flex flex-wrap justify-center gap-4">
-      <Button href={primaryCta.href} variant="ghost" target={primaryCta.target}>
-        {primaryCta.label}
-      </Button>
-      {
-        secondaryCta && (
-          <Button
-            href={secondaryCta.href}
-            variant="secondary"
-            target={secondaryCta.target}
-          >
-            {secondaryCta.label}
-          </Button>
-        )
-      }
-    </div>
+    {
+      (primaryCta || secondaryCta) && (
+        <div class="flex flex-wrap justify-center gap-4">
+          {primaryCta && (
+            <Button
+              href={primaryCta.href}
+              variant="ghost"
+              target={primaryCta.target}
+            >
+              {primaryCta.label}
+            </Button>
+          )}
+          {secondaryCta && (
+            <Button
+              href={secondaryCta.href}
+              variant="secondary"
+              target={secondaryCta.target}
+            >
+              {secondaryCta.label}
+            </Button>
+          )}
+        </div>
+      )
+    }
   </div>
 </section>

@@ -1,0 +1,60 @@
+---
+interface Props {
+  overline?: string;
+  heading?: string;
+  subheading?: string;
+  id?: string;
+  align?: "center" | "left";
+  class?: string;
+}
+
+const {
+  overline,
+  heading,
+  subheading,
+  id,
+  align = "center",
+  class: className,
+} = Astro.props;
+
+const hasHeading = !!heading || Astro.slots.has("heading");
+const hasSubheading = !!subheading || Astro.slots.has("subheading");
+const centered = align === "center";
+---
+
+<header
+  class:list={["mb-10", centered && "text-center", className]}
+>
+  {
+    overline && (
+      <p class="font-body text-primary mb-2 text-sm font-semibold tracking-widest uppercase">
+        {overline}
+      </p>
+    )
+  }
+  {
+    hasHeading && (
+      <h2
+        id={id}
+        class:list={[
+          "font-heading text-text text-3xl md:text-4xl",
+          hasSubheading && "mb-4",
+        ]}
+      >
+        <slot name="heading">{heading}</slot>
+      </h2>
+    )
+  }
+  {
+    hasSubheading && (
+      <p
+        class:list={[
+          "font-body text-text-light text-base leading-relaxed",
+          centered && "mx-auto max-w-2xl",
+        ]}
+      >
+        <slot name="subheading">{subheading}</slot>
+      </p>
+    )
+  }
+</header>

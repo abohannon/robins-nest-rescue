@@ -1,5 +1,6 @@
 ---
 import ActionCard from "./ActionCard.astro";
+import SectionHeader from "./SectionHeader.astro";
 
 interface CardData {
   icon: string;
@@ -10,20 +11,25 @@ interface CardData {
 }
 
 interface Props {
-  heading: string;
+  overline?: string;
+  heading?: string;
   subheading?: string;
   cards: CardData[];
 }
 
-const { heading, subheading, cards } = Astro.props;
+const { overline, heading, subheading, cards } = Astro.props;
+const hasHeader = !!(overline || heading || subheading);
 ---
 
 <section class="bg-off-white px-6 py-16">
-  <div class="mx-auto max-w-5xl text-center">
-    <h2 class="font-heading text-text mb-2 text-3xl">{heading}</h2>
+  <div class="mx-auto max-w-5xl">
     {
-      subheading && (
-        <p class="font-body text-text-light mb-8 text-base">{subheading}</p>
+      hasHeader && (
+        <SectionHeader
+          overline={overline}
+          heading={heading}
+          subheading={subheading}
+        />
       )
     }
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

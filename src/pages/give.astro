@@ -3,6 +3,7 @@ import Layout from "../components/Layout.astro";
 import ImageHero from "../components/ImageHero.astro";
 import MissionBanner from "../components/MissionBanner.astro";
 import ActionCardGrid from "../components/ActionCardGrid.astro";
+import SectionHeader from "../components/SectionHeader.astro";
 import ranchAerial from "../assets/ranch-aerial.jpg";
 
 const CONTACT_EMAIL = "info@robinsnestrescue.com";
@@ -113,19 +114,11 @@ const waysToGive = [
     aria-labelledby="pet-guardianship-heading"
   >
     <div class="mx-auto max-w-3xl">
-      <div class="mb-8 text-center">
-        <p
-          class="font-body text-primary mb-2 text-sm font-semibold tracking-widest uppercase"
-        >
-          A Lifelong Safety Net
-        </p>
-        <h2
-          id="pet-guardianship-heading"
-          class="font-heading text-text text-3xl md:text-4xl"
-        >
-          Pet Guardianship Program
-        </h2>
-      </div>
+      <SectionHeader
+        overline="A Lifelong Safety Net"
+        heading="Pet Guardianship Program"
+        id="pet-guardianship-heading"
+      />
       <div
         class="font-body text-text space-y-5 text-lg leading-relaxed [&_strong]:font-semibold"
       >

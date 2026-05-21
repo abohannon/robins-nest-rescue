@@ -4,6 +4,7 @@ import ImageHero from "../components/ImageHero.astro";
 import MissionBanner from "../components/MissionBanner.astro";
 import FeatureCardGrid from "../components/FeatureCardGrid.astro";
 import Faq from "../components/Faq.astro";
+import SectionHeader from "../components/SectionHeader.astro";
 import ranchAerial from "../assets/ranch-aerial.jpg";
 
 const CONTACT_EMAIL = "info@robinsnestrescue.org";
@@ -144,16 +145,10 @@ const faqItems = [
 
   <section class="bg-off-white px-6 py-16 md:py-24">
     <div class="mx-auto max-w-3xl">
-      <div class="mb-8 text-center">
-        <p
-          class="font-body text-primary mb-2 text-sm font-semibold tracking-widest uppercase"
-        >
-          What Is Side by Side?
-        </p>
-        <h2 class="font-heading text-text text-3xl md:text-4xl">
-          Healing Happens in Relationship
-        </h2>
-      </div>
+      <SectionHeader
+        overline="What Is Side by Side?"
+        heading="Healing Happens in Relationship"
+      />
       <div
         class="font-body text-text space-y-5 text-lg leading-relaxed [&_strong]:font-semibold"
       >
@@ -193,26 +188,12 @@ const faqItems = [
 
   <section class="bg-white px-6 py-16 md:py-24" aria-labelledby="who-its-for">
     <div class="mx-auto max-w-4xl">
-      <div class="mb-10 text-center">
-        <p
-          class="font-body text-primary mb-2 text-sm font-semibold tracking-widest uppercase"
-        >
-          Who It's For
-        </p>
-        <h2
-          id="who-its-for"
-          class="font-heading text-text mb-4 text-3xl md:text-4xl"
-        >
-          Healing Has No Age Limit
-        </h2>
-        <p
-          class="font-body text-text-light mx-auto max-w-2xl text-base leading-relaxed"
-        >
-          Side by Side is designed for individuals and groups seeking
-          connection, restoration, and emotional wellbeing. Our experiences may
-          be especially meaningful for:
-        </p>
-      </div>
+      <SectionHeader
+        id="who-its-for"
+        overline="Who It's For"
+        heading="Healing Has No Age Limit"
+        subheading="Side by Side is designed for individuals and groups seeking connection, restoration, and emotional wellbeing. Our experiences may be especially meaningful for:"
+      />
       <ul
         class="grid grid-cols-1 gap-3 sm:grid-cols-2"
         aria-label="Who Side by Side is for"
@@ -265,26 +246,12 @@ const faqItems = [
     aria-labelledby="pricing-heading"
   >
     <div class="mx-auto max-w-4xl">
-      <div class="mb-10 text-center">
-        <p
-          class="font-body text-primary mb-2 text-sm font-semibold tracking-widest uppercase"
-        >
-          Pricing &amp; Scholarships
-        </p>
-        <h2
-          id="pricing-heading"
-          class="font-heading text-text mb-4 text-3xl md:text-4xl"
-        >
-          Healing Should Be Accessible
-        </h2>
-        <p
-          class="font-body text-text-light mx-auto max-w-2xl text-base leading-relaxed"
-        >
-          Side by Side experiences help support both our rescue animals and the
-          mission of Robin's Nest Rescue. Pricing varies based on session type,
-          duration, and group size.
-        </p>
-      </div>
+      <SectionHeader
+        id="pricing-heading"
+        overline="Pricing & Scholarships"
+        heading="Healing Should Be Accessible"
+        subheading="Side by Side experiences help support both our rescue animals and the mission of Robin's Nest Rescue. Pricing varies based on session type, duration, and group size."
+      />
 
       <h3
         class="font-body text-text mb-4 text-center text-sm font-semibold tracking-wider uppercase"

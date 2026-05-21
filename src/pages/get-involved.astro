@@ -7,6 +7,7 @@ import ActionCardGrid from "../components/ActionCardGrid.astro";
 import FeatureCardGrid from "../components/FeatureCardGrid.astro";
 import Button from "../components/Button.astro";
 import Faq from "../components/Faq.astro";
+import SectionHeader from "../components/SectionHeader.astro";
 import ranchAerial from "../assets/ranch-aerial.jpg";
 import volunteerPhoto1 from "../assets/get-involved/volunteer-pouring-feed-into-bowls.jpeg";
 import volunteerPhoto2 from "../assets/get-involved/volunteer-carrying-hay-bundle.jpeg";
@@ -188,14 +189,10 @@ const volunteerGallery = [
 
   <section class="bg-white px-6 py-16">
     <div class="mx-auto max-w-5xl">
-      <div class="mb-8 text-center">
-        <h2 class="font-heading text-text mb-2 text-3xl">
-          Volunteers in Action
-        </h2>
-        <p class="font-body text-text-light text-base">
-          Real moments from the folks who keep the sanctuary running.
-        </p>
-      </div>
+      <SectionHeader
+        heading="Volunteers in Action"
+        subheading="Real moments from the folks who keep the sanctuary running."
+      />
       <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
         {
           volunteerGallery.map((photo, index) => (
@@ -217,7 +214,7 @@ const volunteerGallery = [
 
   <section class="bg-white px-6 py-16">
     <div class="mx-auto max-w-3xl text-center">
-      <h2 class="font-heading text-primary mb-4 text-3xl">Ready to Apply?</h2>
+      <SectionHeader heading="Ready to Apply?" />
       <p class="font-body text-text mb-4 text-lg leading-relaxed">
         Review the volunteer handbook for our policies and program details, then
         fill out a short application. Once your application is in, you'll be

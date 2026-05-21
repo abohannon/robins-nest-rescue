@@ -8,6 +8,7 @@ import ProcessSteps from "../../components/ProcessSteps.astro";
 import VisitorGuidelines from "../../components/VisitorGuidelines.astro";
 import TourPricingTiers from "../../components/TourPricingTiers.astro";
 import YouTubeEmbed from "../../components/YouTubeEmbed.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
 import { SANCTUARY_ADDRESS, CALENDLY_URL } from "../../lib/tours";
 
 const address = SANCTUARY_ADDRESS;
@@ -40,17 +41,11 @@ const experienceSteps = [
 
   <section class="px-6 py-16 md:py-24" aria-labelledby="tour-preview-heading">
     <div class="mx-auto max-w-4xl">
-      <div class="mx-auto mb-10 max-w-2xl text-center">
-        <h2
-          id="tour-preview-heading"
-          class="font-heading text-primary mb-4 text-3xl"
-        >
-          Watch a Tour Preview
-        </h2>
-        <p class="text-text-light text-lg leading-relaxed">
-          Take a quick look at what a visit to the sanctuary feels like.
-        </p>
-      </div>
+      <SectionHeader
+        id="tour-preview-heading"
+        heading="Watch a Tour Preview"
+        subheading="Take a quick look at what a visit to the sanctuary feels like."
+      />
       <YouTubeEmbed
         videoId="cjwKUT18Dh4"
         title="Robin's Nest Rescue farm tour preview"
@@ -65,33 +60,21 @@ const experienceSteps = [
     aria-labelledby="suggested-donation-heading"
   >
     <div class="mx-auto max-w-5xl">
-      <div class="mx-auto mb-10 max-w-2xl text-center">
-        <h2
-          id="suggested-donation-heading"
-          class="font-heading text-primary mb-4 text-3xl"
-        >
-          Suggested Donation
-        </h2>
-        <p class="text-text-light text-lg leading-relaxed">
-          We're a 501(c)(3) nonprofit, so 100% of your donation goes directly to
-          the care of our rescue animals and is tax-deductible. Suggested
-          amounts are for the entire group.
-        </p>
-      </div>
+      <SectionHeader
+        id="suggested-donation-heading"
+        heading="Suggested Donation"
+        subheading="We're a 501(c)(3) nonprofit, so 100% of your donation goes directly to the care of our rescue animals and is tax-deductible. Suggested amounts are for the entire group."
+      />
       <TourPricingTiers />
     </div>
   </section>
 
   <section id="book" class="px-6 py-16 md:py-24">
-    <div class="mx-auto max-w-3xl text-center">
-      <h2 class="font-heading text-primary mb-4 text-3xl">
-        Reserve Your Experience
-      </h2>
-      <p class="text-text-light mb-8 text-lg leading-relaxed">
-        Visits run about an hour around our morning (8:30 a.m.) and evening
-        (5:30 p.m.) feeding times. Donation-based — every dollar goes directly
-        to the care of our rescue animals.
-      </p>
+    <div class="mx-auto max-w-3xl">
+      <SectionHeader
+        heading="Reserve Your Experience"
+        subheading="Visits run about an hour around our morning (8:30 a.m.) and evening (5:30 p.m.) feeding times. Donation-based — every dollar goes directly to the care of our rescue animals."
+      />
     </div>
     <div class="mx-auto max-w-3xl">
       <CalendlyEmbed url={CALENDLY_URL} />
@@ -102,12 +85,7 @@ const experienceSteps = [
 
   <section class="px-6 py-16 md:py-24">
     <div class="mx-auto max-w-5xl">
-      <h2 class="font-heading text-primary mb-4 text-center text-3xl">
-        Find Us
-      </h2>
-      <p class="text-text-light mb-8 text-center text-lg">
-        {address}
-      </p>
+      <SectionHeader heading="Find Us" subheading={address} />
       <GoogleMapEmbed query={address} />
     </div>
   </section>

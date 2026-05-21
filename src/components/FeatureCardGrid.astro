@@ -1,5 +1,6 @@
 ---
 import FeatureCard from "./FeatureCard.astro";
+import SectionHeader from "./SectionHeader.astro";
 import type { ImageMetadata } from "astro";
 
 interface CardData {
@@ -11,24 +12,25 @@ interface CardData {
 }
 
 interface Props {
+  overline?: string;
   heading?: string;
   subheading?: string;
   cards: CardData[];
 }
 
-const { heading, subheading, cards } = Astro.props;
+const { overline, heading, subheading, cards } = Astro.props;
+const hasHeader = !!(overline || heading || subheading);
 ---
 
 <section class="px-6 py-16">
   <div class="mx-auto max-w-5xl">
     {
-      heading && (
-        <div class="mb-10 text-center">
-          <h2 class="font-heading text-text mb-2 text-3xl">{heading}</h2>
-          {subheading && (
-            <p class="font-body text-text-light text-base">{subheading}</p>
-          )}
-        </div>
+      hasHeader && (
+        <SectionHeader
+          overline={overline}
+          heading={heading}
+          subheading={subheading}
+        />
       )
     }
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

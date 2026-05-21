@@ -6,6 +6,7 @@ import GoogleMapEmbed from "../../components/GoogleMapEmbed.astro";
 import GiveButterWidget from "../../components/GiveButterWidget.astro";
 import VisitorGuidelines from "../../components/VisitorGuidelines.astro";
 import TourPricingTiers from "../../components/TourPricingTiers.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
 import { SANCTUARY_ADDRESS, sanitizeName } from "../../lib/tours";
 
 const address = SANCTUARY_ADDRESS;
@@ -58,19 +59,11 @@ if (eventTime) {
     aria-labelledby="complete-your-booking-heading"
   >
     <div class="mx-auto max-w-5xl">
-      <div class="mx-auto mb-10 max-w-2xl text-center">
-        <h2
-          id="complete-your-booking-heading"
-          class="font-heading text-primary mb-4 text-3xl"
-        >
-          Complete Your Booking
-        </h2>
-        <p class="text-text-light text-lg leading-relaxed">
-          {
-            "As a 501(c)(3) nonprofit, your donation is tax-deductible and goes directly to the care of our rescue animals. Choose the suggested amount that matches your group size."
-          }
-        </p>
-      </div>
+      <SectionHeader
+        id="complete-your-booking-heading"
+        heading="Complete Your Booking"
+        subheading="As a 501(c)(3) nonprofit, your donation is tax-deductible and goes directly to the care of our rescue animals. Choose the suggested amount that matches your group size."
+      />
       <TourPricingTiers />
       <div class="mx-auto mt-12 max-w-md">
         <GiveButterWidget id="gKZZE3" />
@@ -82,12 +75,7 @@ if (eventTime) {
 
   <section class="px-6 py-16 md:py-24">
     <div class="mx-auto max-w-5xl">
-      <h2 class="font-heading text-primary mb-4 text-center text-3xl">
-        Getting Here
-      </h2>
-      <p class="text-text-light mb-8 text-center text-lg">
-        {address}
-      </p>
+      <SectionHeader heading="Getting Here" subheading={address} />
       <GoogleMapEmbed query={address} />
     </div>
   </section>

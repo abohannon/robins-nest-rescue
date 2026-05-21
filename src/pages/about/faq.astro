@@ -1,7 +1,7 @@
 ---
 import Layout from "../../components/Layout.astro";
 import Hero from "../../components/Hero.astro";
-import Faq from "../../components/Faq.astro";
+import FaqList from "../../components/Faq.astro";
 import MissionBanner from "../../components/MissionBanner.astro";
 
 const faqs = [
@@ -34,7 +34,7 @@ const faqs = [
     subtext="Answers to the questions we hear most often. More to come."
     primaryCta={{ label: "Book a Tour", href: "/tours" }}
   />
-  <Faq heading="General questions" items={faqs} />
+  <FaqList heading="General questions" items={faqs} />
   <MissionBanner
     heading="Still have a question?"
     body="If you didn't see your question above, reach out and we'll get back to you."

@@ -1,28 +1,31 @@
 ---
+import SectionHeader from "./SectionHeader.astro";
+
 interface FaqItem {
   question: string;
   answer: string;
 }
 
 interface Props {
-  heading: string;
+  overline?: string;
+  heading?: string;
   subheading?: string;
   items: FaqItem[];
 }
 
-const { heading, subheading, items } = Astro.props;
+const { overline, heading, subheading, items } = Astro.props;
+const hasHeader = !!(overline || heading || subheading);
 ---
 
 <section class="bg-white px-6 py-16">
   <div class="mx-auto max-w-3xl">
-    <h2 class="font-heading text-primary mb-2 text-center text-3xl">
-      {heading}
-    </h2>
     {
-      subheading && (
-        <p class="font-body text-text-light mb-8 text-center text-base">
-          {subheading}
-        </p>
+      hasHeader && (
+        <SectionHeader
+          overline={overline}
+          heading={heading}
+          subheading={subheading}
+        />
       )
     }
     <ul class="border-border divide-border divide-y border-t border-b">

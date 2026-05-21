@@ -3,6 +3,7 @@ import Layout from "../components/Layout.astro";
 import Hero from "../components/Hero.astro";
 import YouTubeEmbed from "../components/YouTubeEmbed.astro";
 import MissionBanner from "../components/MissionBanner.astro";
+import SectionHeader from "../components/SectionHeader.astro";
 ---
 
 <Layout title="Virtual Tour" currentPath="/virtual-tour">
@@ -14,18 +15,11 @@ import MissionBanner from "../components/MissionBanner.astro";
 
   <section class="px-6 py-16 md:py-24" aria-labelledby="virtual-tour-heading">
     <div class="mx-auto max-w-4xl">
-      <div class="mx-auto mb-10 max-w-2xl text-center">
-        <h2
-          id="virtual-tour-heading"
-          class="font-heading text-primary mb-4 text-3xl"
-        >
-          A Visit From Anywhere
-        </h2>
-        <p class="text-text-light text-lg leading-relaxed">
-          Walk the property, meet the animals, and get a feel for what a day at
-          the sanctuary looks like — all from wherever you are.
-        </p>
-      </div>
+      <SectionHeader
+        id="virtual-tour-heading"
+        heading="A Visit From Anywhere"
+        subheading="Walk the property, meet the animals, and get a feel for what a day at the sanctuary looks like — all from wherever you are."
+      />
       <YouTubeEmbed
         videoId="cjwKUT18Dh4"
         title="Robin's Nest Rescue virtual tour"

@@ -22,9 +22,7 @@ const hasSubheading = !!subheading || Astro.slots.has("subheading");
 const centered = align === "center";
 ---
 
-<header
-  class:list={["mb-10", centered && "text-center", className]}
->
+<header class:list={["mb-10", centered && "text-center", className]}>
   {
     overline && (
       <p class="font-body text-primary mb-2 text-sm font-semibold tracking-widest uppercase">

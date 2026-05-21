@@ -1,4 +1,6 @@
 ---
+import SectionHeader from "./SectionHeader.astro";
+
 interface Props {
   variant?: "white" | "off-white";
 }
@@ -13,9 +15,7 @@ const { variant = "white" } = Astro.props;
   ]}
 >
   <div class="mx-auto max-w-3xl">
-    <h2 class="font-heading text-primary mb-6 text-center text-3xl">
-      What to Know Before You Visit
-    </h2>
+    <SectionHeader heading="What to Know Before You Visit" />
     <ul class="text-text space-y-4 text-lg">
       <li class="flex items-start gap-3">
         <span class="text-primary mt-1 text-xl" aria-hidden="true"

@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { animals } from "../data/animals";
+import { shuffle } from "../lib/random";
 
 interface Props {
   exclude?: string;
@@ -17,7 +18,18 @@ if (family) {
 if (exclude) {
   filtered = filtered.filter((a) => a.slug !== exclude);
 }
-const displayAnimals = filtered.slice(0, limit);
+
+// Pre-shuffle on the server so the static HTML is not deterministic per build,
+// and so no-JS users still see a varied (if not per-refresh) selection. The
+// client-side script below re-shuffles on every page load to satisfy the
+// "refresh shows new animals" acceptance criterion.
+const displayAnimals = shuffle(filtered);
+
+// All candidates render into the DOM as the shuffleable pool. The inline CSS
+// hides cards past `limit` so server output and the no-JS fallback both show
+// exactly `limit` cards. The client script shuffles the cards in place and
+// explicitly toggles display, then reveals the grid.
+const noscriptCss = `[data-meet-more-grid] > .meet-more-card:nth-child(n+${limit + 1}) { display: none; } [data-meet-more-grid] { visibility: visible !important; }`;
 ---
 
 {
@@ -26,11 +38,16 @@ const displayAnimals = filtered.slice(0, limit);
       <h2 class="font-heading text-text mb-8 text-2xl md:text-3xl">
         Meet More Animals
       </h2>
-      <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+      <div
+        class="meet-more-grid grid grid-cols-2 gap-4 md:grid-cols-4"
+        data-meet-more-grid
+        data-limit={limit}
+        style="visibility: hidden"
+      >
         {displayAnimals.map((animal) => (
           <a
             href={`/animals/${animal.family}/${animal.slug}`}
-            class="group relative block aspect-square overflow-hidden rounded-lg"
+            class="meet-more-card group relative block aspect-square overflow-hidden rounded-lg"
           >
             <Image
               src={animal.photo}
@@ -48,6 +65,34 @@ const displayAnimals = filtered.slice(0, limit);
           </a>
         ))}
       </div>
+      <noscript>
+        <style set:html={noscriptCss} />
+      </noscript>
     </section>
   )
 }
+
+<script>
+  // Randomize the "Meet More Animals" grid on every page load.
+  // The server emits all eligible animals as children of [data-meet-more-grid];
+  // this script Fisher–Yates shuffles them, then shows only the first `limit`.
+  const grids = document.querySelectorAll<HTMLElement>("[data-meet-more-grid]");
+  grids.forEach((grid) => {
+    const limit = Number(grid.dataset.limit ?? "4") || 4;
+    const cards = Array.from(grid.children) as HTMLElement[];
+    if (cards.length === 0) return;
+
+    // Fisher–Yates shuffle.
+    for (let i = cards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [cards[i], cards[j]] = [cards[j], cards[i]];
+    }
+
+    cards.forEach((card, index) => {
+      grid.appendChild(card);
+      card.style.display = index < limit ? "" : "none";
+    });
+
+    grid.style.visibility = "visible";
+  });
+</script>

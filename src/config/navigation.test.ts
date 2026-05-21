@@ -130,6 +130,38 @@ describe("navigation config", () => {
     expect(labels).not.toContain("Events");
     expect(labels).not.toContain("The Sanctuary");
   });
+
+  it("Get Involved link exposes children submenu items", () => {
+    const getInvolvedLink = navLinks.find(
+      (link) => link.label === "Get Involved",
+    );
+    expect(getInvolvedLink).toBeDefined();
+    expect(getInvolvedLink?.children).toBeDefined();
+    expect(getInvolvedLink?.children?.length).toBeGreaterThan(0);
+    for (const child of getInvolvedLink?.children ?? []) {
+      expect(child).toHaveProperty("label");
+      expect(child).toHaveProperty("href");
+      expect(child.href).toMatch(/^(\/|https?:\/\/)/);
+    }
+  });
+
+  it("Get Involved children include Volunteer and Other Ways to Give", () => {
+    const getInvolvedLink = navLinks.find(
+      (link) => link.label === "Get Involved",
+    );
+    const children = getInvolvedLink?.children ?? [];
+    expect(children).toEqual(
+      expect.arrayContaining([
+        { label: "Volunteer", href: "/volunteer" },
+        { label: "Other Ways to Give", href: "/give" },
+      ]),
+    );
+  });
+
+  it("does not include the legacy /get-involved top-level link", () => {
+    const legacy = navLinks.find((link) => link.href === "/get-involved");
+    expect(legacy).toBeUndefined();
+  });
 });
 
 describe("isExternalHref", () => {

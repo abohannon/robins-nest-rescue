@@ -35,7 +35,14 @@ export const navLinks: NavLink[] = [
     ],
   },
   { label: "Healing Experiences", href: "/healing-experiences" },
-  { label: "Get Involved", href: "/get-involved" },
+  {
+    label: "Get Involved",
+    href: "/volunteer",
+    children: [
+      { label: "Volunteer", href: "/volunteer" },
+      { label: "Other Ways to Give", href: "/give" },
+    ],
+  },
   {
     label: "About",
     href: "/about",

@@ -3,7 +3,6 @@ import { Image } from "astro:assets";
 import Layout from "../components/Layout.astro";
 import ImageHero from "../components/ImageHero.astro";
 import MissionBanner from "../components/MissionBanner.astro";
-import ActionCardGrid from "../components/ActionCardGrid.astro";
 import FeatureCardGrid from "../components/FeatureCardGrid.astro";
 import Button from "../components/Button.astro";
 import Faq from "../components/Faq.astro";
@@ -109,34 +108,6 @@ const volunteerFaqs = [
   },
 ];
 
-const otherWaysToGive = [
-  {
-    icon: "📦",
-    title: "Amazon Wishlist",
-    description:
-      "Send supplies directly to the sanctuary. Hay, feed buckets, grooming tools — every item helps care for our 21+ residents.",
-    linkHref: "https://www.amazon.com/hz/wishlist/ls/1EQLUJ0SF09EX",
-    linkLabel: "View the wishlist",
-  },
-  {
-    icon: "💝",
-    title: "Make a Donation",
-    description:
-      "One-time or recurring gifts directly fund veterinary care, food, shelter, and the programs that pair our animals with the people they help heal.",
-    linkHref: "/donate",
-    linkLabel: "Donate now",
-  },
-  {
-    icon: "📨",
-    title: "Planned Giving",
-    description:
-      "Leave a lasting legacy by including Robin's Nest Rescue in your estate plans. Get in touch to discuss the options that work for you.",
-    linkHref:
-      "mailto:info@robinsnestrescue.com?subject=Planned%20Giving%20Inquiry",
-    linkLabel: "Contact us",
-  },
-];
-
 const volunteerGallery = [
   {
     src: volunteerPhoto1,
@@ -161,9 +132,9 @@ const volunteerGallery = [
 ];
 ---
 
-<Layout title="Get Involved" currentPath="/get-involved">
+<Layout title="Volunteer" currentPath="/volunteer">
   <ImageHero
-    headline="Get Involved"
+    headline="Volunteer"
     subtext="Dedicated folks like you are the only reason we can continue our mission. Whether you have an hour a month or a closet full of talents, there's a place for you at Robin's Nest."
     image={ranchAerial}
     primaryCta={{
@@ -254,10 +225,11 @@ const volunteerGallery = [
     />
   </div>
 
-  <ActionCardGrid
+  <MissionBanner
     heading="Other Ways to Give"
-    subheading="Time isn't the only way to support our mission."
-    cards={otherWaysToGive}
+    body="Time isn't the only way to support our mission. From monthly giving to in-kind donations and planned gifts, there are many ways to help the sanctuary thrive."
+    cta={{ label: "Explore Ways to Give", href: "/give" }}
+    variant="subtle"
   />
 
   <MissionBanner

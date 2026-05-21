@@ -1,18 +1,549 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "../../components/Layout.astro";
-import Hero from "../../components/Hero.astro";
+import ImageHero from "../../components/ImageHero.astro";
 import MissionBanner from "../../components/MissionBanner.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+import heroImage from "../../assets/founders-story/image4.jpg";
+import littleGirl from "../../assets/founders-story/image11.png";
+import rodeoOnDoc from "../../assets/founders-story/image5.jpg";
+import founderWithHorse from "../../assets/founders-story/image9.jpg";
+import threeChimigos from "../../assets/founders-story/image8.jpg";
+import originalLogo from "../../assets/founders-story/image7.png";
+import founderAndMother from "../../assets/founders-story/image3.jpg";
+import threePigs from "../../assets/founders-story/image10.jpg";
+import founderWithPigs from "../../assets/founders-story/image2.jpg";
+import phinneasAndDonkey from "../../assets/founders-story/image1.jpg";
+import rescueLogo from "../../assets/founders-story/image6.png";
 ---
 
 <Layout title="Founder's Story" currentPath="/about/founders-story">
-  <Hero
-    headline="Founder's Story"
-    subtext="The story behind Robin's Nest Rescue — coming soon."
-    primaryCta={{ label: "Book a Tour", href: "/tours" }}
+  <ImageHero
+    headline="Our Founder's Story"
+    subtext="A dream years in the making — built on rescue, resilience, and the quiet healing only animals can offer."
+    image={heroImage}
+    size="tall"
   />
+
+  <section
+    class="bg-off-white px-6 py-16 md:py-24"
+    aria-labelledby="it-started-with-love"
+  >
+    <div class="mx-auto max-w-3xl">
+      <SectionHeader
+        id="it-started-with-love"
+        overline="A Dream Years in the Making"
+        heading="It Started with Love"
+      />
+      <div
+        class="font-body text-text space-y-5 text-lg leading-relaxed [&_strong]:font-semibold"
+      >
+        <p>Some dreams begin with a business plan.</p>
+        <p>Robin's Nest began with animals.</p>
+        <p>
+          As a little girl, I was always trying to rescue something. At five
+          years old, it was a baby sparrow I named Tweety. Soon after came Doc,
+          my beloved Quarter Horse, who became far more than a horse — he was my
+          safe place, my confidant, and one of my earliest teachers in trust,
+          resilience, and unconditional love.
+        </p>
+        <p>
+          Long before I understood trauma or healing, animals were quietly
+          teaching me both.
+        </p>
+        <p>That truth stayed with me for life.</p>
+      </div>
+
+      <figure class="mt-12">
+        <Image
+          src={littleGirl}
+          alt="The founder as a young girl outdoors, sitting in the grass."
+          class="mx-auto h-auto w-full max-w-md rounded-lg shadow-md"
+          widths={[400, 640, 800]}
+          sizes="(min-width: 768px) 28rem, 100vw"
+        />
+      </figure>
+
+      <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <figure>
+          <Image
+            src={rodeoOnDoc}
+            alt="The founder as a young rider competing on her Quarter Horse, Doc, in a rodeo barrel race."
+            class="h-auto w-full rounded-lg shadow-md"
+            widths={[400, 640, 800]}
+            sizes="(min-width: 768px) 50vw, 100vw"
+          />
+          <figcaption
+            class="font-body text-text-light mt-2 text-center text-sm italic"
+          >
+            Riding Doc in the arena.
+          </figcaption>
+        </figure>
+        <figure>
+          <Image
+            src={founderWithHorse}
+            alt="The founder as a young adult, cheek-to-cheek with her chestnut horse on a sunny day."
+            class="h-auto w-full rounded-lg shadow-md"
+            widths={[400, 640, 800]}
+            sizes="(min-width: 768px) 50vw, 100vw"
+          />
+          <figcaption
+            class="font-body text-text-light mt-2 text-center text-sm italic"
+          >
+            A safe place, a confidant, a teacher.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="bg-white px-6 py-16 md:py-24"
+    aria-labelledby="three-chimigos"
+  >
+    <div class="mx-auto max-w-3xl">
+      <SectionHeader
+        id="three-chimigos"
+        overline="Where the dream took its first step"
+        heading="The Three Chimigos"
+      />
+      <div
+        class="font-body text-text space-y-5 text-lg leading-relaxed [&_strong]:font-semibold"
+      >
+        <p>
+          In 2010, what would eventually become Robin's Nest took its first real
+          step with a trip to the San Diego Humane Society.
+        </p>
+        <p>
+          That's where I met Lily — a tiny tan Chihuahua mix who practically
+          leapt into my heart. The connection was instant.
+        </p>
+        <p>
+          Later came Alberto, a little blonde boy with a heartbreaking story of
+          abuse, and Julio, a tiny black Chihuahua with a limp and an outsized
+          spirit.
+        </p>
+        <p>
+          Together, they became our beloved <strong>Three Chimigos.</strong>
+        </p>
+        <p>
+          Like the iconic <em>Three Amigos</em>, they became heroes to our
+          family, our friends, and even thousands of college students who came
+          to know them while accompanying my mother, Dr. Sue ("Nana"), in her
+          teaching work.
+        </p>
+        <p>But they were more than adored companions.</p>
+        <p>
+          They became symbols of resilience, unconditional love, loyalty, and
+          the extraordinary generosity animals offer — even after hardship.
+        </p>
+        <blockquote
+          class="border-primary text-text my-6 border-l-4 pl-6 text-xl italic"
+        >
+          The soul of Robin's Nest owes much to these three little dogs.
+        </blockquote>
+      </div>
+
+      <figure class="mt-12">
+        <Image
+          src={threeChimigos}
+          alt="Three small rescue dogs — Lily the tan Chihuahua, Alberto the blonde, and Julio the black Chihuahua — standing together on a wooden deck."
+          class="mx-auto h-auto w-full rounded-lg shadow-md"
+          widths={[400, 640, 1024]}
+          sizes="(min-width: 768px) 48rem, 100vw"
+        />
+        <figcaption
+          class="font-body text-text-light mt-2 text-center text-sm italic"
+        >
+          Lily, Alberto, and Julio — the Three Chimigos.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section
+    class="bg-off-white px-6 py-16 md:py-24"
+    aria-labelledby="naming-the-dream"
+  >
+    <div class="mx-auto max-w-3xl">
+      <SectionHeader
+        id="naming-the-dream"
+        overline="2014"
+        heading="Naming the Dream"
+      />
+      <div
+        class="font-body text-text space-y-5 text-lg leading-relaxed [&_strong]:font-semibold"
+      >
+        <p>
+          By 2014, the dream had taken enough shape that I gave it a name:
+          <strong>Robin's Nest.</strong>
+        </p>
+        <p>
+          Because my middle name is Robin, the name felt deeply personal — but
+          it also represented everything I hoped to create:
+        </p>
+        <ul
+          class="font-body text-text mx-auto max-w-md list-none space-y-1 pl-0 text-center text-lg"
+        >
+          <li>A place of shelter.</li>
+          <li>Safety.</li>
+          <li>Belonging.</li>
+          <li>Home.</li>
+        </ul>
+        <p>Even though the ranch didn't yet exist, the dream did.</p>
+        <p>
+          I believed in it enough to put it out into the universe —
+          commissioning a graphic designer to create the very first Robin's Nest
+          logo and giving life to a vision I hoped to build someday.
+        </p>
+        <p>But life has a way of making someday feel far away.</p>
+        <p>
+          Law school. Marriage. Starting my own business. A growing career.
+          Responsibilities. Timing.
+        </p>
+        <p>And for years, the dream waited.</p>
+      </div>
+
+      <figure class="mt-12">
+        <Image
+          src={originalLogo}
+          alt="The original Robin's Nest Ranch Rescue Resort logo, featuring a horse silhouette on a teal and coral background."
+          class="mx-auto h-auto w-full max-w-sm"
+          widths={[300, 480, 640]}
+          sizes="(min-width: 768px) 24rem, 100vw"
+        />
+        <figcaption
+          class="font-body text-text-light mt-2 text-center text-sm italic"
+        >
+          The very first Robin's Nest logo, commissioned in 2014.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="bg-white px-6 py-16 md:py-24" aria-labelledby="leap-of-faith">
+    <div class="mx-auto max-w-3xl">
+      <SectionHeader
+        id="leap-of-faith"
+        overline="2020 and beyond"
+        heading="The Leap of Faith"
+      />
+      <div
+        class="font-body text-text space-y-5 text-lg leading-relaxed [&_strong]:font-semibold"
+      >
+        <p>Then came the pandemic.</p>
+        <p>
+          Like so many people, the stillness of quarantine created space for
+          reflection that everyday life rarely allows.
+        </p>
+        <p>I found myself asking difficult questions:</p>
+        <p class="italic">
+          What really matters?<br />
+          What kind of legacy do I want to leave?<br />
+          Why had I become so disconnected from the things that made me feel most
+          alive?
+        </p>
+        <p>
+          The answer kept bringing me back to the same place: animals, nature,
+          healing, connection, and purpose.
+        </p>
+        <p>And the truth became impossible to ignore:</p>
+        <blockquote
+          class="border-primary text-text my-6 border-l-4 pl-6 text-xl italic"
+        >
+          Life is short. There is never going to be a perfect time.
+        </blockquote>
+        <p>
+          If I was ever going to stop dreaming and actually build Robin's Nest,
+          it had to be now.
+        </p>
+        <p>
+          My mother, Dr. Sue, and I had long shared a deep love of animals and a
+          belief in resilience, healing, and second chances. Together, we
+          decided to take the leap.
+        </p>
+      </div>
+
+      <figure class="my-12">
+        <Image
+          src={founderAndMother}
+          alt="The founder and her mother, Dr. Sue, smiling together — co-founders of Robin's Nest Rescue."
+          class="mx-auto h-auto w-full max-w-md rounded-lg shadow-md"
+          widths={[400, 640, 800]}
+          sizes="(min-width: 768px) 28rem, 100vw"
+        />
+        <figcaption
+          class="font-body text-text-light mt-2 text-center text-sm italic"
+        >
+          The founder with her mother and co-founder, Dr. Sue.
+        </figcaption>
+      </figure>
+
+      <div
+        class="font-body text-text space-y-5 text-lg leading-relaxed [&_strong]:font-semibold"
+      >
+        <p>
+          When we found our five-acre property in Ramona — a former pig rescue —
+          it wasn't polished.
+        </p>
+        <p>But it was full of possibility.</p>
+        <p>
+          We saw sanctuary. Second chances. A place where vulnerable animals
+          could feel safe.
+        </p>
+        <p>
+          And maybe, though we didn't fully realize it yet, a place where people
+          could heal too.
+        </p>
+        <p>And then came our first sanctuary residents.</p>
+        <p>
+          Three little pigs — <strong>Falkor, Michael, and Meg</strong> — rescued
+          from a legendary hoarding case through Farm Animal Refuge.
+        </p>
+        <p>
+          I had originally gone to bring home the bonded pair, Falkor and
+          Michael.
+        </p>
+        <p>But then Meg captured my heart.</p>
+        <p>So naturally… I came home with three.</p>
+      </div>
+
+      <div class="my-12 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <figure>
+          <Image
+            src={threePigs}
+            alt="Falkor, Michael, and Meg — three small black rescue pigs — looking up at the camera on a stone patio."
+            class="h-auto w-full rounded-lg shadow-md"
+            widths={[400, 640, 800]}
+            sizes="(min-width: 768px) 50vw, 100vw"
+          />
+          <figcaption
+            class="font-body text-text-light mt-2 text-center text-sm italic"
+          >
+            Falkor, Michael, and Meg.
+          </figcaption>
+        </figure>
+        <figure>
+          <Image
+            src={founderWithPigs}
+            alt="The founder sitting beside her three rescue pigs as they rest in the sun."
+            class="h-auto w-full rounded-lg shadow-md"
+            widths={[400, 640, 800]}
+            sizes="(min-width: 768px) 50vw, 100vw"
+          />
+          <figcaption
+            class="font-body text-text-light mt-2 text-center text-sm italic"
+          >
+            First sanctuary residents, first quiet afternoons.
+          </figcaption>
+        </figure>
+      </div>
+
+      <div
+        class="font-body text-text space-y-5 text-lg leading-relaxed [&_strong]:font-semibold"
+      >
+        <p>
+          Soon after came <strong>Phinneas</strong>, a miniature horse, and
+          <strong>Donkey</strong>, a miniature donkey, both saved from kill pens
+          through Little Hooves.
+        </p>
+        <p>Suddenly, the dream wasn't just an idea anymore.</p>
+        <p>It had names. Snouts. Hooves. Personalities. Stories.</p>
+        <p>Robin's Nest was real.</p>
+      </div>
+
+      <figure class="mt-12">
+        <Image
+          src={phinneasAndDonkey}
+          alt="The founder leading Phinneas the miniature horse and Donkey the miniature donkey into a small barn at the sanctuary."
+          class="mx-auto h-auto w-full max-w-2xl rounded-lg shadow-md"
+          widths={[400, 640, 1024]}
+          sizes="(min-width: 768px) 42rem, 100vw"
+        />
+        <figcaption
+          class="font-body text-text-light mt-2 text-center text-sm italic"
+        >
+          Phinneas and Donkey — saved from kill pens through Little Hooves.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section
+    class="bg-off-white px-6 py-16 md:py-24"
+    aria-labelledby="built-by-family"
+  >
+    <div class="mx-auto max-w-3xl">
+      <SectionHeader
+        id="built-by-family"
+        overline="The village"
+        heading="Built by Family, Fueled by Community"
+      />
+      <div
+        class="font-body text-text space-y-5 text-lg leading-relaxed [&_strong]:font-semibold"
+      >
+        <p>Dreams like this don't happen alone.</p>
+        <p>
+          My mother, Dr. Sue, has been my co-founder, partner, and an
+          extraordinary force behind Robin's Nest from day one.
+        </p>
+        <p>
+          My husband, Nick, has also been one of Robin's Nest's greatest
+          champions — supporting the vision, the uncertainty, and the leap of
+          faith required to bring it to life.
+        </p>
+        <p>And then came the village.</p>
+        <ul
+          class="font-body text-text mx-auto max-w-md list-none space-y-1 pl-0 text-center text-lg"
+        >
+          <li>Friends.</li>
+          <li>Volunteers.</li>
+          <li>Neighbors.</li>
+          <li>Donors.</li>
+          <li>Community partners.</li>
+          <li>Animal lovers.</li>
+        </ul>
+        <blockquote
+          class="border-primary text-text my-6 border-l-4 pl-6 text-xl italic"
+        >
+          Robin's Nest has always been built by love.
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white px-6 py-16 md:py-24" aria-labelledby="mission-grew">
+    <div class="mx-auto max-w-3xl">
+      <SectionHeader
+        id="mission-grew"
+        overline="An unexpected discovery"
+        heading="When the Mission Grew"
+      />
+      <div
+        class="font-body text-text space-y-5 text-lg leading-relaxed [&_strong]:font-semibold"
+      >
+        <p>At first, Robin's Nest was about rescue.</p>
+        <p>Saving animals. Creating sanctuary. Offering second chances.</p>
+        <p>But something unexpected happened.</p>
+        <p>When people came to the ranch, they changed.</p>
+        <p>
+          Guarded children opened up.<br />
+          Stressed adults softened.<br />
+          Stories surfaced.<br />
+          Laughter returned.<br />
+          Connection happened.
+        </p>
+        <p>
+          Again and again, I witnessed the same quiet magic animals had given me
+          my entire life.
+        </p>
+        <p class="font-heading text-primary text-center text-3xl">Healing.</p>
+        <p>Not because of a formal program.</p>
+        <p>
+          Simply because animals have an extraordinary ability to meet us
+          exactly where we are.
+        </p>
+        <p>
+          And once I saw that happening — not just for me, but for others — I
+          knew I couldn't keep it to myself.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="bg-off-white px-6 py-16 md:py-24"
+    aria-labelledby="side-by-side"
+  >
+    <div class="mx-auto max-w-3xl">
+      <SectionHeader
+        id="side-by-side"
+        overline="A program born organically"
+        heading="Side by Side"
+      />
+      <div
+        class="font-body text-text space-y-5 text-lg leading-relaxed [&_strong]:font-semibold"
+      >
+        <p>
+          That's how <strong>Side by Side</strong> was born.
+        </p>
+        <p>
+          Not from a strategic plan — but organically, through community,
+          connection, and lived experience.
+        </p>
+        <p>
+          One visit became another.<br />
+          One conversation became an invitation.<br />
+          One invitation became a partnership.
+        </p>
+        <p>
+          Today, Robin's Nest creates space for justice-impacted youth,
+          veterans, first responders, trauma survivors, exonerees, and others
+          navigating difficult chapters to experience the healing power of
+          animals, nature, and connection.
+        </p>
+        <p>Because the mission became bigger than rescue.</p>
+        <blockquote
+          class="border-primary text-text my-6 border-l-4 pl-6 text-xl italic"
+        >
+          Healing goes both ways.
+        </blockquote>
+        <p class="text-center">
+          <a
+            href="/healing-experiences"
+            class="text-primary font-semibold underline hover:no-underline"
+          >
+            Learn more about Side by Side
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white px-6 py-16 md:py-24" aria-labelledby="they-save-us">
+    <div class="mx-auto max-w-3xl">
+      <SectionHeader
+        id="they-save-us"
+        overline="Where the story keeps going"
+        heading="We Rescue Them. They Save Us."
+      />
+      <div
+        class="font-body text-text space-y-5 text-lg leading-relaxed [&_strong]:font-semibold"
+      >
+        <p>Robin's Nest Rescue is more than an animal sanctuary.</p>
+        <p>
+          It is a place where second chances are real.<br />
+          Where healing happens quietly.<br />
+          Where animals and humans alike are seen for more than their scars.
+        </p>
+        <p>Every animal here has a story.</p>
+        <p>So do the people who walk through our gates.</p>
+        <p>And somehow, side by side, healing happens.</p>
+        <p>That is Robin's Nest.</p>
+        <p>And we're just getting started.</p>
+        <p
+          class="font-heading text-primary mt-8 text-center text-3xl md:text-4xl"
+        >
+          We rescue them. They save us.
+        </p>
+      </div>
+
+      <figure class="mt-12">
+        <Image
+          src={rescueLogo}
+          alt="The Robin's Nest Rescue mark with the tagline 'We rescue them. They save us.' arching above and below a horse, alpaca, and dog silhouette."
+          class="mx-auto h-auto w-full max-w-sm"
+          widths={[300, 480, 640]}
+          sizes="(min-width: 768px) 24rem, 100vw"
+        />
+      </figure>
+    </div>
+  </section>
+
   <MissionBanner
-    heading="A page in progress"
-    body="We're working on sharing how Robin's Nest Rescue came to be. In the meantime, the best way to hear the story is in person — come visit the sanctuary."
+    heading="Come meet the animals behind the story"
+    body="The best way to experience Robin's Nest is in person. Book a Farm Tour to meet the animals, hear their stories, and see the sanctuary that grew from this dream."
     cta={{ label: "Book a Farm Tour", href: "/tours" }}
+    variant="highlight"
   />
 </Layout>
